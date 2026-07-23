@@ -1,6 +1,11 @@
 # Netlify config for narrativestack.ai
 # Static site, no build step. Publish this folder as-is.
 
+# Serverless functions (Quick-Check → Kit handoff). The KIT_API_KEY
+# environment variable must be set in Netlify for the function to work.
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/field-guide"
   to = "/field-guide.html"

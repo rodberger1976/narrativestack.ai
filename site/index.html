@@ -552,7 +552,6 @@ footer a{color:var(--coral);text-decoration:none}
     <p class="big">Trust has retreated to the inner circle. No memo brings it back.</p>
     <p class="q">If your team turned around right now to look at you, what story would they say you have been telling?</p>
     <div class="rowc"><a class="btn btn-coral" href="#assessment">Take the Quick Leadership Assessment</a></div>
-    <p class="sig"><b>You Matter. We Matter. Stories Matter.</b></p>
   </div>
 </section>
 
@@ -569,7 +568,7 @@ document.querySelectorAll('.seam').forEach(s=>seamIO.observe(s));
 const seqIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');seqIO.unobserve(e.target)}}),{threshold:.35});
 document.querySelectorAll('.spine').forEach(s=>seqIO.observe(s));
 // Assessment launch: carry the email into the Quick-Check gate. No POST here;
-// the email capture wires to Kajabi later (one Field Guide waitlist).
+// the Quick-Check itself sends the completion to Kit via the site's Netlify Function.
 (function(){
   var begin=document.getElementById('assess-begin'),email=document.getElementById('assess-email');
   if(!begin)return;
