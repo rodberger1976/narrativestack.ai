@@ -14,31 +14,58 @@ window.ASSESSMENT_CONFIG = {
   instrument: 'quick-leadership',          // canonical instrument key
   maxScore: 60,
 
-  /* ── RESULT HANDOFF ENDPOINT (Kajabi) ───────────────────────
-     The single place the completed result POSTs to. Everything
-     feeds ONE Kajabi audience: the shared completed tag, the zone
-     tag, and the zone email sequence travel in the payload, so the
-     Kajabi automation branches on them. Leave '' to run standalone
-     (results render on-page, cache locally, nothing sent). Drop the
-     Kajabi form/endpoint URL here tomorrow to go live. Do NOT hardcode
-     it in the instrument — this is the only wire-point. */
-  endpoint: '',
+  /* ── RESULT HANDOFF ENDPOINT (Kit) ──────────────────────────
+     The ONLY place the completed result POSTs to: the site's own
+     Netlify Function. The function owns all Kit v4 logic — zone
+     cutoffs, tag IDs, custom fields, sequence enrollment — and reads
+     the Kit API key from the KIT_API_KEY environment variable in
+     Netlify (never in this repo). It also writes a backup copy of
+     every submission into the "assessment-completions" Netlify Form
+     before calling Kit, so a Kit failure never loses the lead.
+     Leave '' to run standalone (results render on-page, cache
+     locally, nothing sent). Do NOT hardcode a URL in the
+     instrument — this is the only wire-point. */
+  endpoint: '/.netlify/functions/quickcheck-to-kit',
 
-  /* ── INBOUND CAPTURE (Option A): Netlify Forms ──────────────
-     When set, the instrument submits each completion to this Netlify
-     form (URL-encoded POST to the site root) instead of `endpoint`.
-     A hidden static <form name="..."> in quick-check.html provisions
-     it at deploy. A scheduled Claude routine reads these submissions
-     and writes the contact + zone tags into Kajabi. No third-party
-     bridge, no reCAPTCHA. Leave '' to fall back to the JSON endpoint. */
-  netlifyForm: 'assessment-completions',
+  /* ── INTENT FORK (first screen after the gate) ──────────────
+     "Is this about your own story as a leader, or your
+     organization's story?" Stored as intent = 'self' | 'org'.
+     Scoring is identical either way; the four story questions
+     re-word to match (see storyQuestions below). */
+  intent: {
+    options: [
+      { value: 'self', label: 'My own story' },
+      { value: 'org',  label: 'My organization’s story' }
+    ]
+  },
+
+  /* ── STORY QUESTION WORDING, branched on intent ─────────────
+     org = organization voice, self = individual-leader voice. */
+  storyQuestions: {
+    origin: {
+      org:  'I can clearly articulate why my company or team exists and why it matters, in a way that moves people, not just informs them.',
+      self: 'I can clearly articulate why I do the work I do and why it matters, in a way that moves people, not just informs them.'
+    },
+    vision: {
+      org:  'I can paint a vivid picture of the future we’re building that people can see and want to be part of.',
+      self: 'I can paint a vivid picture of the future I’m working toward that people can see and want to be part of.'
+    },
+    values: {
+      org:  'I have specific stories that illustrate our values. Not principles on a wall, but real moments when we lived them under pressure.',
+      self: 'I have specific stories that illustrate the values I lead by. Not principles on a wall, but real moments when I lived them under pressure.'
+    },
+    transform: {
+      org:  'I can tell the story of a specific customer or stakeholder whose life changed because of our work.',
+      self: 'I can tell the story of a specific person whose life changed because of my work.'
+    }
+  },
 
   /* ── ZONES (the single routing key across instruments + teasers) ──
      Sum the score, then route into the FIRST zone whose [min,max]
      contains the total. tier = canonical T1–T5. label = forward-facing.
      leadsWith = the line the result page opens with (Spec §5 table).
-     tag/sequence/video/worksheet/resultPage = wire-points for Kajabi
-     and the zone result pages (fill the empty strings when ready).
+     tag/sequence/video/worksheet/resultPage = wire-points for the
+     zone result pages (the Kit function owns the real Kit IDs).
      defaultAnchor = the IP rung paired with this zone before capacity
      flexes it (see anchors + anchorByCapacity below). */
   zones: [
@@ -129,7 +156,7 @@ window.ASSESSMENT_CONFIG = {
      quiet capacity inference below. */
   qualifiers: {
     orgSize:   { question: 'How big is your organization?',
-                 options: ['Just me', '2–10', '11–50', '51–200', '201–1,000', '1,000+'] },
+                 options: ['Independent / just me', '2–10', '11–50', '51–200', '201–1,000', '1,000+'] },
     timeframe: { question: 'When do you want to act on this?',
                  options: ['Now', 'This quarter', 'This year', 'Just exploring'] }
   },
@@ -140,7 +167,7 @@ window.ASSESSMENT_CONFIG = {
   capacity: {
     seniorRolePattern: 'founder|ceo|owner|president|principal|partner|chief|c[a-z]?o\\b|vp|vice\\s*president|head\\b|director',
     largeOrg: ['51–200', '201–1,000', '1,000+'],
-    smallOrg: ['Just me', '2–10'],
+    smallOrg: ['Independent / just me', '2–10'],
     nearTerm: ['Now', 'This quarter']
   },
 

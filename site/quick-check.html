@@ -1367,18 +1367,18 @@
   </style>
 </head>
 <body class="on-hero">
-<!-- Netlify Forms (detection enabled 2026-06-11): hidden static form so Netlify provisions "assessment-completions"
-     at deploy time. The assessment submits to it via JS (postToWebhook, Netlify mode).
-     Never shown to users. A scheduled Claude routine reads these submissions and writes
-     the contact + zone tags into Kajabi. -->
+<!-- Netlify Forms: hidden static form so Netlify keeps provisioning "assessment-completions"
+     at deploy time. The PAGE no longer posts here — it posts only to the quickcheck-to-kit
+     Netlify Function, and the FUNCTION writes a backup copy of every submission into this
+     form before talking to Kit, so no lead is ever lost. Never shown to users. -->
 <form name="assessment-completions" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
   <input type="hidden" name="form-name" value="assessment-completions">
   <input name="bot-field">
-  <input name="name"><input name="email"><input name="role"><input name="org_size">
+  <input name="name"><input name="email"><input name="role"><input name="intent"><input name="org_size">
   <input name="timeframe"><input name="total_score"><input name="tier"><input name="zone">
   <input name="zone_title"><input name="objective"><input name="capacity"><input name="tags">
   <input name="sequence"><input name="result_page"><input name="anchor">
-  <textarea name="reflection"></textarea>
+  <textarea name="reflection"></textarea><textarea name="verbatim"></textarea>
   <input name="source"><input name="lead_source"><input name="campaign"><input name="submitted_at"><input name="event">
 </form>
 
@@ -1454,8 +1454,30 @@
         </p>
       </section>
 
-      <!-- STEP 1: PART ONE -->
+      <!-- STEP 1: INTENT FORK (self vs organization) -->
       <section class="step" data-step="1" aria-hidden="true">
+        <div class="progress">
+          <span>Before We Begin</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 10%;"></div></div>
+        </div>
+        <div class="eyebrow">One Quick Thing</div>
+        <div class="eyebrow-underscore"></div>
+        <h2>First, one quick thing so I read you right.</h2>
+        <p class="muted">Is this about your own story as a leader, or your organization&rsquo;s story?</p>
+
+        <div class="q">
+          <div class="scale-legend" id="intent-label">This is about</div>
+          <div id="intent-options" class="choice-list" role="radiogroup" aria-labelledby="intent-label"></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" data-back>Back</button>
+          <button class="btn" type="button" data-next>Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 2: PART ONE -->
+      <section class="step" data-step="2" aria-hidden="true">
         <div class="progress">
           <span>Part 01 / 03</span>
           <div class="progress-bar"><div class="progress-fill" style="width: 33%;"></div></div>
@@ -1467,28 +1489,28 @@
 
         <div class="q">
           <h3 class="q-title">The <em>Origin Story</em></h3>
-          <p class="q-help">I can clearly articulate why my company or team exists and why it matters, in a way that moves people, not just informs them.</p>
+          <p class="q-help" id="qh-origin">I can clearly articulate why my company or team exists and why it matters, in a way that moves people, not just informs them.</p>
           <div class="scale" data-q="p1_origin"></div>
           <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
         </div>
 
         <div class="q">
           <h3 class="q-title">The <em>Vision Story</em></h3>
-          <p class="q-help">I can paint a vivid picture of the future we&rsquo;re building that people can see and want to be part of.</p>
+          <p class="q-help" id="qh-vision">I can paint a vivid picture of the future we&rsquo;re building that people can see and want to be part of.</p>
           <div class="scale" data-q="p1_vision"></div>
           <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
         </div>
 
         <div class="q">
           <h3 class="q-title">The <em>Values Story</em></h3>
-          <p class="q-help">I have specific stories that illustrate our values. Not principles on a wall, but real moments when we lived them under pressure.</p>
+          <p class="q-help" id="qh-values">I have specific stories that illustrate our values. Not principles on a wall, but real moments when we lived them under pressure.</p>
           <div class="scale" data-q="p1_values"></div>
           <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
         </div>
 
         <div class="q">
           <h3 class="q-title">The <em>Transformation Story</em></h3>
-          <p class="q-help">I can tell the story of a specific customer or stakeholder whose life changed because of our work.</p>
+          <p class="q-help" id="qh-transform">I can tell the story of a specific customer or stakeholder whose life changed because of our work.</p>
           <div class="scale" data-q="p1_transform"></div>
           <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
         </div>
@@ -1499,8 +1521,8 @@
         </div>
       </section>
 
-      <!-- STEP 2: PART TWO -->
-      <section class="step" data-step="2" aria-hidden="true">
+      <!-- STEP 3: PART TWO -->
+      <section class="step" data-step="3" aria-hidden="true">
         <div class="progress">
           <span>Part 02 / 03</span>
           <div class="progress-bar"><div class="progress-fill" style="width: 66%;"></div></div>
@@ -1537,8 +1559,8 @@
         </div>
       </section>
 
-      <!-- STEP 3: PART THREE -->
-      <section class="step" data-step="3" aria-hidden="true">
+      <!-- STEP 4: PART THREE -->
+      <section class="step" data-step="4" aria-hidden="true">
         <div class="progress">
           <span>Part 03 / 03</span>
           <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
@@ -1571,8 +1593,8 @@
         </div>
       </section>
 
-      <!-- STEP 4: REFLECTION -->
-      <section class="step" data-step="4" aria-hidden="true">
+      <!-- STEP 5: REFLECTION -->
+      <section class="step" data-step="5" aria-hidden="true">
         <div class="progress">
           <span>One Last Question</span>
           <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
@@ -1596,8 +1618,8 @@
         <p class="legal">If you struggled with that question, you&rsquo;ve just identified your biggest leadership communication gap.</p>
       </section>
 
-      <!-- STEP 5: OBJECTIVE + QUALIFIERS (axis one + capacity inputs) -->
-      <section class="step" data-step="5" aria-hidden="true">
+      <!-- STEP 6: OBJECTIVE + QUALIFIERS (axis one + capacity inputs) -->
+      <section class="step" data-step="6" aria-hidden="true">
         <div class="progress">
           <span>One Last Thing</span>
           <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
@@ -1629,7 +1651,7 @@
       </section>
 
       <!-- STEP 6: RESULT -->
-      <section class="step" data-step="6" aria-hidden="true">
+      <section class="step" data-step="7" aria-hidden="true">
         <div class="band-marker" id="r-band-eyebrow">Your Result</div>
         <h2 id="r-band-title">&nbsp;</h2>
         <div class="score-display"><span id="r-score">0</span><span class="of">/60</span></div>
@@ -1760,11 +1782,6 @@
         </div>
       </section>
 
-      <p class="closing">
-        <span><em>You Matter.</em></span>
-        <span><em>We Matter.</em></span>
-        <span><em>Stories Matter.</em></span>
-      </p>
       <p class="attrib"><a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Dr. Rod Berger</a> &middot; The Narrative Edge &middot; Wiley 2025</p>
     </div>
   </footer>
@@ -1775,13 +1792,12 @@
     /* ============================================================
        RESULT HANDOFF ENDPOINT
        ============================================================
-       The Kajabi endpoint is NOT hardcoded here. It lives in
-       assessment-config.js (ASSESSMENT_CONFIG.endpoint) so it is
-       configurable without touching the instrument. Empty = standalone:
-       results render on-page and cache locally, nothing posts externally.
-       The payload carries tier, zone, objective, capacity, the shared
-       completed tag, the zone tag, and the zone sequence, so one Kajabi
-       automation routes everything into the single audience.
+       The endpoint is NOT hardcoded here. It lives in
+       assessment-config.js (ASSESSMENT_CONFIG.endpoint) and points at
+       the site's own Netlify Function (quickcheck-to-kit), which owns
+       all Kit logic: zone cutoffs, tag IDs, custom fields, sequences.
+       Empty = standalone: results render on-page and cache locally,
+       nothing posts externally.
        ============================================================ */
     const WEBHOOK_URL = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.endpoint) || '';
 
@@ -1921,6 +1937,7 @@
     const state = {
       step: 0,
       lead: { name: '', email: '', role: '' },
+      intent: '',           // 'self' | 'org' — the fork asked right after the gate
       p1: { p1_origin: null, p1_vision: null, p1_values: null, p1_transform: null },
       p2: { p2_q1: null, p2_q2: null, p2_q3: null, p2_q4: null, p2_q5: null },
       p3: { p3_minds: 0, p3_retold: 0, p3_emotion: 0, p3_door: 0 },
@@ -2019,9 +2036,12 @@
 
     function validateStep(n) {
       if (n === 1) {
-        if (Object.values(state.p1).some(v => v == null)) { flash('Please rate all four stories.'); return false; }
+        if (!state.intent) { flash('Please choose one to continue.'); return false; }
       }
       if (n === 2) {
+        if (Object.values(state.p1).some(v => v == null)) { flash('Please rate all four stories.'); return false; }
+      }
+      if (n === 3) {
         if (Object.values(state.p2).some(v => v == null)) { flash('Please answer all five statements.'); return false; }
       }
       return true;
@@ -2058,7 +2078,7 @@
     })();
 
     /* Capture where the visitor came from, so warm leads stay segmentable by origin
-       in Kajabi (e.g. Apollo outbound vs organic). Reads utm_source / utm_campaign
+       in Kit (e.g. Apollo outbound vs organic). Reads utm_source / utm_campaign
        once on load; defaults to 'organic'. Travels in the completion payload. */
     (function captureSource() {
       try {
@@ -2224,40 +2244,81 @@
       }
     })();
 
-    /* Posts a payload to the webhook (Formspree). Always caches locally
-       first so leads are never lost if the network fails. The
-       `Accept: application/json` header tells Formspree to return JSON
-       instead of redirecting — keeps our in-page confirmation behavior. */
+    /* ============================================================
+       INTENT FORK (self vs organization)
+       Asked immediately after the gate. Stores state.intent as
+       'self' | 'org' and re-words the four story questions to match.
+       Scoring is identical either way; only the wording flexes.
+       Copy + variants are tunable from assessment-config.js
+       (cfg.intent, cfg.storyQuestions) with safe fallbacks here.
+       ============================================================ */
+    const STORY_QUESTION_FALLBACKS = {
+      origin: {
+        org:  'I can clearly articulate why my company or team exists and why it matters, in a way that moves people, not just informs them.',
+        self: 'I can clearly articulate why I do the work I do and why it matters, in a way that moves people, not just informs them.'
+      },
+      vision: {
+        org:  'I can paint a vivid picture of the future we’re building that people can see and want to be part of.',
+        self: 'I can paint a vivid picture of the future I’m working toward that people can see and want to be part of.'
+      },
+      values: {
+        org:  'I have specific stories that illustrate our values. Not principles on a wall, but real moments when we lived them under pressure.',
+        self: 'I have specific stories that illustrate the values I lead by. Not principles on a wall, but real moments when I lived them under pressure.'
+      },
+      transform: {
+        org:  'I can tell the story of a specific customer or stakeholder whose life changed because of our work.',
+        self: 'I can tell the story of a specific person whose life changed because of my work.'
+      }
+    };
+
+    function applyIntentWording() {
+      const cfg = window.ASSESSMENT_CONFIG || {};
+      const variants = cfg.storyQuestions || {};
+      const which = state.intent === 'self' ? 'self' : 'org';
+      [['origin', 'qh-origin'], ['vision', 'qh-vision'], ['values', 'qh-values'], ['transform', 'qh-transform']]
+        .forEach(([key, id]) => {
+          const el = document.getElementById(id);
+          const v = (variants[key] && variants[key][which]) ||
+                    (STORY_QUESTION_FALLBACKS[key] && STORY_QUESTION_FALLBACKS[key][which]);
+          if (el && v) el.textContent = v;
+        });
+    }
+
+    (function initIntent() {
+      const cfg = window.ASSESSMENT_CONFIG || {};
+      const options = (cfg.intent && cfg.intent.options) || [
+        { value: 'self', label: 'My own story' },
+        { value: 'org',  label: 'My organization’s story' }
+      ];
+      const box = document.getElementById('intent-options');
+      if (!box) return;
+      options.forEach(o => {
+        const lbl = document.createElement('label');
+        const inp = document.createElement('input');
+        inp.type = 'radio'; inp.name = 'intent'; inp.value = o.value;
+        inp.addEventListener('change', () => {
+          state.intent = o.value;
+          box.querySelectorAll('label').forEach(l => l.classList.remove('checked'));
+          lbl.classList.add('checked');
+          applyIntentWording();
+        });
+        const span = document.createElement('span');
+        span.textContent = o.label;
+        lbl.appendChild(inp); lbl.appendChild(span); box.appendChild(lbl);
+      });
+    })();
+
+    /* Posts a payload as JSON to the Netlify Function (quickcheck-to-kit),
+       the ONLY place completions go. The function captures the lead first
+       (durable backup + logs), then upserts into Kit with tags, custom
+       fields, and the zone sequence. Always caches locally before posting
+       so leads survive a network failure. */
     async function postToWebhook(payload) {
       try {
         const cache = JSON.parse(localStorage.getItem('nelqc_leads') || '[]');
         cache.push(payload);
         localStorage.setItem('nelqc_leads', JSON.stringify(cache));
       } catch (_) {}
-      // Netlify Forms mode (Option A): submit URL-encoded to the site root so Netlify
-      // captures it. A scheduled Claude routine syncs these into Kajabi. Objects/arrays
-      // (e.g. tags) are JSON-stringified; the sync routine parses them back.
-      const netlifyForm = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.netlifyForm) || '';
-      if (netlifyForm) {
-        try {
-          const flat = { 'form-name': netlifyForm };
-          Object.keys(payload).forEach((k) => {
-            const v = payload[k];
-            flat[k] = (v && typeof v === 'object') ? JSON.stringify(v) : (v == null ? '' : String(v));
-          });
-          const body = Object.keys(flat)
-            .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(flat[k]))
-            .join('&');
-          const res = await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: body
-          });
-          return res.ok ? { ok: true, error: null } : { ok: false, error: 'http-' + res.status };
-        } catch (err) {
-          return { ok: false, error: 'network' };
-        }
-      }
 
       if (!WEBHOOK_URL) return { ok: false, error: 'no-webhook' };
       try {
@@ -2267,18 +2328,13 @@
           body: JSON.stringify(payload)
         });
         if (res.ok) return { ok: true, error: null };
-        // Try to surface Formspree's structured error messages
         let detail = 'http-' + res.status;
         try {
           const json = await res.json();
-          if (json && Array.isArray(json.errors) && json.errors.length) {
-            detail = json.errors.map(e => e.message || e.field || 'error').join('; ');
-          } else if (json && typeof json.error === 'string') {
-            detail = json.error;
-          }
+          if (json && typeof json.error === 'string') detail = json.error;
         } catch (_) { /* response wasn't JSON */ }
         if (typeof console !== 'undefined' && console.warn) {
-          console.warn('[narrative-edge] webhook error:', detail, payload);
+          console.warn('[narrative-edge] function error:', detail, payload);
         }
         return { ok: false, error: detail };
       } catch (err) {
@@ -2373,15 +2429,17 @@
       const leadHtml = (zone && zone.leadsWith) ? '<p class="result-lead">' + zone.leadsWith + '</p>' : '';
       document.getElementById('r-body').innerHTML = leadHtml + r.body + renderTrailer() + renderAnchor(anchor);
       document.getElementById('r-cta').innerHTML = renderCTA(c, s.band);
-      showStep(6);
+      showStep(7);
 
       // Tags: one shared completed tag + one zone tag (Spec §6).
       const tags = [cfg.sharedCompletedTag, zone && zone.tag].filter(Boolean);
 
       const payload = {
         name: state.lead.name,
+        first_name: state.lead.name,
         email: state.lead.email,
         role: state.lead.role,
+        intent: state.intent,
         org_size: state.orgSize,
         timeframe: state.timeframe,
         part_one_scores: state.p1,
@@ -2397,12 +2455,15 @@
         zone_title: r.title,
         objective: state.objective,
         capacity: state.capacity,
-        // Routing wire-points (sent once Kit/Kajabi is connected).
+        // Routing wire-points (the Kit function owns the real tag/sequence IDs;
+        // these travel for the Netlify Forms backup record).
         tags: tags,
         sequence: zone && zone.sequence,
         result_page: resultPage,
         anchor: anchorKey,
         reflection: state.reflection,
+        // Canonical open-question answer (Kit custom field quick_check_verbatim).
+        verbatim: state.reflection,
         submitted_at: new Date().toISOString(),
         source: 'narrative-edge-quick-check',
         lead_source: window.__ns_source || 'organic',
@@ -2427,10 +2488,10 @@
         statusEl.textContent = 'Results sent to ' + state.lead.email;
         statusEl.className = 'submit-status ok';
       } else if (error === 'network') {
-        statusEl.textContent = 'Network error &middot; results saved locally';
+        statusEl.textContent = 'Network error · results saved locally';
         statusEl.className = 'submit-status error';
       } else {
-        statusEl.textContent = 'Delivery failed &middot; results saved locally';
+        statusEl.textContent = 'Delivery failed · results saved locally';
         statusEl.className = 'submit-status error';
       }
     });
@@ -2622,6 +2683,7 @@
       Object.keys(state.p2).forEach(k => state.p2[k] = null);
       Object.keys(state.p3).forEach(k => state.p3[k] = 0);
       state.reflection = '';
+      state.intent = '';
       state.objective = ''; state.orgSize = ''; state.timeframe = ''; state.capacity = '';
       document.querySelectorAll('.scale label, .tf label, .choice-list label').forEach(l => l.classList.remove('checked'));
       document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
