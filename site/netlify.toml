@@ -16,6 +16,11 @@
   to = "/quick-check.html"
   status = 200
 
+[[redirects]]
+  from = "/proximity-read"
+  to = "/proximity-read.html"
+  status = 200
+
 # Engagement path subpages: pretty URLs (/paths/narrative-sprint -> .html)
 [[redirects]]
   from = "/paths/:slug"

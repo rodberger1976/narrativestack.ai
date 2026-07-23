@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Proximity Read &middot; Dr. Rod Berger</title>
+  <meta name="description" content="Answer four questions, honestly, and Dr. Rod Berger will hand you back what he finds in your voice, in a short letter written only to you." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================
+       Narrative Stack — Design Tokens v1.1
+       The Proximity Read — system-voice surface, human-voice copy
+       ========================================================== */
+    :root {
+      --ns-dark-blue: #183048;
+      --ns-azure:     #2FC4DD;
+      --ns-coral:     #FF7559;
+      --ns-paper:     #FAFAF7;
+      --ns-cream:     #F4F2EC;
+
+      --ns-paper-80: rgba(250, 250, 247, 0.82);
+      --ns-paper-60: rgba(250, 250, 247, 0.60);
+      --ns-paper-40: rgba(250, 250, 247, 0.40);
+      --ns-paper-12: rgba(250, 250, 247, 0.12);
+      --ns-paper-06: rgba(250, 250, 247, 0.06);
+
+      --ns-serif: 'Source Serif 4', Georgia, serif;
+      --ns-sans:  'Inter', system-ui, -apple-system, sans-serif;
+      --ns-mono:  'JetBrains Mono', ui-monospace, monospace;
+
+      --ns-space-1: 8px;
+      --ns-space-2: 16px;
+      --ns-space-3: 24px;
+      --ns-space-5: 40px;
+      --ns-space-8: 64px;
+      --ns-space-12: 96px;
+
+      --ns-stroke-hairline: 1px;
+      --ns-stroke-line: 2px;
+      --ns-stroke-bar: 6px;
+
+      --ns-max: 680px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--ns-dark-blue);
+      color: var(--ns-paper);
+      font-family: var(--ns-serif);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--ns-max);
+      margin: 0 auto;
+      padding: 0 var(--ns-space-3);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Geometric markers — Azure half-circles, right rail */
+    .geometry {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 280px;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .geometry::before,
+    .geometry::after {
+      content: "";
+      position: absolute;
+      right: -160px;
+      width: 320px;
+      height: 320px;
+      background: var(--ns-azure);
+      border-radius: 50%;
+    }
+    .geometry::before { top: 14%; }
+    .geometry::after { bottom: 14%; }
+    @media (max-width: 1100px) {
+      .geometry { display: none; }
+    }
+
+    /* Header — minimal brand mark */
+    header {
+      padding: var(--ns-space-5) 0 0;
+      position: relative;
+      z-index: 2;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--ns-space-2);
+    }
+    .wordmark {
+      font-family: var(--ns-sans);
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      color: var(--ns-paper);
+    }
+    .wordmark .narr {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: -0.005em;
+    }
+    .wordmark .stack {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 14px;
+    }
+    .meta-tag {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ns-paper-60);
+    }
+
+    main {
+      flex: 1;
+      padding: var(--ns-space-8) 0 var(--ns-space-12);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Eyebrow — mono uppercase, Azure hand-line beneath */
+    .eyebrow {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      font-weight: 500;
+      margin-bottom: var(--ns-space-2);
+      display: inline-block;
+    }
+    .eyebrow-underscore {
+      display: block;
+      width: 56px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-azure);
+      margin-bottom: var(--ns-space-3);
+    }
+    .subtitle {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--ns-paper-80);
+      margin: 0 0 var(--ns-space-3);
+    }
+
+    h1 {
+      font-family: var(--ns-sans);
+      color: var(--ns-paper);
+      font-weight: 700;
+      letter-spacing: -0.018em;
+      line-height: 1.08;
+      font-size: clamp(2.1rem, 5vw, 3.2rem);
+      margin: 0 0 var(--ns-space-3);
+    }
+    p {
+      margin: 0 0 var(--ns-space-2);
+      color: var(--ns-paper-80);
+    }
+    p.lead {
+      font-size: 1.15rem;
+      color: var(--ns-paper);
+      line-height: 1.55;
+    }
+    em { font-style: italic; color: var(--ns-paper); }
+    a {
+      color: var(--ns-azure);
+      text-decoration: none;
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-azure);
+      padding-bottom: 1px;
+      transition: opacity 120ms ease;
+    }
+    a:hover { opacity: 0.7; }
+
+    /* Frame paragraph — the table-setting, bar-accented */
+    .frame {
+      margin: var(--ns-space-5) 0 var(--ns-space-8);
+      padding: var(--ns-space-3) var(--ns-space-3) var(--ns-space-3) var(--ns-space-5);
+      border-left: var(--ns-stroke-bar) solid var(--ns-azure);
+      background: var(--ns-paper-06);
+    }
+    .frame p {
+      font-family: var(--ns-serif);
+      font-size: 1.05rem;
+      color: var(--ns-paper);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Questions — numbered, hairline-separated */
+    .question {
+      margin-bottom: var(--ns-space-8);
+    }
+    .q-number {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      margin-bottom: var(--ns-space-1);
+    }
+    .question label.q-label {
+      display: block;
+      font-family: var(--ns-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--ns-paper);
+      line-height: 1.45;
+      margin-bottom: var(--ns-space-2);
+      cursor: pointer;
+    }
+    textarea {
+      width: 100%;
+      min-height: 160px;
+      resize: vertical;
+      background: var(--ns-paper-06);
+      color: var(--ns-paper);
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      padding: 14px 16px;
+      font-family: var(--ns-serif);
+      font-size: 1.05rem;
+      line-height: 1.55;
+      border-radius: 0;
+      transition: border-color 120ms ease;
+    }
+    textarea::placeholder { color: var(--ns-paper-40); font-style: italic; }
+    textarea:focus {
+      outline: none;
+      border-color: var(--ns-azure);
+      background: transparent;
+    }
+
+    /* Capture fields — hairline-only, no cards */
+    .capture {
+      margin-top: var(--ns-space-8);
+      padding-top: var(--ns-space-5);
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+    }
+    .subhead-label {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ns-paper);
+      margin-bottom: var(--ns-space-1);
+    }
+    .subhead-rule {
+      width: 48px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-azure);
+      margin-bottom: var(--ns-space-3);
+    }
+    .form-group { margin-bottom: var(--ns-space-3); }
+    .form-group label {
+      display: block;
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+      margin-bottom: var(--ns-space-1);
+    }
+    .form-group label .dim { text-transform: none; letter-spacing: 0.06em; }
+    input[type="text"], input[type="email"], input[type="url"] {
+      width: 100%;
+      background: transparent;
+      color: var(--ns-paper);
+      border: 0;
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      padding: 12px 0;
+      font-family: var(--ns-serif);
+      font-size: 1.1rem;
+      transition: border-color 120ms ease;
+      border-radius: 0;
+    }
+    input::placeholder { color: var(--ns-paper-40); }
+    input:focus {
+      outline: none;
+      border-bottom-color: var(--ns-azure);
+    }
+
+    /* Button — heavy sans, sharp edges, Azure fill */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ns-space-1);
+      background: var(--ns-azure);
+      color: var(--ns-dark-blue);
+      border: 0;
+      border-radius: 0;
+      padding: 16px 28px;
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+    .btn:hover { background: #4ad4ec; }
+    .btn:active { background: var(--ns-azure); }
+    .btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+    .btn-row {
+      display: flex;
+      gap: var(--ns-space-2);
+      align-items: center;
+      margin-top: var(--ns-space-5);
+      flex-wrap: wrap;
+    }
+    .btn-row .meta {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+    }
+    .submit-status {
+      margin-top: var(--ns-space-2);
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+      min-height: 1.2em;
+    }
+    .submit-status.error { color: var(--ns-coral); }
+
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--ns-azure);
+      outline-offset: 2px;
+    }
+
+    /* Confirmation — replaces the form in place */
+    .confirmation {
+      display: none;
+      margin-top: var(--ns-space-8);
+      padding: var(--ns-space-5);
+      border-left: var(--ns-stroke-bar) solid var(--ns-coral);
+      background: var(--ns-paper-06);
+    }
+    .confirmation.visible { display: block; }
+    .confirmation p {
+      font-family: var(--ns-serif);
+      font-size: 1.25rem;
+      line-height: 1.55;
+      color: var(--ns-cream);
+      margin: 0;
+    }
+    .confirmation .sig {
+      display: block;
+      margin-top: var(--ns-space-3);
+      font-style: italic;
+      color: var(--ns-paper);
+    }
+
+    /* Footer */
+    footer {
+      padding: var(--ns-space-8) 0 var(--ns-space-5);
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      margin-top: var(--ns-space-12);
+      position: relative;
+      z-index: 2;
+    }
+    .attrib {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ns-paper-60);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      :root { --ns-max: 100%; }
+      main { padding: var(--ns-space-5) 0 var(--ns-space-8); }
+      .frame { padding-left: var(--ns-space-3); border-left-width: var(--ns-stroke-bar); }
+      .question { margin-bottom: var(--ns-space-5); }
+    }
+  </style>
+</head>
+<body>
+<!-- Netlify Forms: hidden static form so Netlify provisions "proximity-reads"
+     at deploy time. The PAGE posts only to the proximity-to-kit Netlify
+     Function; the FUNCTION writes a backup copy of every submission into this
+     form before talking to Kit, so no lead is ever lost. Never shown to users. -->
+<form name="proximity-reads" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
+  <input type="hidden" name="form-name" value="proximity-reads">
+  <input name="bot-field">
+  <input name="first_name"><input name="email"><input name="link">
+  <textarea name="purpose"></textarea><textarea name="scene"></textarea>
+  <textarea name="care"></textarea><textarea name="future"></textarea>
+  <input name="source"><input name="submitted_at">
+</form>
+
+  <div class="geometry" aria-hidden="true"></div>
+
+  <header>
+    <div class="container">
+      <div class="wordmark">
+        <span class="narr">Narrative</span><span class="stack">STACK</span>
+      </div>
+      <div class="meta-tag">The Proximity Read &middot; 2026</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <div class="eyebrow">The Proximity Read</div>
+      <div class="eyebrow-underscore"></div>
+
+      <p class="subtitle">The story you&rsquo;re telling, and the one you&rsquo;re not.</p>
+
+      <h1>Most people have a business card. Very few have a story that would survive losing it.</h1>
+
+      <p class="lead">
+        I would like to read yours. Answer four questions, honestly, and I will hand you back what I find in your voice, in a short letter written only to you.
+      </p>
+
+      <div class="frame">
+        <p>
+          I have sat across from more than four thousand people. The questions below are the ones I would ask if we were at a table together, and there are no right answers. Give me the moment, not the summary. That is where your voice actually lives.
+        </p>
+      </div>
+
+      <form id="proximity-form" novalidate>
+
+        <div class="question">
+          <div class="q-number">Question &middot; 01</div>
+          <label class="q-label" for="q-purpose">Strip away your title, your company, and your numbers. If none of that were on the table, what story would you tell about why you do this work?</label>
+          <textarea id="q-purpose" name="purpose"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-number">Question &middot; 02</div>
+          <label class="q-label" for="q-scene">Tell me about one specific moment, a real scene with a time and a place, when you knew this work was yours. Not the milestone. The moment. Where were you, and what happened?</label>
+          <textarea id="q-scene" name="scene"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-number">Question &middot; 03</div>
+          <label class="q-label" for="q-care">When was the last time you let a room see you care about something that was not strictly your job, and what did the room do?</label>
+          <textarea id="q-care" name="care"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="q-number">Question &middot; 04</div>
+          <label class="q-label" for="q-future">If the person you most want to reach described you a year from now, in their own words, what would you want them to say, and is that the story you are telling today?</label>
+          <textarea id="q-future" name="future"></textarea>
+        </div>
+
+        <div class="capture">
+          <div class="subhead-label">Where the letter goes</div>
+          <div class="subhead-rule"></div>
+
+          <div class="form-group">
+            <label for="c-first-name">First name</label>
+            <input id="c-first-name" name="first_name" type="text" autocomplete="given-name" required placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="c-link">A link to something you have written or said that you are proud of <span class="dim">(optional, and it helps me read you)</span></label>
+            <input id="c-link" name="link" type="url" inputmode="url" placeholder="https://" />
+          </div>
+
+          <div class="btn-row">
+            <button class="btn" type="submit" id="submit-btn">Read my voice</button>
+          </div>
+          <div id="submit-status" class="submit-status" aria-live="polite"></div>
+        </div>
+
+      </form>
+
+      <div id="confirmation" class="confirmation" aria-live="polite">
+        <p>
+          Thank you. This is the part most people skip, and you did not. I read these myself. Watch your inbox, and I will hand you back what I find.
+          <span class="sig">Rod.</span>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="attrib"><a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Dr. Rod Berger</a> &middot; The Narrative Edge &middot; Wiley 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    /* The only endpoint this page talks to. Relative, so it resolves on
+       draft previews and production alike. */
+    const ENDPOINT = '/.netlify/functions/proximity-to-kit';
+
+    const form = document.getElementById('proximity-form');
+    const statusEl = document.getElementById('submit-status');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusEl.textContent = '';
+      statusEl.classList.remove('error');
+
+      const firstName = document.getElementById('c-first-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+
+      if (!firstName) {
+        statusEl.textContent = 'Please tell me your first name.';
+        statusEl.classList.add('error');
+        document.getElementById('c-first-name').focus();
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        statusEl.textContent = 'Please enter a valid email so the letter can reach you.';
+        statusEl.classList.add('error');
+        document.getElementById('c-email').focus();
+        return;
+      }
+
+      const payload = {
+        first_name: firstName,
+        email: email,
+        purpose: document.getElementById('q-purpose').value.trim(),
+        scene: document.getElementById('q-scene').value.trim(),
+        care: document.getElementById('q-care').value.trim(),
+        future: document.getElementById('q-future').value.trim(),
+        link: document.getElementById('c-link').value.trim(),
+      };
+
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('http-' + res.status);
+        form.style.display = 'none';
+        document.getElementById('confirmation').classList.add('visible');
+        document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        submitBtn.disabled = false;
+        statusEl.textContent = 'Something interrupted the send. Please try again.';
+        statusEl.classList.add('error');
+      }
+    });
+  </script>
+</body>
+</html>
