@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow"><!-- Remove when a page goes public -->
+<title>The Advanced Narrative Offsite · The Narrative Stack</title>
+<meta name="description" content="Rod joins your own leadership gathering as the guest who runs the story work, stress-testing a strong narrative against what comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ns-dark-blue:#183048; --ns-azure:#2FC4DD; --ns-coral:#FF7559;
+  --ns-paper:#FAFAF7; --ns-cream:#F4F2EC; --ns-ink:#0A0A0A;
+  --ns-graphite:#4A4A4A; --ns-mute:#888780; --ns-fog:#E5E5E2; --ns-mist:#E8F7FA;
+  --ns-serif:'Source Serif 4',Georgia,serif;
+  --ns-sans:'Hanken Grotesk',system-ui,sans-serif;
+  --ns-mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ns-paper);color:var(--ns-ink);font-family:var(--ns-serif);font-size:17px;line-height:1.6}
+a{color:inherit}
+.wrap{max-width:880px;margin:0 auto;padding:0 28px}
+
+/* Header */
+header{background:var(--ns-dark-blue);color:#fff}
+.nav{max-width:1180px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:28px}
+.mark{font-family:var(--ns-serif);font-weight:700;font-size:19px;letter-spacing:.01em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.mark svg{display:block}
+.nav nav{margin-left:auto;display:flex;align-items:center;gap:26px}
+.nav nav a{font-family:var(--ns-sans);font-size:14px;color:#D7DEE6;text-decoration:none;letter-spacing:.01em}
+.nav nav a:hover{color:#fff}
+.btn{font-family:var(--ns-sans);font-size:14px;font-weight:600;background:var(--ns-coral);color:#fff;border-radius:999px;padding:10px 22px;text-decoration:none;display:inline-block}
+.btn:hover{filter:brightness(1.05)}
+@media(max-width:760px){.nav nav a:not(.btn){display:none}}
+
+/* Hero */
+.hero{padding:84px 0 64px;border-bottom:1px solid var(--ns-fog)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:56px;align-items:center}
+.hero-art{position:relative}
+.hero-art img{display:block;width:100%;border-radius:14px;position:relative;z-index:1}
+.hero-art::before{content:"";position:absolute;inset:18px -18px -18px 18px;background:var(--ns-dark-blue);border-radius:14px}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:340px}}
+.hero-band{margin-top:48px;position:relative}
+.hero-band img{display:block;width:100%;max-height:300px;object-fit:cover;border-radius:14px;position:relative;z-index:1}
+.hero-band::before{content:"";position:absolute;inset:16px -16px -16px 16px;background:var(--ns-dark-blue);border-radius:14px}
+.eyebrow{font-family:var(--ns-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ns-mute);margin-bottom:22px}
+.eyebrow b{color:var(--ns-coral);font-weight:500}
+h1{font-family:var(--ns-serif);font-weight:700;font-size:clamp(40px,6vw,60px);line-height:1.1;letter-spacing:-.01em;max-width:14ch}
+.lede{margin-top:26px;font-size:21px;line-height:1.55;color:var(--ns-graphite);max-width:34em}
+
+/* Sections */
+section{padding:60px 0;border-bottom:1px solid var(--ns-fog)}
+.label{font-family:var(--ns-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ns-azure);margin-bottom:8px}
+h2{font-family:var(--ns-serif);font-weight:700;font-size:30px;line-height:1.2;margin-bottom:22px;max-width:22ch}
+section p{max-width:36em;margin-bottom:18px}
+section p:last-child{margin-bottom:0}
+.spine{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--ns-fog);border:1px solid var(--ns-fog);margin-top:34px}
+.spine div{background:var(--ns-paper);padding:24px 22px}
+.spine h3{font-family:var(--ns-sans);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;color:var(--ns-dark-blue)}
+.spine p{font-size:15px;color:var(--ns-graphite);line-height:1.55;margin:0}
+@media(max-width:680px){.spine{grid-template-columns:1fr}}
+
+/* Fit cards */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+.fit article{border-top:2px solid var(--ns-dark-blue);padding-top:16px}
+.fit h3{font-family:var(--ns-sans);font-weight:700;font-size:15px;margin-bottom:8px}
+.fit p{font-size:15.5px;color:var(--ns-graphite);margin:0}
+@media(max-width:680px){.fit{grid-template-columns:1fr}}
+
+/* Pull quote */
+.pull{background:var(--ns-dark-blue);color:#fff}
+.pull .wrap{padding-top:72px;padding-bottom:72px}
+.pull p.q{font-family:var(--ns-serif);font-style:italic;font-size:clamp(24px,3.4vw,32px);line-height:1.35;max-width:24em}
+.pull .sig{margin-top:28px;font-family:var(--ns-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ns-coral)}
+
+/* Anchor pairing */
+.anchor{background:var(--ns-cream)}
+.anchor .pairing{display:flex;gap:34px;align-items:flex-start;margin-top:26px;flex-wrap:wrap}
+.anchor .read,.anchor .do{flex:1 1 280px}
+.anchor h3{font-family:var(--ns-sans);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.anchor h3 span{color:var(--ns-coral)}
+.anchor p{font-size:15.5px;color:var(--ns-graphite);margin:0}
+
+/* CTA */
+.cta{text-align:left;padding:72px 0}
+.cta h2{margin-bottom:14px}
+.cta p{margin-bottom:30px;color:var(--ns-graphite);max-width:34em}
+.cta .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ghost{font-family:var(--ns-sans);font-size:14px;font-weight:600;color:var(--ns-dark-blue);text-decoration:none;border-bottom:1px solid var(--ns-azure);padding-bottom:2px}
+
+/* Footer */
+footer{background:var(--ns-dark-blue);color:#AEB9C4;font-family:var(--ns-sans);font-size:13.5px}
+footer .wrap{max-width:1180px;padding-top:54px;padding-bottom:54px}
+.paths{display:flex;gap:8px 26px;flex-wrap:wrap;margin-bottom:30px}
+.paths a{color:#D7DEE6;text-decoration:none}
+.paths a:hover{color:#fff}
+.paths a.here{color:var(--ns-coral)}
+footer .close{font-family:var(--ns-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7E8B98}
+
+/* Hub */
+.hub-grid{display:grid;gap:22px;margin-top:38px}
+.hub-card{border:1px solid var(--ns-fog);background:#fff;padding:30px 30px 26px;text-decoration:none;display:block;transition:border-color .15s}
+.hub-card:hover{border-color:var(--ns-azure)}
+.hub-card h3{font-family:var(--ns-serif);font-weight:700;font-size:24px;margin-bottom:8px}
+.hub-card .tag{font-family:var(--ns-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ns-coral);margin-bottom:12px}
+.hub-card p{font-size:15.5px;color:var(--ns-graphite);max-width:46em}
+.note{border:1px dashed var(--ns-mute);background:var(--ns-mist);padding:22px 24px;margin-top:46px;font-family:var(--ns-sans);font-size:13.5px;color:var(--ns-graphite)}
+.note b{color:var(--ns-dark-blue)}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="mark" href="https://narrativestack.ai" style="color:#fff"><svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+<path d="M12 11 C8.6 7.8, 8.6 3.4, 12 0.8 C15.4 3.4, 15.4 7.8, 12 11 Z" fill="#2FC4DD"/>
+<path d="M11 12 C7.8 8.6, 3.4 8.6, 0.8 12 C3.4 15.4, 7.8 15.4, 11 12 Z" fill="#249EBD"/>
+<path d="M13 12 C16.2 8.6, 20.6 8.6, 23.2 12 C20.6 15.4, 16.2 15.4, 13 12 Z" fill="#2FC4DD"/>
+<path d="M12 13 C8.6 16.2, 8.6 20.6, 12 23.2 C15.4 20.6, 15.4 16.2, 12 13 Z" fill="#FF7559"/>
+</svg> The Narrative Stack</a>
+    <nav>
+      <a href="https://narrativestack.ai/#thinking">The Thinking</a>
+      <a href="https://narrativestack.ai/#assessment">Assessment</a>
+      <a href="https://narrativestack.ai/#work">The Work</a>
+      <a href="https://narrativestack.ai/#rod">Rod</a>
+      <a class="btn" href="https://narrativestack.ai/#assessment">Take the Assessment</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero"><div class="wrap">
+    <div>
+      <div class="eyebrow">THE WORK · <b>THE GATHERING</b></div>
+      <h1>The Advanced Narrative Offsite</h1>
+      <p class="lede">You already have the gathering on the calendar. I join it as the guest who runs the story work. One or two days inside your own room, stress-testing a story that already works against everything that is about to change.</p>
+    </div>
+    <div class="hero-art"><img src="assets/offsite-mountains.jpg" alt="Mountain ridgelines under a rising sun"></div>
+  </div></div>
+
+  <section><div class="wrap">
+    <div class="label">The Fit</div>
+    <h2>Who brings me into the room</h2>
+    <p>The Offsite is advanced on purpose. It assumes a story that is already clear and credible, and a team honest enough to ask whether it will stay that way.</p>
+    <div class="fit">
+      <article><h3>The aligned team facing a new chapter</h3><p>Your result said the story is working across the organization. But a raise, a new market, a leadership change, or a hard year is coming, and the story that got you here has not met it yet.</p></article>
+      <article><h3>The leadership that wants the work done together</h3><p>Some narratives cannot be evolved by memo. The Offsite puts the whole leadership in one room so the next version of the story belongs to everyone who has to tell it.</p></article>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="label">The Shape</div>
+    <h2>What the days hold</h2>
+    <p>Your agenda stays yours. The story work threads through it on the same spine as everything I run.</p>
+    <div class="spine">
+      <div><h3>Source</h3><p>Before I arrive, I learn the story you tell now, from the artifacts and from a few of the people who carry it. I come in knowing where it lives, not just what it says.</p></div>
+      <div><h3>Examine</h3><p>In the room, we put the story against the future: the scenarios, the audiences, the moments you can see coming. We find where it holds, where it strains, and where it goes quiet.</p></div>
+      <div><h3>Author</h3><p>We draft the evolution together, capture the new stories the room surfaces, and leave with a story roadmap for the next twelve to twenty-four months, owned by the people in the chairs.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="label">The Outcome</div>
+    <h2>What your team walks away holding</h2>
+    <p>A narrative tuned for what is coming rather than what already happened. New keystone stories captured while they were still warm. And a roadmap that names the moments where the story goes to work next, so the offsite glow becomes Monday behavior.</p>
+  </div></section>
+
+  <section class="anchor"><div class="wrap">
+    <div class="label">Nothing Dead-Ends</div>
+    <h2>Something to read, something to do</h2>
+    <div class="pairing">
+      <div class="read"><h3><span>Read</span> · The Field Guide</h3><p>Aligned teams are usually ready to work on the page. The Field Guide gives every leader the instrument so the room's work continues at sixteen desks.</p></div>
+      <div class="do"><h3><span>Do</span> · The standing relationship</h3><p>For some teams, the Offsite becomes an annual rhythm. For a few, it opens the door to Storyteller in Residence, where the guest stops being a guest.</p></div>
+    </div>
+  </div></section>
+
+  <div class="pull"><div class="wrap">
+    <p class="q">The story that built this company is true. Is it still the truest thing you could be telling?</p>
+    <div class="sig">Yours in Narrative · Rod</div>
+  </div></div>
+
+  <section class="cta"><div class="wrap">
+    <h2>Put me on your agenda</h2>
+    <p>Tell me when your leadership gathers next and what the year in front of you holds. We will scope the day, or the two days, around the moment you are actually facing.</p>
+    <div class="row">
+      <a class="btn" id="book-cta" href="https://calendly.com/rod-drrodberger/30min?utm_source=narrativestack&utm_campaign=engagement-paths&utm_content=offsite">Book the Conversation</a>
+      <a class="ghost" href="https://narrativestack.ai/#assessment">Take the Quick Leadership Assessment first</a>
+    </div>
+  </div></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="paths">
+      <a href="narrative-debrief.html">Narrative Debrief</a>
+      <a href="narrative-sprint.html">Narrative Sprint</a>
+      <a href="narrative-leadership-lab.html">Narrative Leadership Lab</a>
+      <a href="advanced-narrative-offsite.html" class="here">Advanced Narrative Offsite</a>
+      <a href="storyteller-in-residence.html">Storyteller in Residence</a>
+    </div>
+    <div class="close">Yours in Narrative &nbsp;·&nbsp; You Matter. We Matter. Stories Matter.</div>
+  </div>
+</footer>
+<script>
+/* Forward zone/intent/email from the result-email link into the Calendly booking, so it prefills. Harmless if absent. */
+(function(){var p=new URLSearchParams(location.search),a=document.getElementById('book-cta');if(!a)return;var u=new URL(a.href);if(p.get('email'))u.searchParams.set('email',p.get('email'));if(p.get('name'))u.searchParams.set('name',p.get('name'));if(p.get('zone'))u.searchParams.set('utm_term',p.get('zone'));if(p.get('intent'))u.searchParams.set('utm_medium',p.get('intent'));a.href=u.toString();})();
+</script>
+</body>
+</html>

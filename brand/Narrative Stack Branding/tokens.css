@@ -1,0 +1,142 @@
+/**
+ * Narrative Stack — Design Tokens v1.1
+ * Production specification — May 2026
+ *
+ * USAGE
+ * Drop this file into the root of any web project. All Narrative Stack
+ * styles should reference these variables, never hardcoded values.
+ *
+ * SURFACE-BY-VOICE RULES (CRITICAL)
+ * Azure (--ns-azure) and Coral (--ns-coral) NEVER appear on the same
+ * surface. Pages and components are either "system voice" (Azure accent)
+ * or "human voice" (Coral accent). Choose one per surface.
+ *
+ * System voice: methodology pages, framework explainers, evidence,
+ * digital CTAs, advisory deliverables, navigation.
+ *
+ * Human voice: pull quotes, the Field Guide, motivational content,
+ * reflection moments, retail products, testimonials.
+ */
+
+:root {
+  /* ===== PRIMARY PALETTE ===== */
+  --ns-dark-blue: #183048;    /* Primary brand. Dominant background. */
+  --ns-azure:     #2FC4DD;    /* System voice accent. */
+  --ns-coral:     #FF7559;    /* Human voice accent. */
+  --ns-paper:     #FAFAF7;    /* Warm background. NOT pure white. */
+
+  /* ===== SUPPORTING PALETTE ===== */
+  --ns-ink:       #0A0A0A;    /* Pure text on light surfaces. */
+  --ns-graphite:  #4A4A4A;    /* Secondary text. */
+  --ns-mute:      #888780;    /* Tertiary text, metadata. */
+  --ns-fog:       #E5E5E2;    /* Dividers and low-weight borders. */
+
+  /* ===== EXTENDED PALETTE ===== */
+  --ns-mid-blue:  #3A6FB0;    /* Bridge tone for Fluid imagery. Optional. */
+  --ns-mist:      #E8F7FA;    /* Pale azure tint. Optional. */
+  --ns-char:      #2C2C2A;    /* Near-black for dark mode surfaces. */
+  --ns-cream:     #F4F2EC;    /* Warm alternative background. */
+
+  /* ===== TYPOGRAPHY ===== */
+  --ns-serif: 'GT Sectra Display', 'Tiempos Headline', 'Source Serif 4', Georgia, serif;
+  --ns-sans:  'GT America', 'Söhne', 'Inter', system-ui, sans-serif;
+  --ns-mono:  'GT America Mono', 'JetBrains Mono', monospace;
+
+  /* Type sizes */
+  --ns-text-display:    64px;   /* H1 display, large hero */
+  --ns-text-headline:   48px;   /* H1 standard */
+  --ns-text-section:    32px;   /* H2 */
+  --ns-text-subhead:    22px;   /* H3 */
+  --ns-text-body:       16px;   /* Body */
+  --ns-text-caption:    12px;   /* Captions */
+  --ns-text-label:      11px;   /* Monospace section labels */
+  --ns-text-statistic:  120px;  /* Large statistic display */
+
+  /* Weights */
+  --ns-weight-regular:  400;
+  --ns-weight-medium:   500;
+  --ns-weight-bold:     700;
+  --ns-weight-black:    900;    /* STACK wordmark only */
+
+  /* Line heights */
+  --ns-leading-tight:        1.1;
+  --ns-leading-snug:         1.3;
+  --ns-leading-comfortable:  1.6;
+
+  /* ===== SPACING (8px rhythm) ===== */
+  --ns-space-1:   8px;
+  --ns-space-2:  16px;
+  --ns-space-3:  24px;
+  --ns-space-5:  40px;
+  --ns-space-8:  64px;
+  --ns-space-12: 96px;
+
+  /* ===== STROKES ===== */
+  --ns-stroke-hairline: 1px;    /* System labels, wordmark slices */
+  --ns-stroke-line:     2px;    /* Hand-line accents */
+  --ns-stroke-bar:      6px;    /* Side bars on human-voice surfaces */
+  --ns-stroke-anchor:  18px;    /* Left bars on document callout boxes */
+
+  /* ===== GRID ===== */
+  --ns-grid-columns:        12;
+  --ns-max-content-width: 720px;
+  --ns-gutter-mobile:      24px;
+  --ns-gutter-tablet:      32px;
+  --ns-gutter-desktop:     40px;
+}
+
+/* ===== UTILITY CLASSES ===== */
+/* These are recommended starting points. Override or extend as needed. */
+
+.ns-system-voice {
+  --ns-accent: var(--ns-azure);
+}
+
+.ns-human-voice {
+  --ns-accent: var(--ns-coral);
+}
+
+.ns-dark-surface {
+  background-color: var(--ns-dark-blue);
+  color: var(--ns-paper);
+}
+
+.ns-light-surface {
+  background-color: var(--ns-paper);
+  color: var(--ns-ink);
+}
+
+.ns-headline {
+  font-family: var(--ns-serif);
+  font-style: italic;
+  font-weight: var(--ns-weight-regular);
+  font-size: var(--ns-text-headline);
+  line-height: var(--ns-leading-tight);
+}
+
+.ns-section-label {
+  font-family: var(--ns-mono);
+  font-size: var(--ns-text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ns-accent, var(--ns-mute));
+}
+
+.ns-body {
+  font-family: var(--ns-serif);
+  font-size: var(--ns-text-body);
+  line-height: var(--ns-leading-comfortable);
+}
+
+/* ===== FORBIDDEN ===== */
+/* Do NOT use the following in any Narrative Stack project:
+ *
+ *   background: linear-gradient(...)        — No gradients
+ *   color: #FFFFFF                          — Use --ns-paper instead
+ *   box-shadow: 0 4px 12px ...              — No drop shadows
+ *   filter: blur(...) or backdrop-filter    — No glassmorphism
+ *   animation: bounce, flash, spin          — No performance animations
+ *
+ * Sketch animations and hand-line elements may move subtly.
+ * Nothing else should.
+ */

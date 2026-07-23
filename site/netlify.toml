@@ -1,0 +1,31 @@
+# Netlify config for narrativestack.ai
+# Static site, no build step. Publish this folder as-is.
+
+[[redirects]]
+  from = "/field-guide"
+  to = "/field-guide.html"
+  status = 200
+
+[[redirects]]
+  from = "/quick-check"
+  to = "/quick-check.html"
+  status = 200
+
+# Engagement path subpages: pretty URLs (/paths/narrative-sprint -> .html)
+[[redirects]]
+  from = "/paths/:slug"
+  to = "/paths/:slug.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Keep the engagement path subpages out of search while unlisted
+[[headers]]
+  for = "/paths/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

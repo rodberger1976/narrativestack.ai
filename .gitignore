@@ -1,0 +1,10 @@
+# macOS system files
+.DS_Store
+
+# Dependencies and local tooling
+node_modules/
+.netlify/
+
+# Local-only folders not part of the website
+_to_delete/
+archive/

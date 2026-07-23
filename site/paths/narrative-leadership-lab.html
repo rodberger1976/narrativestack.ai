@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow"><!-- Remove when a page goes public -->
+<title>The Narrative Leadership Lab · The Narrative Stack</title>
+<meta name="description" content="A small cohort of leaders who work their stories together over time, each using their own result as the case.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ns-dark-blue:#183048; --ns-azure:#2FC4DD; --ns-coral:#FF7559;
+  --ns-paper:#FAFAF7; --ns-cream:#F4F2EC; --ns-ink:#0A0A0A;
+  --ns-graphite:#4A4A4A; --ns-mute:#888780; --ns-fog:#E5E5E2; --ns-mist:#E8F7FA;
+  --ns-serif:'Source Serif 4',Georgia,serif;
+  --ns-sans:'Hanken Grotesk',system-ui,sans-serif;
+  --ns-mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ns-paper);color:var(--ns-ink);font-family:var(--ns-serif);font-size:17px;line-height:1.6}
+a{color:inherit}
+.wrap{max-width:880px;margin:0 auto;padding:0 28px}
+
+/* Header */
+header{background:var(--ns-dark-blue);color:#fff}
+.nav{max-width:1180px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:28px}
+.mark{font-family:var(--ns-serif);font-weight:700;font-size:19px;letter-spacing:.01em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.mark svg{display:block}
+.nav nav{margin-left:auto;display:flex;align-items:center;gap:26px}
+.nav nav a{font-family:var(--ns-sans);font-size:14px;color:#D7DEE6;text-decoration:none;letter-spacing:.01em}
+.nav nav a:hover{color:#fff}
+.btn{font-family:var(--ns-sans);font-size:14px;font-weight:600;background:var(--ns-coral);color:#fff;border-radius:999px;padding:10px 22px;text-decoration:none;display:inline-block}
+.btn:hover{filter:brightness(1.05)}
+@media(max-width:760px){.nav nav a:not(.btn){display:none}}
+
+/* Hero */
+.hero{padding:84px 0 64px;border-bottom:1px solid var(--ns-fog)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:56px;align-items:center}
+.hero-art{position:relative}
+.hero-art img{display:block;width:100%;border-radius:14px;position:relative;z-index:1}
+.hero-art::before{content:"";position:absolute;inset:18px -18px -18px 18px;background:var(--ns-dark-blue);border-radius:14px}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:340px}}
+.hero-band{margin-top:48px;position:relative}
+.hero-band img{display:block;width:100%;max-height:300px;object-fit:cover;border-radius:14px;position:relative;z-index:1}
+.hero-band::before{content:"";position:absolute;inset:16px -16px -16px 16px;background:var(--ns-dark-blue);border-radius:14px}
+.eyebrow{font-family:var(--ns-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ns-mute);margin-bottom:22px}
+.eyebrow b{color:var(--ns-coral);font-weight:500}
+h1{font-family:var(--ns-serif);font-weight:700;font-size:clamp(40px,6vw,60px);line-height:1.1;letter-spacing:-.01em;max-width:14ch}
+.lede{margin-top:26px;font-size:21px;line-height:1.55;color:var(--ns-graphite);max-width:34em}
+
+/* Sections */
+section{padding:60px 0;border-bottom:1px solid var(--ns-fog)}
+.label{font-family:var(--ns-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ns-azure);margin-bottom:8px}
+h2{font-family:var(--ns-serif);font-weight:700;font-size:30px;line-height:1.2;margin-bottom:22px;max-width:22ch}
+section p{max-width:36em;margin-bottom:18px}
+section p:last-child{margin-bottom:0}
+.spine{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--ns-fog);border:1px solid var(--ns-fog);margin-top:34px}
+.spine div{background:var(--ns-paper);padding:24px 22px}
+.spine h3{font-family:var(--ns-sans);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;color:var(--ns-dark-blue)}
+.spine p{font-size:15px;color:var(--ns-graphite);line-height:1.55;margin:0}
+@media(max-width:680px){.spine{grid-template-columns:1fr}}
+
+/* Fit cards */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+.fit article{border-top:2px solid var(--ns-dark-blue);padding-top:16px}
+.fit h3{font-family:var(--ns-sans);font-weight:700;font-size:15px;margin-bottom:8px}
+.fit p{font-size:15.5px;color:var(--ns-graphite);margin:0}
+@media(max-width:680px){.fit{grid-template-columns:1fr}}
+
+/* Pull quote */
+.pull{background:var(--ns-dark-blue);color:#fff}
+.pull .wrap{padding-top:72px;padding-bottom:72px}
+.pull p.q{font-family:var(--ns-serif);font-style:italic;font-size:clamp(24px,3.4vw,32px);line-height:1.35;max-width:24em}
+.pull .sig{margin-top:28px;font-family:var(--ns-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ns-coral)}
+
+/* Anchor pairing */
+.anchor{background:var(--ns-cream)}
+.anchor .pairing{display:flex;gap:34px;align-items:flex-start;margin-top:26px;flex-wrap:wrap}
+.anchor .read,.anchor .do{flex:1 1 280px}
+.anchor h3{font-family:var(--ns-sans);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.anchor h3 span{color:var(--ns-coral)}
+.anchor p{font-size:15.5px;color:var(--ns-graphite);margin:0}
+
+/* CTA */
+.cta{text-align:left;padding:72px 0}
+.cta h2{margin-bottom:14px}
+.cta p{margin-bottom:30px;color:var(--ns-graphite);max-width:34em}
+.cta .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ghost{font-family:var(--ns-sans);font-size:14px;font-weight:600;color:var(--ns-dark-blue);text-decoration:none;border-bottom:1px solid var(--ns-azure);padding-bottom:2px}
+
+/* Footer */
+footer{background:var(--ns-dark-blue);color:#AEB9C4;font-family:var(--ns-sans);font-size:13.5px}
+footer .wrap{max-width:1180px;padding-top:54px;padding-bottom:54px}
+.paths{display:flex;gap:8px 26px;flex-wrap:wrap;margin-bottom:30px}
+.paths a{color:#D7DEE6;text-decoration:none}
+.paths a:hover{color:#fff}
+.paths a.here{color:var(--ns-coral)}
+footer .close{font-family:var(--ns-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7E8B98}
+
+/* Hub */
+.hub-grid{display:grid;gap:22px;margin-top:38px}
+.hub-card{border:1px solid var(--ns-fog);background:#fff;padding:30px 30px 26px;text-decoration:none;display:block;transition:border-color .15s}
+.hub-card:hover{border-color:var(--ns-azure)}
+.hub-card h3{font-family:var(--ns-serif);font-weight:700;font-size:24px;margin-bottom:8px}
+.hub-card .tag{font-family:var(--ns-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ns-coral);margin-bottom:12px}
+.hub-card p{font-size:15.5px;color:var(--ns-graphite);max-width:46em}
+.note{border:1px dashed var(--ns-mute);background:var(--ns-mist);padding:22px 24px;margin-top:46px;font-family:var(--ns-sans);font-size:13.5px;color:var(--ns-graphite)}
+.note b{color:var(--ns-dark-blue)}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="mark" href="https://narrativestack.ai" style="color:#fff"><svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+<path d="M12 11 C8.6 7.8, 8.6 3.4, 12 0.8 C15.4 3.4, 15.4 7.8, 12 11 Z" fill="#2FC4DD"/>
+<path d="M11 12 C7.8 8.6, 3.4 8.6, 0.8 12 C3.4 15.4, 7.8 15.4, 11 12 Z" fill="#249EBD"/>
+<path d="M13 12 C16.2 8.6, 20.6 8.6, 23.2 12 C20.6 15.4, 16.2 15.4, 13 12 Z" fill="#2FC4DD"/>
+<path d="M12 13 C8.6 16.2, 8.6 20.6, 12 23.2 C15.4 20.6, 15.4 16.2, 12 13 Z" fill="#FF7559"/>
+</svg> The Narrative Stack</a>
+    <nav>
+      <a href="https://narrativestack.ai/#thinking">The Thinking</a>
+      <a href="https://narrativestack.ai/#assessment">Assessment</a>
+      <a href="https://narrativestack.ai/#work">The Work</a>
+      <a href="https://narrativestack.ai/#rod">Rod</a>
+      <a class="btn" href="https://narrativestack.ai/#assessment">Take the Assessment</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero"><div class="wrap">
+    <div>
+      <div class="eyebrow">THE WORK · <b>THE COHORT</b></div>
+      <h1>The Narrative Leadership Lab</h1>
+      <p class="lede">A small room of leaders working their stories together over time. You bring your own result as the case. The cohort brings what no consultant can: people with no reason to flatter you.</p>
+    </div>
+    <div class="hero-art"><img src="assets/lab-table.jpg" alt="Leaders working together around a table"></div>
+  </div></div>
+
+  <section><div class="wrap">
+    <div class="label">The Fit</div>
+    <h2>Who joins the Lab</h2>
+    <p>The Lab was built for the most common result we see, and for the leader who does better work with company.</p>
+    <div class="fit">
+      <article><h3>The leader whose story drifts</h3><p>On a good day it lands. An all-hands that soared, a board update that fell flat, and no clear reason why. The Lab turns those scattered moments into a pattern you can repeat on purpose.</p></article>
+      <article><h3>The leader who wants peers, not just a guide</h3><p>Some stories sharpen fastest against other stories. In the Lab you hear how a founder, an operator, and a school leader each solve the same problem, and your own answer gets braver for it.</p></article>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="label">The Shape</div>
+    <h2>How a cohort works</h2>
+    <p>A handful of leaders, live sessions across several weeks, light work between them. The same spine runs through it.</p>
+    <div class="spine">
+      <div><h3>Source</h3><p>You arrive with your assessment as your case. First sessions surface the stories you already carry: the ones you tell, the ones you avoid, the ones others tell about you.</p></div>
+      <div><h3>Examine</h3><p>The cohort is the instrument. You tell your story to people who owe you nothing, and you watch where they sit forward and where they reach for their phones. That data does not lie.</p></div>
+      <div><h3>Author</h3><p>You draft a working version of your leadership story, pressure-test it across the sessions, and plan one high-stakes moment where it goes live: a keynote, a raise, a hard conversation.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="label">The Outcome</div>
+    <h2>What you walk away holding</h2>
+    <p>A story that has survived contact with strangers. A plan for the one moment that matters most in your next quarter. And a bench of peers who know your story well enough to call you when you drift back to the police report. They will. That is the point.</p>
+  </div></section>
+
+  <section class="anchor"><div class="wrap">
+    <div class="label">Nothing Dead-Ends</div>
+    <h2>Something to read, something to do</h2>
+    <div class="pairing">
+      <div class="read"><h3><span>Read</span> · The go-between, or the Field Guide</h3><p>Readers who want more than the book but are not ready for the full workbook start with the shorter companion. Leaders ready to work on the page bring the Field Guide into the room.</p></div>
+      <div class="do"><h3><span>Do</span> · Office hours, and what follows</h3><p>Each participant gets time with me one to one. Some leaders find the Lab is exactly enough. Others discover their organization needs the work too, and the Sprint is waiting.</p></div>
+    </div>
+  </div></section>
+
+  <div class="pull"><div class="wrap">
+    <p class="q">When you told your story to someone with nothing to gain from liking it, what did their face tell you?</p>
+    <div class="sig">Yours in Narrative · Rod</div>
+  </div></div>
+
+  <section class="cta"><div class="wrap">
+    <h2>Ask about the next cohort</h2>
+    <p>Labs run in small cohorts and they fill quietly. If your result pointed you here, reach out and I will tell you when the next room opens and whether it is your room.</p>
+    <div class="row">
+      <a class="btn" id="book-cta" href="https://calendly.com/rod-drrodberger/30min?utm_source=narrativestack&utm_campaign=engagement-paths&utm_content=lab">Book the Conversation</a>
+      <a class="ghost" href="https://narrativestack.ai/#assessment">Take the Quick Leadership Assessment first</a>
+    </div>
+  </div></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="paths">
+      <a href="narrative-debrief.html">Narrative Debrief</a>
+      <a href="narrative-sprint.html">Narrative Sprint</a>
+      <a href="narrative-leadership-lab.html" class="here">Narrative Leadership Lab</a>
+      <a href="advanced-narrative-offsite.html">Advanced Narrative Offsite</a>
+      <a href="storyteller-in-residence.html">Storyteller in Residence</a>
+    </div>
+    <div class="close">Yours in Narrative &nbsp;·&nbsp; You Matter. We Matter. Stories Matter.</div>
+  </div>
+</footer>
+<script>
+/* Forward zone/intent/email from the result-email link into the Calendly booking, so it prefills. Harmless if absent. */
+(function(){var p=new URLSearchParams(location.search),a=document.getElementById('book-cta');if(!a)return;var u=new URL(a.href);if(p.get('email'))u.searchParams.set('email',p.get('email'));if(p.get('name'))u.searchParams.set('name',p.get('name'));if(p.get('zone'))u.searchParams.set('utm_term',p.get('zone'));if(p.get('intent'))u.searchParams.set('utm_medium',p.get('intent'));a.href=u.toString();})();
+</script>
+</body>
+</html>

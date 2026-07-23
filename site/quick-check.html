@@ -1,0 +1,2649 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Narrative Edge Leadership Quick-Check &middot; Dr. Rod Berger</title>
+  <meta name="description" content="A five-minute Quick-Check on your leadership storytelling. From Dr. Rod Berger, author of The Narrative Edge (Wiley)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================
+       Narrative Stack — Design Tokens v1.1
+       System voice surface (Azure accent) — Dark Blue dominant
+       ========================================================== */
+    :root {
+      --ns-dark-blue: #183048;
+      --ns-azure:     #2FC4DD;
+      --ns-coral:     #FF7559;
+      --ns-paper:     #FAFAF7;
+      --ns-ink:       #0A0A0A;
+      --ns-graphite:  #4A4A4A;
+      --ns-mute:      #888780;
+      --ns-fog:       #E5E5E2;
+      --ns-mid-blue:  #3A6FB0;
+      --ns-mist:      #E8F7FA;
+      --ns-char:      #2C2C2A;
+
+      /* This page is a system-voice surface. */
+      --ns-accent: var(--ns-azure);
+
+      /* Derived for dark-surface UI */
+      --ns-paper-80: rgba(250, 250, 247, 0.82);
+      --ns-paper-60: rgba(250, 250, 247, 0.60);
+      --ns-paper-40: rgba(250, 250, 247, 0.40);
+      --ns-paper-12: rgba(250, 250, 247, 0.12);
+      --ns-paper-06: rgba(250, 250, 247, 0.06);
+
+      --ns-serif: 'Source Serif 4', 'GT Sectra Display', 'Tiempos Headline', Georgia, serif;
+      --ns-sans:  'Inter', 'GT America', 'Söhne', system-ui, -apple-system, sans-serif;
+      --ns-mono:  'JetBrains Mono', 'GT America Mono', ui-monospace, monospace;
+
+      --ns-space-1: 8px;
+      --ns-space-2: 16px;
+      --ns-space-3: 24px;
+      --ns-space-5: 40px;
+      --ns-space-8: 64px;
+      --ns-space-12: 96px;
+
+      --ns-stroke-hairline: 1px;
+      --ns-stroke-line: 2px;
+      --ns-stroke-bar: 6px;
+      --ns-stroke-anchor: 18px;
+
+      --ns-max: 720px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--ns-dark-blue);
+      color: var(--ns-paper);
+      font-family: var(--ns-serif);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--ns-max);
+      margin: 0 auto;
+      padding: 0 var(--ns-space-3);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==========================================================
+       Geometric markers — Azure half-circles
+       Slide 19 / 26 signature treatment
+       ========================================================== */
+    .geometry {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 280px;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .geometry::before,
+    .geometry::after {
+      content: "";
+      position: absolute;
+      right: -160px;
+      width: 320px;
+      height: 320px;
+      background: var(--ns-azure);
+      border-radius: 50%;
+    }
+    .geometry::before { top: 14%; }
+    .geometry::after { bottom: 14%; }
+    @media (max-width: 900px) {
+      .geometry { display: none; }
+    }
+
+    /* ==========================================================
+       Header — minimal brand mark
+       ========================================================== */
+    header {
+      padding: var(--ns-space-5) 0 0;
+      position: relative;
+      z-index: 2;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--ns-space-2);
+    }
+    .wordmark {
+      font-family: var(--ns-sans);
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      color: var(--ns-paper);
+    }
+    .wordmark .narr {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: -0.005em;
+    }
+    .wordmark .stack {
+      font-family: var(--ns-sans);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      font-size: 14px;
+      position: relative;
+    }
+    .meta-tag {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ns-paper-60);
+    }
+
+    /* ==========================================================
+       Main content
+       ========================================================== */
+    main {
+      flex: 1;
+      padding: var(--ns-space-8) 0 var(--ns-space-12);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Hero only — widen container and suppress fixed geometry behind portrait */
+    body.on-hero .container { max-width: 1040px; }
+    body.on-hero .geometry { display: none; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: var(--ns-space-8);
+      align-items: start;
+    }
+    .hero-text { max-width: 560px; }
+    .hero-portrait {
+      position: relative;
+      align-self: start;
+    }
+    .hero-portrait .portrait-frame {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      overflow: hidden;
+    }
+    .hero-portrait img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-portrait::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--ns-space-2));
+      top: var(--ns-space-2);
+      width: 100%;
+      height: 100%;
+      border-left: var(--ns-stroke-anchor) solid var(--ns-azure);
+      z-index: -1;
+    }
+    .hero-portrait .portrait-caption {
+      margin-top: var(--ns-space-2);
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ns-paper-60);
+      text-align: right;
+    }
+    .hero-portrait .portrait-caption strong {
+      display: block;
+      color: var(--ns-paper);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: var(--ns-space-5);
+      }
+      .hero-portrait {
+        max-width: 240px;
+      }
+      .hero-portrait::before { display: none; }
+      .hero-portrait .portrait-caption { text-align: left; }
+    }
+
+    /* ==========================================================
+       YouTube embed — responsive 16:9, hairline frame
+       ========================================================== */
+    .video-block {
+      margin: var(--ns-space-5) 0;
+    }
+    .video-block .video-label {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      margin-bottom: var(--ns-space-1);
+    }
+    .video-block .video-title {
+      font-family: var(--ns-sans);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--ns-paper);
+      margin-bottom: var(--ns-space-2);
+      letter-spacing: -0.005em;
+    }
+    .video-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      background: var(--ns-dark-blue);
+    }
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ==========================================================
+       Book block — persistent CTA to The Narrative Edge on Amazon
+       Shown on every result, between the band CTA and Trust(ed) Sessions.
+       ========================================================== */
+    .book-block {
+      margin-top: var(--ns-space-5);
+      padding-top: var(--ns-space-5);
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: var(--ns-space-5);
+      align-items: center;
+    }
+    .book-block .book-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .book-block .book-eyebrow {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      margin-bottom: var(--ns-space-1);
+    }
+    .book-block h3 {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      color: var(--ns-paper);
+      margin: 0 0 var(--ns-space-2);
+    }
+    .book-block .book-subtitle {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      color: var(--ns-paper-80);
+      font-size: 1.05rem;
+      margin: 0 0 var(--ns-space-2);
+    }
+    .book-block p {
+      font-family: var(--ns-serif);
+      color: var(--ns-paper-80);
+      margin: 0 0 var(--ns-space-3);
+    }
+    @media (max-width: 640px) {
+      .book-block {
+        grid-template-columns: 1fr;
+        gap: var(--ns-space-3);
+      }
+      .book-block .book-image { max-width: 220px; margin: 0 auto; }
+    }
+
+    /* ==========================================================
+       Trust(ed) Sessions application
+       Discrete human-voice surface — Coral accent only within this block.
+       Per Narrative Stack v1.1: "Dark surface (human voice)" pattern.
+       ========================================================== */
+    .trusted-sessions {
+      margin-top: var(--ns-space-12);
+      padding-top: var(--ns-space-8);
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      max-width: 600px;
+    }
+    .ts-eyebrow {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-coral);
+      font-weight: 500;
+      margin-bottom: var(--ns-space-2);
+      display: inline-block;
+    }
+    .ts-eyebrow-underscore {
+      display: inline-block;
+      width: 56px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-coral);
+      margin-bottom: var(--ns-space-3);
+    }
+    .ts-headline {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--ns-paper);
+      margin: 0 0 var(--ns-space-3);
+    }
+    .ts-framing p {
+      font-family: var(--ns-serif);
+      font-size: 1.05rem;
+      color: var(--ns-paper);
+      line-height: 1.55;
+      margin: 0 0 var(--ns-space-2);
+    }
+    .ts-framing p:last-of-type { margin-bottom: var(--ns-space-5); }
+    .ts-framing p em {
+      font-style: italic;
+      color: var(--ns-paper);
+    }
+    .ts-form .field { margin-bottom: var(--ns-space-3); }
+    .ts-form label {
+      display: block;
+      font-family: var(--ns-sans);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      color: var(--ns-paper);
+      margin-bottom: 6px;
+    }
+    .ts-form .req {
+      color: var(--ns-coral);
+      margin-left: 2px;
+    }
+    .ts-form input[type="text"],
+    .ts-form input[type="email"],
+    .ts-form textarea {
+      width: 100%;
+      background: var(--ns-paper-06);
+      color: var(--ns-paper);
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      padding: 12px 14px;
+      font-family: var(--ns-serif);
+      font-size: 1rem;
+      border-radius: 0;
+      line-height: 1.5;
+    }
+    .ts-form input::placeholder, .ts-form textarea::placeholder { color: var(--ns-paper-40); font-style: italic; }
+    .ts-form input:focus, .ts-form textarea:focus {
+      outline: none;
+      border-color: var(--ns-coral);
+      background: transparent;
+    }
+    .ts-form textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+    .ts-form textarea#ts-story {
+      min-height: 220px;
+      font-size: 1.05rem;
+    }
+    .ts-form .helper {
+      font-family: var(--ns-sans);
+      font-size: 12px;
+      color: var(--ns-paper-60);
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+    .ts-form .charcount {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--ns-paper-60);
+      margin-top: 4px;
+      text-align: right;
+    }
+    .ts-form .charcount.under { color: var(--ns-coral); }
+    .ts-form .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--ns-space-2);
+      padding: var(--ns-space-3) 0;
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      margin-top: var(--ns-space-3);
+    }
+    .ts-form .checkbox-field input[type="checkbox"] {
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      margin: 2px 0 0 0;
+      accent-color: var(--ns-coral);
+      cursor: pointer;
+    }
+    .ts-form .checkbox-field label {
+      font-family: var(--ns-serif);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--ns-paper);
+      line-height: 1.5;
+      margin: 0;
+      cursor: pointer;
+      letter-spacing: 0;
+    }
+    .btn-coral {
+      background: var(--ns-coral);
+      color: var(--ns-dark-blue);
+    }
+    .btn-coral:hover { background: #ff8d75; }
+    .btn-coral[disabled] {
+      background: var(--ns-paper-12);
+      color: var(--ns-paper-60);
+      cursor: not-allowed;
+    }
+    .ts-submit-row { margin-top: var(--ns-space-3); }
+    .ts-form-error {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ns-coral);
+      margin-top: var(--ns-space-2);
+      min-height: 1.2em;
+    }
+    .ts-thanks {
+      border-left: var(--ns-stroke-anchor) solid var(--ns-coral);
+      padding: var(--ns-space-3) var(--ns-space-3) var(--ns-space-3) var(--ns-space-5);
+      background: var(--ns-paper-06);
+      margin-top: var(--ns-space-5);
+    }
+    .ts-thanks .ts-thanks-label {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-coral);
+      margin-bottom: var(--ns-space-2);
+    }
+    .ts-thanks p {
+      font-family: var(--ns-serif);
+      font-size: 1.05rem;
+      color: var(--ns-paper);
+      line-height: 1.55;
+      margin: 0 0 var(--ns-space-2);
+    }
+    .ts-thanks .sig {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      color: var(--ns-paper);
+      margin-top: var(--ns-space-3);
+    }
+    .ts-thanks .sig strong { font-style: normal; font-weight: 600; }
+    @media (max-width: 640px) {
+      .trusted-sessions { padding-top: var(--ns-space-5); }
+      .ts-thanks {
+        padding-left: var(--ns-space-3);
+        border-left-width: var(--ns-stroke-bar);
+      }
+    }
+
+    /* ==========================================================
+       Opt-in confirmation (Field Guide discount)
+       ========================================================== */
+    .optin-confirm {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--ns-space-2);
+      padding: var(--ns-space-3);
+      border: var(--ns-stroke-hairline) solid var(--ns-azure);
+      background: var(--ns-paper-06);
+      margin-top: var(--ns-space-2);
+    }
+    .optin-confirm .check {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border: var(--ns-stroke-line) solid var(--ns-azure);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ns-azure);
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+    }
+    .optin-confirm-text strong {
+      display: block;
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ns-azure);
+      margin-bottom: 4px;
+    }
+    .optin-confirm-text p {
+      font-family: var(--ns-serif);
+      color: var(--ns-paper-80);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================================
+       Field Guide publication notify — footer-resident, Coral-accented
+       Captures broader-audience signups distinct from the Developing-band
+       discount opt-in. Notification-only, no discount promise.
+       Event: 'field_guide_publication_notify'
+       ========================================================== */
+    .fg-notify {
+      margin-bottom: var(--ns-space-5);
+      padding-bottom: var(--ns-space-5);
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: var(--ns-space-5);
+      align-items: end;
+    }
+    .fg-notify-eyebrow {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-coral);
+      margin-bottom: var(--ns-space-1);
+    }
+    .fg-notify-underscore {
+      display: block;
+      width: 48px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-coral);
+      margin-bottom: var(--ns-space-2);
+    }
+    .fg-notify-headline {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--ns-paper);
+      margin: 0 0 var(--ns-space-1);
+      letter-spacing: -0.005em;
+      line-height: 1.15;
+    }
+    .fg-notify-body {
+      font-family: var(--ns-serif);
+      color: var(--ns-paper-80);
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      max-width: 460px;
+    }
+    .fg-notify-row {
+      display: flex;
+      gap: var(--ns-space-1);
+      align-items: stretch;
+    }
+    .fg-notify-row input[type="email"] {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      color: var(--ns-paper);
+      border: 0;
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      padding: 12px 0;
+      font-family: var(--ns-serif);
+      font-size: 1rem;
+      border-radius: 0;
+    }
+    .fg-notify-row input[type="email"]::placeholder { color: var(--ns-paper-40); font-style: italic; }
+    .fg-notify-row input[type="email"]:focus {
+      outline: none;
+      border-bottom-color: var(--ns-coral);
+    }
+    .fg-notify-row .btn-coral {
+      padding: 14px 22px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      flex: 0 0 auto;
+    }
+    .fg-notify-error {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ns-coral);
+      margin-top: var(--ns-space-1);
+      min-height: 1.2em;
+    }
+    .fg-notify-confirm {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--ns-space-2);
+      padding: var(--ns-space-3);
+      border: var(--ns-stroke-hairline) solid var(--ns-coral);
+      background: var(--ns-paper-06);
+    }
+    .fg-notify-confirm .check {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border: var(--ns-stroke-line) solid var(--ns-coral);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ns-coral);
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+    }
+    .fg-notify-confirm strong {
+      display: block;
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ns-coral);
+      margin-bottom: 4px;
+    }
+    .fg-notify-confirm p {
+      font-family: var(--ns-serif);
+      color: var(--ns-paper-80);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 720px) {
+      .fg-notify {
+        grid-template-columns: 1fr;
+        gap: var(--ns-space-3);
+      }
+    }
+
+    /* ==========================================================
+       Eyebrows and section labels
+       Mono uppercase, Azure hand-line beneath
+       ========================================================== */
+    .eyebrow {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      font-weight: 500;
+      margin-bottom: var(--ns-space-2);
+      display: inline-block;
+    }
+    .eyebrow-underscore {
+      display: inline-block;
+      width: 56px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-azure);
+      margin-bottom: var(--ns-space-3);
+    }
+
+    .subhead-label {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ns-paper);
+      margin-bottom: var(--ns-space-1);
+    }
+    .subhead-rule {
+      width: 48px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-azure);
+      margin-bottom: var(--ns-space-3);
+    }
+
+    /* ==========================================================
+       Typography — Inter heavy display, Source Serif body
+       ========================================================== */
+    h1, h2, h3 {
+      font-family: var(--ns-sans);
+      color: var(--ns-paper);
+      font-weight: 700;
+      letter-spacing: -0.018em;
+      line-height: 1.05;
+      margin: 0 0 var(--ns-space-3);
+    }
+    h1 {
+      font-size: clamp(2.5rem, 5.6vw, 4rem);
+    }
+    h2 {
+      font-size: clamp(2rem, 4.4vw, 2.75rem);
+      line-height: 1.08;
+    }
+    h3 {
+      font-size: 1.4rem;
+      letter-spacing: -0.005em;
+    }
+    p {
+      margin: 0 0 var(--ns-space-2);
+      color: var(--ns-paper-80);
+    }
+    p.lead {
+      font-size: 1.125rem;
+      color: var(--ns-paper);
+      max-width: 600px;
+    }
+    .dim { color: var(--ns-paper-60); }
+    .muted { color: var(--ns-paper-80); }
+    em { font-style: italic; color: var(--ns-paper); }
+    a {
+      color: var(--ns-azure);
+      text-decoration: none;
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-azure);
+      padding-bottom: 1px;
+      transition: opacity 120ms ease;
+    }
+    a:hover { opacity: 0.7; }
+
+    /* ==========================================================
+       Form inputs — hairline-only, no cards
+       ========================================================== */
+    .form-group { margin-bottom: var(--ns-space-3); }
+    label {
+      display: block;
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+      margin-bottom: var(--ns-space-1);
+    }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      background: transparent;
+      color: var(--ns-paper);
+      border: 0;
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      padding: 12px 0;
+      font-family: var(--ns-serif);
+      font-size: 1.1rem;
+      transition: border-color 120ms ease;
+      border-radius: 0;
+    }
+    input::placeholder, textarea::placeholder { color: var(--ns-paper-40); }
+    input:focus, textarea:focus {
+      outline: none;
+      border-bottom-color: var(--ns-azure);
+    }
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================
+       Buttons — heavy sans, sharp edges, Azure fill or hairline
+       ========================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ns-space-1);
+      background: var(--ns-azure);
+      color: var(--ns-dark-blue);
+      border: 0;
+      border-radius: 0;
+      padding: 16px 28px;
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 120ms ease;
+      text-decoration: none;
+    }
+    .btn:hover { background: #4ad4ec; border-bottom: 0; }
+    .btn:active { background: var(--ns-azure); }
+    .btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ns-paper);
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      padding: 15px 27px;
+    }
+    .btn-ghost:hover {
+      background: var(--ns-paper-06);
+      color: var(--ns-paper);
+      border-color: var(--ns-paper);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: var(--ns-space-2);
+      align-items: center;
+      margin-top: var(--ns-space-5);
+      flex-wrap: wrap;
+    }
+    .btn-row .meta {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+    }
+
+    /* ==========================================================
+       Steps — slide-in transitions
+       ========================================================== */
+    .step { display: none; }
+    .step.active {
+      display: block;
+      animation: fade .4s ease;
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ==========================================================
+       Progress indicator
+       ========================================================== */
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: var(--ns-space-2);
+      margin-bottom: var(--ns-space-5);
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ns-paper-60);
+    }
+    .progress-bar {
+      flex: 1;
+      max-width: 200px;
+      height: var(--ns-stroke-hairline);
+      background: var(--ns-paper-12);
+      position: relative;
+    }
+    .progress-fill {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      background: var(--ns-azure);
+      width: 0;
+      transition: width 380ms ease;
+    }
+
+    /* ==========================================================
+       Question blocks
+       ========================================================== */
+    .q {
+      padding: var(--ns-space-5) 0;
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+    }
+    .q:first-of-type { padding-top: var(--ns-space-3); }
+    .q:last-of-type { border-bottom: 0; }
+    .q-title {
+      font-family: var(--ns-sans);
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+      color: var(--ns-paper);
+      margin: 0 0 var(--ns-space-1);
+    }
+    .q-title em {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--ns-azure);
+    }
+    .q-help {
+      font-family: var(--ns-serif);
+      font-size: 1rem;
+      color: var(--ns-paper-80);
+      margin: 0 0 var(--ns-space-3);
+      max-width: 600px;
+    }
+
+    /* ==========================================================
+       1-5 Scale — bordered cells, Azure on select
+       ========================================================== */
+    .scale {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: var(--ns-space-2);
+      max-width: 520px;
+    }
+    .scale label {
+      margin: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 0;
+      background: transparent;
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      border-right-width: 0;
+      color: var(--ns-paper);
+      font-family: var(--ns-sans);
+      font-weight: 500;
+      font-size: 1.05rem;
+      text-transform: none;
+      letter-spacing: 0;
+      transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+    .scale label:last-child { border-right-width: var(--ns-stroke-hairline); }
+    .scale input { position: absolute; opacity: 0; pointer-events: none; }
+    .scale label:hover { background: var(--ns-paper-06); }
+    .scale label.checked {
+      background: var(--ns-azure);
+      color: var(--ns-dark-blue);
+      border-color: var(--ns-azure);
+      font-weight: 700;
+    }
+    .scale-legend {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ns-paper-60);
+      margin-top: var(--ns-space-1);
+      max-width: 520px;
+    }
+
+    /* ==========================================================
+       T/F — two-cell bordered toggle
+       ========================================================== */
+    .tf {
+      display: grid;
+      grid-template-columns: 160px 160px;
+      gap: 0;
+      margin-top: var(--ns-space-2);
+    }
+    .tf label {
+      margin: 0;
+      cursor: pointer;
+      padding: 14px 0;
+      text-align: center;
+      background: transparent;
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      color: var(--ns-paper);
+      font-family: var(--ns-sans);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+    .tf label:first-child { border-right-width: 0; }
+    .tf input { position: absolute; opacity: 0; pointer-events: none; }
+    .tf label:hover { background: var(--ns-paper-06); }
+    .tf label.checked {
+      background: var(--ns-azure);
+      color: var(--ns-dark-blue);
+      border-color: var(--ns-azure);
+    }
+
+    /* ==========================================================
+       Number stepper
+       ========================================================== */
+    .stepper {
+      display: inline-flex;
+      align-items: stretch;
+      gap: 0;
+      border: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      background: transparent;
+      margin-top: var(--ns-space-1);
+    }
+    .stepper button {
+      background: transparent;
+      color: var(--ns-paper);
+      border: 0;
+      padding: 0 18px;
+      font-family: var(--ns-sans);
+      font-weight: 500;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+    .stepper button:hover { background: var(--ns-paper-06); }
+    .stepper input {
+      width: 64px;
+      text-align: center;
+      border: 0;
+      border-left: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      border-right: var(--ns-stroke-hairline) solid var(--ns-paper-40);
+      background: transparent;
+      color: var(--ns-paper);
+      font-family: var(--ns-sans);
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 12px 0;
+      -moz-appearance: textfield;
+    }
+    .stepper input::-webkit-outer-spin-button,
+    .stepper input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* ==========================================================
+       Result — score display + breakdown
+       ========================================================== */
+    .band-marker {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ns-azure);
+      margin-bottom: var(--ns-space-2);
+    }
+    .band-marker::before {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: var(--ns-stroke-line);
+      background: var(--ns-azure);
+      vertical-align: middle;
+      margin-right: var(--ns-space-1);
+    }
+
+    .score-display {
+      font-family: var(--ns-sans);
+      font-weight: 900;
+      font-size: clamp(4.5rem, 12vw, 7.5rem);
+      line-height: 0.95;
+      color: var(--ns-paper);
+      margin: var(--ns-space-3) 0 var(--ns-space-1);
+      letter-spacing: -0.04em;
+    }
+    .score-display .of {
+      color: var(--ns-paper-60);
+      font-size: 0.32em;
+      vertical-align: top;
+      margin-left: 8px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: var(--ns-space-5) 0;
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+    }
+    .breakdown div {
+      padding: var(--ns-space-3) var(--ns-space-2);
+      border-right: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+    }
+    .breakdown div:last-child { border-right: 0; }
+    .breakdown .label {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+      margin-bottom: 6px;
+    }
+    .breakdown .val {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--ns-paper);
+      letter-spacing: -0.02em;
+    }
+    .breakdown .val small {
+      color: var(--ns-paper-60);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-left: 2px;
+    }
+
+    /* Result body */
+    .result-body p {
+      font-family: var(--ns-serif);
+      font-size: 1.075rem;
+      color: var(--ns-paper);
+      line-height: 1.6;
+    }
+
+    /* Questions-to-sit-with block — anchor bar callout */
+    .questions-block {
+      padding: var(--ns-space-3) var(--ns-space-3) var(--ns-space-3) var(--ns-space-5);
+      margin: var(--ns-space-5) 0;
+      border-left: var(--ns-stroke-anchor) solid var(--ns-azure);
+      background: var(--ns-paper-06);
+    }
+    .questions-block .qb-label {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      margin-bottom: var(--ns-space-2);
+    }
+    .questions-block p {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-size: 1.075rem;
+      color: var(--ns-paper);
+      margin: 0 0 var(--ns-space-1);
+      line-height: 1.5;
+    }
+    .questions-block p:last-child { margin-bottom: 0; }
+
+    /* CTA card — hairline frame, no fill */
+    .cta-block {
+      margin-top: var(--ns-space-5);
+      padding-top: var(--ns-space-5);
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+    }
+    /* When the band CTA renders nothing (type 'none'), hide the wrapper so
+       its divider doesn't stack with the book-block divider below it. */
+    .cta-block:empty {
+      display: none;
+    }
+    .cta-block .cta-label {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ns-azure);
+      margin-bottom: var(--ns-space-1);
+    }
+    .cta-block h4 {
+      font-family: var(--ns-sans);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--ns-paper);
+      margin: 0 0 var(--ns-space-2);
+      letter-spacing: -0.01em;
+    }
+    .cta-block p {
+      font-family: var(--ns-serif);
+      color: var(--ns-paper-80);
+      margin: 0 0 var(--ns-space-3);
+    }
+
+    /* Reflection prompt block — italic serif pull-quote treatment */
+    .reflection-prompt {
+      border-left: var(--ns-stroke-anchor) solid var(--ns-azure);
+      padding: var(--ns-space-3) var(--ns-space-3) var(--ns-space-3) var(--ns-space-5);
+      margin-bottom: var(--ns-space-3);
+      background: var(--ns-paper-06);
+    }
+    .reflection-prompt p {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: var(--ns-paper);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* ==========================================================
+       Footer
+       ========================================================== */
+    footer {
+      padding: var(--ns-space-8) 0 var(--ns-space-5);
+      border-top: var(--ns-stroke-hairline) solid var(--ns-paper-12);
+      margin-top: var(--ns-space-12);
+      position: relative;
+      z-index: 2;
+    }
+    .closing {
+      font-family: var(--ns-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--ns-paper);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .closing span { display: block; }
+    .attrib {
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ns-paper-60);
+      text-align: center;
+      margin-top: var(--ns-space-3);
+    }
+
+    /* Status + error messaging */
+    .submit-status, .gate-error {
+      margin-top: var(--ns-space-2);
+      font-family: var(--ns-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ns-paper-60);
+      min-height: 1.2em;
+    }
+    .submit-status.ok, .gate-error.ok { color: var(--ns-azure); }
+    .submit-status.error, .gate-error.error { color: var(--ns-coral); }
+
+    /* Legal / fine print */
+    .legal {
+      font-family: var(--ns-serif);
+      font-size: 0.95rem;
+      color: var(--ns-paper-60);
+      margin-top: var(--ns-space-3);
+      max-width: 580px;
+    }
+
+    /* ==========================================================
+       Mobile
+       ========================================================== */
+    @media (max-width: 640px) {
+      :root { --ns-max: 100%; }
+      main { padding: var(--ns-space-5) 0 var(--ns-space-8); }
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.85rem; }
+      .breakdown { grid-template-columns: 1fr; }
+      .breakdown div { border-right: 0; border-bottom: var(--ns-stroke-hairline) solid var(--ns-paper-12); }
+      .breakdown div:last-child { border-bottom: 0; }
+      .tf { grid-template-columns: 1fr 1fr; }
+      .questions-block, .reflection-prompt {
+        padding-left: var(--ns-space-3);
+        border-left-width: var(--ns-stroke-bar);
+      }
+    }
+  </style>
+
+  <!-- ==========================================================
+       SITE SKIN — overrides to match narrativestack.ai design system.
+       Source-order wins over the tokens above. Maps the instrument's
+       --ns-* palette to the site's exact tokens, swaps Inter/Source Serif
+       for Hanken Grotesk + Cormorant Garamond, restyles buttons to the
+       site's coral pill, and adds the cyan seam-glow accent.
+       ========================================================== -->
+  <style id="ns-site-skin">
+    :root{
+      /* exact site palette */
+      --ns-dark-blue:#1A3048;
+      --ns-azure:#2FC3DD;
+      --ns-coral:#FF774F;
+      --ns-paper:#FAFBF6;
+      --ns-accent:var(--ns-azure);
+      /* site type stacks */
+      --ns-serif:"Cormorant Garamond",Georgia,serif;
+      --ns-sans:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+      --ns-mono:"Hanken Grotesk",system-ui,sans-serif;
+      --site-navy-deep:#122638;
+      --site-coral-deep:#E0654A;
+      --site-line:rgba(47,195,221,.20);
+    }
+    /* body in sans (Hanken); display headings in serif (Cormorant) */
+    body{font-family:var(--ns-sans);}
+    input[type="text"],input[type="email"],input[type="number"],textarea,select{font-family:var(--ns-sans)!important;}
+    h1,h2,h3{font-family:var(--ns-serif);font-weight:600;letter-spacing:-0.01em;}
+    h1{line-height:1.04;}
+    .lead,.muted,p,.q-help,.result-body p,.cta-block p,.fg-notify-body{font-family:var(--ns-sans);}
+    .score-display{font-family:var(--ns-sans);font-weight:700;}
+    /* keep the editorial italic accents in Cormorant */
+    .q-title em,.questions-block p,.reflection-prompt,.closing em{font-family:var(--ns-serif);}
+    /* labels/eyebrows: Hanken, tracked, no mono look */
+    .band-marker,.qb-label,.eyebrow,.subhead-label,.meta-tag,.cta-label,.video-label,.fg-notify-eyebrow,.book-eyebrow,.scale-legend,.breakdown .label{font-family:var(--ns-sans)!important;font-weight:700;}
+
+    /* buttons -> site coral pill, sentence case */
+    .btn{
+      background:var(--ns-coral);
+      color:#fff;
+      border-radius:999px;
+      text-transform:none;
+      letter-spacing:normal;
+      font-family:var(--ns-sans);
+      font-weight:700;
+      font-size:.98rem;
+      padding:.82em 1.5em;
+      box-shadow:0 12px 28px -12px rgba(255,119,79,.75);
+    }
+    .btn:hover{background:var(--site-coral-deep);box-shadow:0 18px 36px -12px rgba(255,119,79,.9);}
+    .btn:active{background:var(--ns-coral);}
+    .btn-coral{background:var(--ns-coral);color:#fff;}
+    .btn-coral:hover{background:var(--site-coral-deep);}
+    .btn-ghost{
+      background:transparent;color:var(--ns-paper);
+      border:1.5px solid var(--site-line);border-radius:999px;
+      box-shadow:none;
+    }
+    .btn-ghost:hover{border-color:var(--ns-azure);color:var(--ns-azure);background:transparent;}
+
+    /* seam-glow accents echoing the main site's scroll seams */
+    header{border-bottom:1px solid var(--site-line);box-shadow:0 1px 0 0 rgba(47,195,221,.16),0 6px 22px -16px rgba(47,195,221,.7);}
+    .eyebrow-underscore,.subhead-rule,.fg-notify-underscore{box-shadow:0 0 18px 1px rgba(47,195,221,.65);}
+    .wordmark .stack{color:var(--ns-azure);}
+    /* the cyan number on the score readout */
+    .q-title em{color:var(--ns-azure);}
+    /* focus states (accessibility) */
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--ns-azure);outline-offset:2px;}
+
+    /* objective choice list + qualifier selects */
+    .choice-list{display:flex;flex-direction:column;gap:10px;}
+    .choice-list label{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--ns-paper-12);border-radius:12px;cursor:pointer;color:var(--ns-paper);transition:border-color .15s,background .15s;font-family:var(--ns-sans);text-transform:none;letter-spacing:normal;font-size:1rem;font-weight:500;}
+    .choice-list label:hover{border-color:var(--ns-azure);background:var(--ns-paper-06);}
+    .choice-list label.checked{border-color:var(--ns-azure);background:rgba(47,195,221,.10);}
+    .choice-list input{appearance:none;-webkit-appearance:none;width:18px;height:18px;min-width:18px;border:1.5px solid var(--ns-paper-40);border-radius:50%;margin:0;position:static;opacity:1;pointer-events:auto;}
+    .choice-list input:checked{border-color:var(--ns-azure);box-shadow:inset 0 0 0 4px var(--ns-azure);}
+    select#q-orgsize,select#q-timeframe{width:100%;padding:14px 16px;background:transparent;border:1px solid var(--ns-paper-12);border-radius:12px;color:var(--ns-paper);font-family:var(--ns-sans);font-size:1rem;}
+    select#q-orgsize option,select#q-timeframe option{color:#16273a;}
+    /* result lead line (Spec §5 "leads with") + anchor block */
+    .result-lead{font-family:var(--ns-serif)!important;font-size:1.3rem;line-height:1.4;color:var(--ns-azure);margin:0 0 var(--ns-space-3);}
+    .anchor-block{margin:var(--ns-space-3) 0;padding:var(--ns-space-3);border:1px solid var(--ns-paper-12);border-radius:12px;}
+    .anchor-block .cta-label{margin-bottom:6px;}
+    .anchor-block .anchor-name{font-family:var(--ns-serif);font-size:1.25rem;color:var(--ns-paper);}
+    .anchor-block a{color:var(--ns-azure);font-weight:700;text-decoration:none;}
+  </style>
+</head>
+<body class="on-hero">
+<!-- Netlify Forms (detection enabled 2026-06-11): hidden static form so Netlify provisions "assessment-completions"
+     at deploy time. The assessment submits to it via JS (postToWebhook, Netlify mode).
+     Never shown to users. A scheduled Claude routine reads these submissions and writes
+     the contact + zone tags into Kajabi. -->
+<form name="assessment-completions" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
+  <input type="hidden" name="form-name" value="assessment-completions">
+  <input name="bot-field">
+  <input name="name"><input name="email"><input name="role"><input name="org_size">
+  <input name="timeframe"><input name="total_score"><input name="tier"><input name="zone">
+  <input name="zone_title"><input name="objective"><input name="capacity"><input name="tags">
+  <input name="sequence"><input name="result_page"><input name="anchor">
+  <textarea name="reflection"></textarea>
+  <input name="source"><input name="lead_source"><input name="campaign"><input name="submitted_at"><input name="event">
+</form>
+
+  <div class="geometry" aria-hidden="true"></div>
+
+  <header>
+    <div class="container">
+      <div class="wordmark">
+        <span class="narr">Narrative</span><span class="stack">STACK</span>
+      </div>
+      <div class="meta-tag">Quick-Check &middot; 2026</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- STEP 0: HERO + EMAIL GATE -->
+      <section class="step active" data-step="0">
+        <div class="hero">
+          <div class="hero-text">
+            <div class="eyebrow">Leadership Quick-Check</div>
+            <div class="eyebrow-underscore"></div>
+
+            <h1>Every leader has a story. The question is whether you&rsquo;re telling yours.</h1>
+
+            <p class="lead">
+              Most leaders introduce themselves by reciting credentials. The ones people remember introduce themselves by telling a story. This Quick-Check is a five-minute snapshot of where your storytelling carries weight as a leadership instrument, and where it leaks.
+            </p>
+            <p class="muted" style="max-width: 600px;">
+              Three short sections. One question at the end that does the real work. Your results land in your inbox with a single question on the back end that <a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Dr. Berger</a> reads himself.
+            </p>
+          </div>
+
+          <div class="hero-portrait">
+            <div class="portrait-frame">
+              <img src="assets/rod-berger.jpg" alt="Dr. Rod Berger" />
+            </div>
+            <div class="portrait-caption">
+              <strong><a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Dr. Rod Berger</a></strong>
+              Author &middot; The Narrative Edge
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--ns-space-8); max-width: 560px;">
+          <div class="subhead-label">Begin</div>
+          <div class="subhead-rule"></div>
+
+          <form id="gate-form" novalidate>
+            <div class="form-group">
+              <label for="g-name">First name</label>
+              <input id="g-name" name="name" type="text" autocomplete="given-name" required placeholder="Your name" />
+            </div>
+            <div class="form-group">
+              <label for="g-email">Email</label>
+              <input id="g-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="g-role">Role or title <span class="dim">(optional)</span></label>
+              <input id="g-role" name="role" type="text" autocomplete="organization-title" placeholder="Founder &middot; CEO &middot; VP" />
+            </div>
+            <div class="btn-row">
+              <button class="btn" type="submit">Begin the Quick-Check</button>
+              <span class="meta">5 minutes</span>
+            </div>
+            <div id="gate-error" class="gate-error" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <p class="legal" style="max-width: 580px;">
+          From the author of <em>The Narrative Edge: Authentic Storytelling That Meets The Moment</em> (Wiley, 2025). Built for leaders, founders, and operators who suspect their data is doing work their stories should be doing.
+        </p>
+      </section>
+
+      <!-- STEP 1: PART ONE -->
+      <section class="step" data-step="1" aria-hidden="true">
+        <div class="progress">
+          <span>Part 01 / 03</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 33%;"></div></div>
+        </div>
+        <div class="eyebrow">Framework &middot; 01</div>
+        <div class="eyebrow-underscore"></div>
+        <h2>The Four Stories Every Leader Needs</h2>
+        <p class="muted">Rate yourself from 1 to 5. 1 means you can&rsquo;t tell this story at all. 5 means you tell it confidently and compellingly.</p>
+
+        <div class="q">
+          <h3 class="q-title">The <em>Origin Story</em></h3>
+          <p class="q-help">I can clearly articulate why my company or team exists and why it matters, in a way that moves people, not just informs them.</p>
+          <div class="scale" data-q="p1_origin"></div>
+          <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
+        </div>
+
+        <div class="q">
+          <h3 class="q-title">The <em>Vision Story</em></h3>
+          <p class="q-help">I can paint a vivid picture of the future we&rsquo;re building that people can see and want to be part of.</p>
+          <div class="scale" data-q="p1_vision"></div>
+          <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
+        </div>
+
+        <div class="q">
+          <h3 class="q-title">The <em>Values Story</em></h3>
+          <p class="q-help">I have specific stories that illustrate our values. Not principles on a wall, but real moments when we lived them under pressure.</p>
+          <div class="scale" data-q="p1_values"></div>
+          <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
+        </div>
+
+        <div class="q">
+          <h3 class="q-title">The <em>Transformation Story</em></h3>
+          <p class="q-help">I can tell the story of a specific customer or stakeholder whose life changed because of our work.</p>
+          <div class="scale" data-q="p1_transform"></div>
+          <div class="scale-legend"><span>Can&rsquo;t tell it</span><span>Tell it confidently</span></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" data-back>Back</button>
+          <button class="btn" type="button" data-next>Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 2: PART TWO -->
+      <section class="step" data-step="2" aria-hidden="true">
+        <div class="progress">
+          <span>Part 02 / 03</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 66%;"></div></div>
+        </div>
+        <div class="eyebrow">Framework &middot; 02</div>
+        <div class="eyebrow-underscore"></div>
+        <h2>Kitchen Table vs. Police Report</h2>
+        <p class="muted">This section explores whether you report your stories like a police record or share them across a kitchen table. Answer true or false.</p>
+
+        <div class="q">
+          <h3 class="q-title">In my last presentation to my team or board, I led with a story before diving into data.</h3>
+          <div class="tf" data-q="p2_q1"></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">When I introduce myself, I share something personal rather than reciting my r&eacute;sum&eacute;.</h3>
+          <div class="tf" data-q="p2_q2"></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">People describe my communication style as &ldquo;engaging&rdquo; or &ldquo;compelling&rdquo; more than &ldquo;informative&rdquo; or &ldquo;thorough.&rdquo;</h3>
+          <div class="tf" data-q="p2_q3"></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">I&rsquo;ve shared a story of personal failure or struggle with my team.</h3>
+          <div class="tf" data-q="p2_q4"></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">I know the name and story of at least one specific customer whose life our work has impacted.</h3>
+          <div class="tf" data-q="p2_q5"></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" data-back>Back</button>
+          <button class="btn" type="button" data-next>Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 3: PART THREE -->
+      <section class="step" data-step="3" aria-hidden="true">
+        <div class="progress">
+          <span>Part 03 / 03</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+        </div>
+        <div class="eyebrow">Framework &middot; 03</div>
+        <div class="eyebrow-underscore"></div>
+        <h2>Story Impact Check</h2>
+        <p class="muted">In the past 30 days, how many times has one of your stories&hellip;</p>
+
+        <div class="q">
+          <h3 class="q-title">&hellip;changed someone&rsquo;s mind or decision?</h3>
+          <div data-q="p3_minds" data-stepper></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">&hellip;been retold by someone else?</h3>
+          <div data-q="p3_retold" data-stepper></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">&hellip;created an emotional response: laughter, tears, silence?</h3>
+          <div data-q="p3_emotion" data-stepper></div>
+        </div>
+        <div class="q">
+          <h3 class="q-title">&hellip;opened a door that data alone couldn&rsquo;t have?</h3>
+          <div data-q="p3_door" data-stepper></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" data-back>Back</button>
+          <button class="btn" type="button" data-next>Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 4: REFLECTION -->
+      <section class="step" data-step="4" aria-hidden="true">
+        <div class="progress">
+          <span>One Last Question</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+        </div>
+        <div class="eyebrow" id="closing-eyebrow">The Question Behind The Questions</div>
+        <div class="eyebrow-underscore"></div>
+        <h2 id="closing-title">If every title were stripped away, what story would you tell?</h2>
+        <div class="reflection-prompt">
+          <p id="closing-prompt">If every title, credential, and accomplishment were stripped away, what story would you tell about who you are and why you do this work?</p>
+        </div>
+        <p class="muted">60 seconds or less. Don&rsquo;t edit. Write what comes.</p>
+        <div class="form-group">
+          <label for="reflection">Your story</label>
+          <textarea id="reflection" placeholder="Write here&hellip;"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" data-back>Back</button>
+          <button class="btn" type="button" data-next>Continue</button>
+        </div>
+        <p class="legal">If you struggled with that question, you&rsquo;ve just identified your biggest leadership communication gap.</p>
+      </section>
+
+      <!-- STEP 5: OBJECTIVE + QUALIFIERS (axis one + capacity inputs) -->
+      <section class="step" data-step="5" aria-hidden="true">
+        <div class="progress">
+          <span>One Last Thing</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+        </div>
+        <div class="eyebrow">Before Your Results</div>
+        <div class="eyebrow-underscore"></div>
+        <h2 id="obj-title">Where do you want your story to take you next?</h2>
+        <p class="muted">This shapes the next step we point you to. We never ask about budget.</p>
+
+        <div class="form-group">
+          <div class="scale-legend" id="obj-label">Your aim</div>
+          <div id="obj-options" class="choice-list" role="radiogroup" aria-labelledby="obj-label"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="q-orgsize" id="orgsize-label">How big is your organization?</label>
+          <select id="q-orgsize" name="orgSize"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="q-timeframe" id="timeframe-label">When do you want to act on this?</label>
+          <select id="q-timeframe" name="timeframe"></select>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" data-back>Back</button>
+          <button class="btn" type="button" id="see-results">See My Results</button>
+        </div>
+      </section>
+
+      <!-- STEP 6: RESULT -->
+      <section class="step" data-step="6" aria-hidden="true">
+        <div class="band-marker" id="r-band-eyebrow">Your Result</div>
+        <h2 id="r-band-title">&nbsp;</h2>
+        <div class="score-display"><span id="r-score">0</span><span class="of">/60</span></div>
+
+        <div class="breakdown">
+          <div><div class="label">Part 01</div><div class="val"><span id="r-p1">0</span><small>/20</small></div></div>
+          <div><div class="label">Part 02</div><div class="val"><span id="r-p2">0</span><small>/20</small></div></div>
+          <div><div class="label">Part 03</div><div class="val"><span id="r-p3">0</span><small>/20</small></div></div>
+        </div>
+
+        <div class="result-body" id="r-body"></div>
+
+        <div class="cta-block" id="r-cta"></div>
+
+        <!-- The book — persistent purchase path across all bands -->
+        <section class="book-block" aria-label="The Narrative Edge book">
+          <div class="book-image">
+            <img src="assets/book.png" alt="The Narrative Edge by Dr. Rod Berger, PsyD (Wiley, 2025)" loading="lazy" />
+          </div>
+          <div class="book-copy">
+            <div class="book-eyebrow">The Book</div>
+            <h3>The Narrative Edge</h3>
+            <p class="book-subtitle">Authentic Storytelling That Meets The Moment</p>
+            <p>The Quick-Check is the snapshot. The book is the field manual. Foreword by Halle Stanford. Wiley, 2025.</p>
+            <a href="https://www.amazon.com/Narrative-Edge-Authentic-Storytelling-Moment/dp/1394331290?utm_source=quick-check&amp;utm_medium=assessment&amp;utm_campaign=narrative-edge&amp;utm_content=result-book-block" class="btn" style="border-bottom: 0;" target="_blank" rel="noopener">Get The Narrative Edge on Amazon</a>
+          </div>
+        </section>
+
+        <div class="btn-row">
+          <button class="btn-ghost btn" type="button" id="restart">Retake the Quick-Check</button>
+        </div>
+        <p class="submit-status" id="submit-status" aria-live="polite"></p>
+
+        <!-- Trust(ed) Sessions Application — discrete human-voice (Coral) surface -->
+        <section class="trusted-sessions" id="trusted-sessions-application">
+          <div class="ts-eyebrow">Apply &middot; Trust(ed) Sessions</div>
+          <div class="ts-eyebrow-underscore"></div>
+          <h2 class="ts-headline">Apply for a Trust(ed) Co-Author Session</h2>
+
+          <div class="ts-framing">
+            <p>I am opening three private sessions to people who attended this webinar.</p>
+            <p>Each is a one-hour Zoom call with me. I will diagnose the single most consequential story or trust issue inside your organization. I will run a live Coherence read against the Stack you just saw. I will tell you what I see, what I would source next if I had more time, and where I would point your leadership team.</p>
+            <p>These are not sales calls. They are working sessions. You walk away with one usable diagnosis and a clear sense of whether the work I do is the work you actually need.</p>
+            <p>Selection is not about the size of your title. It is about the specificity of the question. The three winners will hear from me by the end of the month.</p>
+          </div>
+
+          <form class="ts-form" id="ts-form" novalidate>
+            <div class="field">
+              <label for="ts-name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="ts-name" name="name" type="text" autocomplete="name" required aria-required="true" minlength="2" maxlength="100" />
+            </div>
+
+            <div class="field">
+              <label for="ts-email">Email address <span class="req" aria-hidden="true">*</span></label>
+              <input id="ts-email" name="email" type="email" autocomplete="email" required aria-required="true" />
+              <div class="helper">I will use this to reach you if you are selected.</div>
+            </div>
+
+            <div class="field">
+              <label for="ts-role-org">Your role and organization <span class="req" aria-hidden="true">*</span></label>
+              <input id="ts-role-org" name="role_organization" type="text" required aria-required="true" minlength="5" maxlength="200" placeholder="e.g., Head of People at a 200-person healthcare company" />
+              <div class="helper">One line. Title, organization size or category, sector if relevant. No company names required.</div>
+            </div>
+
+            <div class="field">
+              <label for="ts-story">The story or trust issue you would put on the table <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="ts-story" name="story_or_trust_issue" required aria-required="true" minlength="50" maxlength="1500" rows="8"></textarea>
+              <div class="helper">One paragraph. Tell me the single most consequential story or trust issue you are sitting with right now. The more specific, the better. This is the field selection is based on.</div>
+              <div class="charcount" id="ts-charcount">0 / 1500</div>
+            </div>
+
+            <input type="hidden" id="ts-band" name="band" value="" />
+
+            <div class="checkbox-field">
+              <input id="ts-consent" name="consent" type="checkbox" required aria-required="true" />
+              <label for="ts-consent">I understand that three applicants will be selected and the rest will receive a personal note from Rod by the end of the month.</label>
+            </div>
+
+            <div class="ts-submit-row">
+              <button type="submit" class="btn btn-coral" id="ts-submit" disabled>Submit my application</button>
+            </div>
+            <div class="ts-form-error" id="ts-error" aria-live="polite"></div>
+          </form>
+
+          <!-- Thank-you message (hidden until submission) -->
+          <div class="ts-thanks" id="ts-thanks" style="display: none;" aria-hidden="true">
+            <div class="ts-thanks-label">Application Received</div>
+            <p>Thank you. Your application is in.</p>
+            <p>I read every single one personally. If you are one of the three selected, you will hear from me by the end of the month with scheduling details for our session. If you are not selected this round, you will still receive a personal note from me by the same date.</p>
+            <p>In the meantime, the work continues. Source the real story. Examine where it is leaking. Author the one that holds.</p>
+            <div class="sig">
+              Yours in narrative,<br/>
+              <strong><a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Rod</a></strong>
+            </div>
+          </div>
+        </section>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+
+      <!-- Field Guide publication notify — open to any visitor regardless of band -->
+      <section class="fg-notify" id="fg-notify" aria-label="Field Guide publication notification">
+        <div class="fg-notify-text">
+          <div class="fg-notify-eyebrow">The Field Guide &middot; Coming This Summer</div>
+          <div class="fg-notify-underscore"></div>
+          <h3 class="fg-notify-headline">Be the first to know.</h3>
+          <p class="fg-notify-body">The Field Guide publishes later this summer. Leave your email and you&rsquo;ll hear from me the day it ships.</p>
+        </div>
+        <form class="fg-notify-form" id="fg-notify-form" novalidate>
+          <div class="fg-notify-row">
+            <input id="fg-notify-email" name="email" type="email" autocomplete="email" required aria-required="true" placeholder="you@example.com" />
+            <button type="submit" class="btn btn-coral" id="fg-notify-submit">Notify me</button>
+          </div>
+          <div class="fg-notify-error" id="fg-notify-error" aria-live="polite"></div>
+        </form>
+        <div class="fg-notify-thanks" id="fg-notify-thanks" style="display: none;" aria-hidden="true">
+          <div class="fg-notify-confirm">
+            <div class="check">&check;</div>
+            <div>
+              <strong>You&rsquo;re on the list</strong>
+              <p>I&rsquo;ll write when it ships.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="closing">
+        <span><em>You Matter.</em></span>
+        <span><em>We Matter.</em></span>
+        <span><em>Stories Matter.</em></span>
+      </p>
+      <p class="attrib"><a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Dr. Rod Berger</a> &middot; The Narrative Edge &middot; Wiley 2025</p>
+    </div>
+  </footer>
+
+  <!-- Tunable routing config (thresholds, zones, tags, sequences, anchors). -->
+  <script src="assessment-config.js"></script>
+  <script>
+    /* ============================================================
+       RESULT HANDOFF ENDPOINT
+       ============================================================
+       The Kajabi endpoint is NOT hardcoded here. It lives in
+       assessment-config.js (ASSESSMENT_CONFIG.endpoint) so it is
+       configurable without touching the instrument. Empty = standalone:
+       results render on-page and cache locally, nothing posts externally.
+       The payload carries tier, zone, objective, capacity, the shared
+       completed tag, the zone tag, and the zone sequence, so one Kajabi
+       automation routes everything into the single audience.
+       ============================================================ */
+    const WEBHOOK_URL = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.endpoint) || '';
+
+    /* Amazon link for The Narrative Edge — UTMs let downstream analytics
+       see Quick-Check-driven traffic and segment by band. */
+    const AMAZON_BASE = 'https://www.amazon.com/Narrative-Edge-Authentic-Storytelling-Moment/dp/1394331290';
+    function amazonLink(band) {
+      const params = new URLSearchParams({
+        utm_source: 'quick-check',
+        utm_medium: 'assessment',
+        utm_campaign: 'narrative-edge',
+        utm_content: band
+      });
+      return `${AMAZON_BASE}?${params.toString()}`;
+    }
+
+    /* The book trailer — same embed for every band. */
+    const BOOK_TRAILER_EMBED = 'https://www.youtube.com/embed/v5LO9aLuLJc';
+    const BOOK_TRAILER_TITLE = 'The Narrative Edge &middot; Official Book Trailer';
+
+    /* CTA type drives rendering:
+         'optin'  — Field Guide 20% discount sign-up (no external link)
+         'amazon' — opens Amazon Narrative Edge with UTM
+         'inquire'— cohort/advisory inquiry (placeholder href)
+    */
+    const CTAS = {
+      aligned: {
+        type: 'inquire',
+        label: 'Next Chapter',
+        title: 'Develop this in others.',
+        body: 'If you&rsquo;re ready to author the story-culture of the people around you, a Trust(ed) Co-Author Session is built for exactly that work. Apply below.',
+        href: '#trusted-sessions-application',
+        cta: 'Apply for a Trust(ed) Session'
+      },
+      developing: {
+        type: 'optin',
+        label: 'Reserve Your Field Guide Discount',
+        title: 'The Field Guide is built for exactly this gap.',
+        body: 'The Field Guide and its companion exercises are designed to give you the range you&rsquo;re missing, the stories beyond your three or four go-tos. It publishes later this summer. Reserve your 20% discount below and you&rsquo;ll get the code the day it ships.',
+        cta: 'Reserve my 20% discount'
+      },
+      drift: {
+        // type 'none' — band narrative leads directly into the universal book
+        // block below; no duplicate Amazon button at this beat.
+        type: 'none'
+      },
+      emerging: {
+        type: 'none'
+      },
+      at_risk: {
+        type: 'none'
+      }
+    };
+
+    const RESULTS = {
+      aligned: {
+        title: 'Story Aligned',
+        marker: 'Score 50&ndash;60',
+        body: `
+          <p>Somewhere along the way, you stopped reciting your r&eacute;sum&eacute; and started telling your story. People notice. They retell what you said in meetings you weren&rsquo;t in. Your stories travel further than your spreadsheets.</p>
+          <p>The shadow at this level is subtle. When story comes naturally, it can quietly become a substitute for examination. You tell the right story so well that you stop asking whether it&rsquo;s still the right story. The version that won you the room three years ago may be the version your team is now politely outgrowing.</p>
+          <p>The next chapter isn&rsquo;t about telling better stories. It&rsquo;s about authoring the story-culture of the people around you. The leaders you raise will inherit either your stories or your story-making. Only one of those is durable.</p>
+          <div class="questions-block">
+            <div class="qb-label">To Sit With</div>
+            <p>What is the story your team would tell about you if you were not in the room?</p>
+            <p>Does it match the one you think you&rsquo;re telling?</p>
+            <p>Which of your signature stories has begun to do less work than it used to?</p>
+          </div>
+        `
+      },
+      developing: {
+        title: 'Story Developing',
+        marker: 'Score 40&ndash;49',
+        body: `
+          <p>You have stories that work. The one about the early customer. The one about why you took the job. The one about the team that held together through the bad quarter. You&rsquo;ve used them. They&rsquo;ve earned their keep.</p>
+          <p>Here&rsquo;s the shadow. A handful of go-to stories is a comfort, not a capability. The ones that worked once start carrying more weight than they should, and the moments that need a different story go unmet. Leaders at this level often have a kitchen-table voice for some rooms and a police-report voice for others. The work is figuring out why.</p>
+          <p>You&rsquo;re not missing the talent. You&rsquo;re missing the range.</p>
+          <div class="questions-block">
+            <div class="qb-label">To Sit With</div>
+            <p>Which of your stories have you told one too many times?</p>
+            <p>Which moments in the last quarter called for a story you didn&rsquo;t have?</p>
+            <p>What part of your own narrative have you been editing out for so long that you&rsquo;ve forgotten it&rsquo;s there?</p>
+          </div>
+        `
+      },
+      drift: {
+        title: 'Story Drift',
+        marker: 'Score 30&ndash;39',
+        body: `
+          <p>You have real stories, and you have used them well. The problem is not range. It is consistency. The story that lands in one room goes missing in the next, and you cannot always predict which version of you will show up.</p>
+          <p>Here is the shadow. When the stakes rise, your narrative drifts. You reach for the polished story in the safe room and the bare timeline in the hard one, exactly backward from what the moment needs. People leave some of your meetings moved and others unsure what you were asking of them. The talent is not in question. The aim is.</p>
+          <p>The work now is alignment. Not more stories, but the discipline to choose the right one on purpose, in the rooms that matter most.</p>
+          <div class="questions-block">
+            <div class="qb-label">To Sit With</div>
+            <p>In which room does your story go quiet, and why that room?</p>
+            <p>When the stakes were highest this quarter, did you reach for the story or the report?</p>
+            <p>What would change if your team could predict the leader who walks in, every time?</p>
+          </div>
+        `
+      },
+      emerging: {
+        title: 'Story Emerging',
+        marker: 'Score 18&ndash;29',
+        body: `
+          <p>You already sense that story matters. You&rsquo;ve watched a peer hold a room with three sentences while you held it with three slides. You felt the difference. You just default the other way when pressure comes up.</p>
+          <p>The shadow at this level is the one most leaders carry quietly. Under stress, you reach for the police report. You give the timeline, the metrics, the next steps. The room nods. Nobody changes their mind. Nobody retells what you said. Later, you can&rsquo;t quite locate why the meeting felt flat.</p>
+          <p>The gap between your data and your influence is not a talent gap. It is a discernment gap. You haven&rsquo;t yet learned to read which moments need a story and which moments need a report.</p>
+          <div class="questions-block">
+            <div class="qb-label">To Sit With</div>
+            <p>What was the last meeting where you reached for data and wished you&rsquo;d reached for a story?</p>
+            <p>What is one story from your own life you have never told at work, that might actually belong there?</p>
+            <p>Whose voice taught you that credibility lives in the data and not in the telling?</p>
+          </div>
+        `
+      },
+      at_risk: {
+        title: 'Story At Risk',
+        marker: 'Score below 18',
+        body: `
+          <p>You lead with credentials, data, and logic. Those are not weaknesses. They got you here. The leaders who promoted you, the boards that backed you, the teams that respect your competence, all of them confirmed that this is how leadership sounds.</p>
+          <p>Here is what the Quick-Check is telling you. The leaders who are now outpacing you are not smarter. They are not working harder. They have learned to do something you have not yet learned to do. They have learned to put a person at the front of the slide deck. They have learned to answer &ldquo;tell me about yourself&rdquo; with a moment and not a title.</p>
+          <p>That is the shadow. The skills that built your credibility are the same skills that are now capping your influence. Leaning on them harder will not close the gap. It widens it.</p>
+          <p>This is not a verdict. It is a starting line.</p>
+          <div class="questions-block">
+            <div class="qb-label">To Sit With</div>
+            <p>If someone took away your title, your credentials, and your accomplishments, what would you have left to say?</p>
+            <p>What is one story from your own life you have never thought of as belonging at work?</p>
+            <p>Who is the person you trust most? What story do they tell about who you are, that you have never told about yourself?</p>
+          </div>
+        `
+      }
+    };
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+    const state = {
+      step: 0,
+      lead: { name: '', email: '', role: '' },
+      p1: { p1_origin: null, p1_vision: null, p1_values: null, p1_transform: null },
+      p2: { p2_q1: null, p2_q2: null, p2_q3: null, p2_q4: null, p2_q5: null },
+      p3: { p3_minds: 0, p3_retold: 0, p3_emotion: 0, p3_door: 0 },
+      reflection: '',
+      // Spec §3/§6: store the three axes separately.
+      objective: '',        // axis one: ambition
+      orgSize: '',          // qualifier (feeds capacity)
+      timeframe: '',        // qualifier (feeds capacity)
+      capacity: '',         // axis two: inferred 'self'|'team'|'org'
+      score: { p1: 0, p2: 0, p3: 0, total: 0, band: '', tier: '' }
+    };
+
+    /* ============================================================
+       BUILD INPUTS
+       ============================================================ */
+    document.querySelectorAll('.scale').forEach(el => {
+      const q = el.dataset.q;
+      for (let i = 1; i <= 5; i++) {
+        const id = `${q}_${i}`;
+        const lbl = document.createElement('label');
+        lbl.setAttribute('for', id);
+        lbl.textContent = i;
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = q;
+        input.id = id;
+        input.value = i;
+        input.addEventListener('change', () => {
+          state.p1[q] = i;
+          el.querySelectorAll('label').forEach(l => l.classList.remove('checked'));
+          lbl.classList.add('checked');
+        });
+        lbl.appendChild(input);
+        el.appendChild(lbl);
+      }
+    });
+
+    document.querySelectorAll('.tf').forEach(el => {
+      const q = el.dataset.q;
+      [['True', true], ['False', false]].forEach(([label, val]) => {
+        const lbl = document.createElement('label');
+        lbl.textContent = label;
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = q;
+        input.value = String(val);
+        input.addEventListener('change', () => {
+          state.p2[q] = val;
+          el.querySelectorAll('label').forEach(l => l.classList.remove('checked'));
+          lbl.classList.add('checked');
+        });
+        lbl.appendChild(input);
+        el.appendChild(lbl);
+      });
+    });
+
+    document.querySelectorAll('[data-stepper]').forEach(el => {
+      const q = el.dataset.q;
+      el.classList.add('stepper');
+      const minus = document.createElement('button');
+      minus.type = 'button'; minus.textContent = '−'; minus.setAttribute('aria-label', 'Decrease');
+      const input = document.createElement('input');
+      input.type = 'number'; input.min = 0; input.value = 0; input.inputMode = 'numeric';
+      const plus = document.createElement('button');
+      plus.type = 'button'; plus.textContent = '+'; plus.setAttribute('aria-label', 'Increase');
+      const sync = (v) => {
+        const n = Math.max(0, parseInt(v || 0, 10) || 0);
+        input.value = n;
+        state.p3[q] = n;
+      };
+      minus.addEventListener('click', () => sync(parseInt(input.value || 0, 10) - 1));
+      plus.addEventListener('click', () => sync(parseInt(input.value || 0, 10) + 1));
+      input.addEventListener('input', () => sync(input.value));
+      el.appendChild(minus); el.appendChild(input); el.appendChild(plus);
+    });
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    const steps = Array.from(document.querySelectorAll('.step'));
+    function showStep(n) {
+      state.step = n;
+      steps.forEach((s) => {
+        const isActive = parseInt(s.dataset.step, 10) === n;
+        s.classList.toggle('active', isActive);
+        s.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+      document.body.classList.toggle('on-hero', n === 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => showStep(Math.max(0, state.step - 1))));
+    document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
+      if (validateStep(state.step)) showStep(state.step + 1);
+    }));
+
+    function validateStep(n) {
+      if (n === 1) {
+        if (Object.values(state.p1).some(v => v == null)) { flash('Please rate all four stories.'); return false; }
+      }
+      if (n === 2) {
+        if (Object.values(state.p2).some(v => v == null)) { flash('Please answer all five statements.'); return false; }
+      }
+      return true;
+    }
+
+    function flash(msg) {
+      const old = document.getElementById('flash');
+      if (old) old.remove();
+      const div = document.createElement('div');
+      div.id = 'flash';
+      div.textContent = msg;
+      div.style.cssText = 'position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:#1a3a5a;border:1px solid #FF7559;color:#FAFAF7;padding:14px 22px;font-family:Inter,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;z-index:50;';
+      document.body.appendChild(div);
+      setTimeout(() => div.remove(), 2400);
+    }
+
+    /* ============================================================
+       GATE FORM
+       ============================================================ */
+    /* Pre-fill the email when the visitor arrived from the main page's
+       #assessment capture (index.html passes ?email=...). No data is
+       posted on the main page; the value is simply carried into the gate. */
+    (function prefillFromQuery() {
+      try {
+        const q = new URLSearchParams(window.location.search);
+        const e = (q.get('email') || '').trim();
+        const emailEl = document.getElementById('g-email');
+        if (e && emailEl && validateEmail(e)) {
+          emailEl.value = e;
+          const nameEl = document.getElementById('g-name');
+          if (nameEl) nameEl.focus();
+        }
+      } catch (_) {}
+    })();
+
+    /* Capture where the visitor came from, so warm leads stay segmentable by origin
+       in Kajabi (e.g. Apollo outbound vs organic). Reads utm_source / utm_campaign
+       once on load; defaults to 'organic'. Travels in the completion payload. */
+    (function captureSource() {
+      try {
+        const q = new URLSearchParams(window.location.search);
+        window.__ns_source = (q.get('utm_source') || '').trim() || 'organic';
+        window.__ns_campaign = (q.get('utm_campaign') || '').trim();
+      } catch (_) { window.__ns_source = 'organic'; window.__ns_campaign = ''; }
+    })();
+
+    document.getElementById('gate-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('g-name').value.trim();
+      const email = document.getElementById('g-email').value.trim();
+      const role = document.getElementById('g-role').value.trim();
+      const errEl = document.getElementById('gate-error');
+      errEl.textContent = '';
+      errEl.className = 'gate-error';
+      if (!name) { errEl.textContent = 'Please add your first name.'; errEl.classList.add('error'); return; }
+      if (!validateEmail(email)) { errEl.textContent = 'Please use a valid email address.'; errEl.classList.add('error'); return; }
+      state.lead = { name, email, role };
+      showStep(1);
+    });
+
+    function validateEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+
+    /* ============================================================
+       SCORING
+       ============================================================ */
+    function score() {
+      const p1 = Object.values(state.p1).reduce((a, b) => a + (b || 0), 0);
+      const p2True = Object.values(state.p2).filter(v => v === true).length;
+      const p2 = p2True * 4;
+      const p3Raw = Object.values(state.p3).reduce((a, b) => a + (b || 0), 0);
+      const p3 = Math.min(20, p3Raw * 2);
+      const total = p1 + p2 + p3;
+      // Threshold into a zone using the tunable config (Spec V2 §5/§6).
+      const z = zoneForTotal(total);
+      state.score = { p1, p2, p3, total, band: z.key, tier: z.tier };
+      return state.score;
+    }
+
+    /* Find the first config zone whose [min,max] contains the total.
+       Falls back to the lowest zone so a result always renders. */
+    function zoneForTotal(total) {
+      const zones = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.zones) || [];
+      return zones.find(z => total >= z.min && total <= z.max) || zones[0];
+    }
+    function zoneByKey(key) {
+      const zones = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.zones) || [];
+      return zones.find(z => z.key === key) || zones[0];
+    }
+
+    /* Axis two: infer capacity quietly from role + org size + timeframe.
+       Returns 'self' | 'team' | 'org'. Never asks budget (Spec §3). */
+    function inferCapacity(role, orgSize, timeframe) {
+      const c = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.capacity) || {};
+      const senior = c.seniorRolePattern ? new RegExp(c.seniorRolePattern, 'i').test(role || '') : false;
+      const large = (c.largeOrg || []).indexOf(orgSize) >= 0;
+      const small = (c.smallOrg || []).indexOf(orgSize) >= 0;
+      if (large && senior) return 'org';
+      if (small && !senior) return 'self';
+      return 'team';
+    }
+
+    /* ============================================================
+       RENDER RESULT + SUBMIT
+       ============================================================ */
+    /* Renders the band-specific CTA. Four flavors:
+       - 'none'    → no band CTA rendered; the universal book block below stands alone
+       - 'optin'   → Field Guide discount sign-up button (no external nav)
+       - 'amazon'  → external link to Amazon w/ UTMs
+       - 'inquire' → placeholder external link (also used for anchor-scroll CTAs)
+    */
+    function renderCTA(c, band) {
+      if (c.type === 'none') return '';
+      let actionHtml = '';
+      if (c.type === 'amazon') {
+        const href = amazonLink(band);
+        actionHtml = `<a href="${href}" class="btn" style="border-bottom: 0;" target="_blank" rel="noopener">${c.cta}</a>`;
+      } else if (c.type === 'optin') {
+        actionHtml = `<button id="fg-optin-btn" class="btn" type="button">${c.cta}</button>
+          <div id="fg-optin-status" class="submit-status" aria-live="polite"></div>`;
+      } else {
+        actionHtml = `<a href="${c.href}" class="btn" style="border-bottom: 0;">${c.cta}</a>`;
+      }
+      return `
+        <div class="cta-label">${c.label}</div>
+        <h4>${c.title}</h4>
+        <p>${c.body}</p>
+        ${actionHtml}
+      `;
+    }
+
+    /* The flexible anchor (Spec §3): the IP rung paired with this result,
+       chosen by capacity. Shows a link when the anchor has a URL, otherwise
+       names it as coming soon. */
+    function renderAnchor(anchor) {
+      if (!anchor) return '';
+      const link = anchor.url
+        ? `<a href="${anchor.url}" target="_blank" rel="noopener">Start with ${anchor.name} &rarr;</a>`
+        : `<span class="muted">${anchor.name} &middot; coming soon</span>`;
+      return `
+        <div class="anchor-block">
+          <div class="cta-label">Your anchor</div>
+          <div class="anchor-name">${anchor.name}</div>
+          <p class="muted">The right place to start the work for where your story stands now.</p>
+          ${link}
+        </div>
+      `;
+    }
+
+    /* Render config-driven inputs (objective, qualifiers) and the closing
+       question, so copy and options stay tunable from assessment-config.js. */
+    (function initFromConfig() {
+      const cfg = window.ASSESSMENT_CONFIG;
+      if (!cfg) return;
+      if (cfg.closingQuestion) {
+        const set = (id, v) => { const el = document.getElementById(id); if (el && v) el.textContent = v; };
+        set('closing-eyebrow', cfg.closingQuestion.eyebrow);
+        set('closing-title', cfg.closingQuestion.title);
+        set('closing-prompt', cfg.closingQuestion.prompt);
+      }
+      if (cfg.objective) {
+        const ot = document.getElementById('obj-title');
+        if (ot && cfg.objective.question) ot.textContent = cfg.objective.question;
+        const box = document.getElementById('obj-options');
+        if (box) (cfg.objective.options || []).forEach(o => {
+          const lbl = document.createElement('label');
+          const inp = document.createElement('input');
+          inp.type = 'radio'; inp.name = 'objective'; inp.value = o.value;
+          inp.addEventListener('change', () => {
+            state.objective = o.value;
+            box.querySelectorAll('label').forEach(l => l.classList.remove('checked'));
+            lbl.classList.add('checked');
+          });
+          const span = document.createElement('span');
+          span.textContent = o.label;
+          lbl.appendChild(inp); lbl.appendChild(span); box.appendChild(lbl);
+        });
+      }
+      const fillSelect = (id, q) => {
+        const s = document.getElementById(id);
+        if (!s || !q) return;
+        const ph = document.createElement('option');
+        ph.value = ''; ph.textContent = 'Select…'; ph.disabled = true; ph.selected = true;
+        s.appendChild(ph);
+        (q.options || []).forEach(opt => {
+          const o = document.createElement('option');
+          o.value = opt; o.textContent = opt; s.appendChild(o);
+        });
+      };
+      if (cfg.qualifiers) {
+        const ol = document.getElementById('orgsize-label');
+        if (ol && cfg.qualifiers.orgSize) ol.textContent = cfg.qualifiers.orgSize.question;
+        const tl = document.getElementById('timeframe-label');
+        if (tl && cfg.qualifiers.timeframe) tl.textContent = cfg.qualifiers.timeframe.question;
+        fillSelect('q-orgsize', cfg.qualifiers.orgSize);
+        fillSelect('q-timeframe', cfg.qualifiers.timeframe);
+        const os = document.getElementById('q-orgsize');
+        if (os) os.addEventListener('change', () => { state.orgSize = os.value; });
+        const tf = document.getElementById('q-timeframe');
+        if (tf) tf.addEventListener('change', () => { state.timeframe = tf.value; });
+      }
+    })();
+
+    /* Posts a payload to the webhook (Formspree). Always caches locally
+       first so leads are never lost if the network fails. The
+       `Accept: application/json` header tells Formspree to return JSON
+       instead of redirecting — keeps our in-page confirmation behavior. */
+    async function postToWebhook(payload) {
+      try {
+        const cache = JSON.parse(localStorage.getItem('nelqc_leads') || '[]');
+        cache.push(payload);
+        localStorage.setItem('nelqc_leads', JSON.stringify(cache));
+      } catch (_) {}
+      // Netlify Forms mode (Option A): submit URL-encoded to the site root so Netlify
+      // captures it. A scheduled Claude routine syncs these into Kajabi. Objects/arrays
+      // (e.g. tags) are JSON-stringified; the sync routine parses them back.
+      const netlifyForm = (window.ASSESSMENT_CONFIG && ASSESSMENT_CONFIG.netlifyForm) || '';
+      if (netlifyForm) {
+        try {
+          const flat = { 'form-name': netlifyForm };
+          Object.keys(payload).forEach((k) => {
+            const v = payload[k];
+            flat[k] = (v && typeof v === 'object') ? JSON.stringify(v) : (v == null ? '' : String(v));
+          });
+          const body = Object.keys(flat)
+            .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(flat[k]))
+            .join('&');
+          const res = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body
+          });
+          return res.ok ? { ok: true, error: null } : { ok: false, error: 'http-' + res.status };
+        } catch (err) {
+          return { ok: false, error: 'network' };
+        }
+      }
+
+      if (!WEBHOOK_URL) return { ok: false, error: 'no-webhook' };
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) return { ok: true, error: null };
+        // Try to surface Formspree's structured error messages
+        let detail = 'http-' + res.status;
+        try {
+          const json = await res.json();
+          if (json && Array.isArray(json.errors) && json.errors.length) {
+            detail = json.errors.map(e => e.message || e.field || 'error').join('; ');
+          } else if (json && typeof json.error === 'string') {
+            detail = json.error;
+          }
+        } catch (_) { /* response wasn't JSON */ }
+        if (typeof console !== 'undefined' && console.warn) {
+          console.warn('[narrative-edge] webhook error:', detail, payload);
+        }
+        return { ok: false, error: detail };
+      } catch (err) {
+        return { ok: false, error: 'network' };
+      }
+    }
+
+    /* Renders the YouTube book trailer embed. Shown on every band's result. */
+    function renderTrailer() {
+      return `
+        <div class="video-block">
+          <div class="video-label">Watch</div>
+          <div class="video-title">${BOOK_TRAILER_TITLE}</div>
+          <div class="video-frame">
+            <iframe src="${BOOK_TRAILER_EMBED}"
+              title="The Narrative Edge — Official Book Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      `;
+    }
+
+    /* Wires the Field Guide opt-in button when the developing band CTA is shown.
+       Sends a second event POST tagged 'field_guide_discount_signup' so
+       downstream automation can trigger the pre-order discount sequence. */
+    function wireFieldGuideOptin(basePayload) {
+      const btn = document.getElementById('fg-optin-btn');
+      if (!btn) return;
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        const statusEl = document.getElementById('fg-optin-status');
+        statusEl.textContent = 'Reserving...';
+        statusEl.className = 'submit-status';
+        const optinPayload = {
+          ...basePayload,
+          event: 'field_guide_discount_signup',
+          field_guide_discount_signup: true,
+          field_guide_discount_signup_at: new Date().toISOString()
+        };
+        const optinResult = await postToWebhook(optinPayload);
+        // Same three-state gating as the Trust(ed) Sessions form:
+        // accept on ok or transient failure (lead is locally cached), surface real errors.
+        const isTransientFailure = optinResult.error === 'network' || optinResult.error === 'no-webhook';
+        if (!optinResult.ok && !isTransientFailure) {
+          btn.disabled = false;
+          statusEl.textContent = `Reservation failed: ${optinResult.error}. Please try again.`;
+          statusEl.className = 'submit-status error';
+          return;
+        }
+        btn.outerHTML = `
+          <div class="optin-confirm">
+            <div class="check">&check;</div>
+            <div class="optin-confirm-text">
+              <strong>Reserved</strong>
+              <p>You&rsquo;ll get the 20% discount code at the email you provided, the day The Field Guide ships.</p>
+            </div>
+          </div>
+        `;
+        statusEl.remove();
+      });
+    }
+
+    document.getElementById('see-results').addEventListener('click', async () => {
+      state.reflection = document.getElementById('reflection').value.trim();
+      const s = score();
+      const r = RESULTS[s.band];
+      const c = CTAS[s.band];
+      const cfg = window.ASSESSMENT_CONFIG || {};
+      const zone = zoneByKey(s.band);
+
+      // Axis two: infer capacity, then flex the anchor to it (Spec §3).
+      state.capacity = inferCapacity(state.lead.role, state.orgSize, state.timeframe);
+      const anchorKey = (cfg.anchorByCapacity && cfg.anchorByCapacity[state.capacity]) ||
+                        (zone && zone.defaultAnchor) || 'book';
+      const anchor = (cfg.anchors && cfg.anchors[anchorKey]) || null;
+
+      // Path routing: zone × capacity → engagement path page (approved model),
+      // falling back to the zone's resultPage if capacity is unknown (Spec §3).
+      const routeSlug = cfg.pathRouting && cfg.pathRouting[s.band] && cfg.pathRouting[s.band][state.capacity];
+      const resultPage = (routeSlug && cfg.paths && cfg.paths[routeSlug]) || (zone && zone.resultPage) || '';
+
+      // Eyebrow range comes from config so it always matches the live cutoffs.
+      document.getElementById('r-band-eyebrow').innerHTML = zone ? ('Score ' + zone.min + '–' + zone.max) : r.marker;
+      document.getElementById('r-band-title').textContent = r.title;
+      document.getElementById('r-score').textContent = s.total;
+      document.getElementById('r-p1').textContent = s.p1;
+      document.getElementById('r-p2').textContent = s.p2;
+      document.getElementById('r-p3').textContent = s.p3;
+      const leadHtml = (zone && zone.leadsWith) ? '<p class="result-lead">' + zone.leadsWith + '</p>' : '';
+      document.getElementById('r-body').innerHTML = leadHtml + r.body + renderTrailer() + renderAnchor(anchor);
+      document.getElementById('r-cta').innerHTML = renderCTA(c, s.band);
+      showStep(6);
+
+      // Tags: one shared completed tag + one zone tag (Spec §6).
+      const tags = [cfg.sharedCompletedTag, zone && zone.tag].filter(Boolean);
+
+      const payload = {
+        name: state.lead.name,
+        email: state.lead.email,
+        role: state.lead.role,
+        org_size: state.orgSize,
+        timeframe: state.timeframe,
+        part_one_scores: state.p1,
+        part_two_answers: state.p2,
+        part_three_counts: state.p3,
+        score_part_one: s.p1,
+        score_part_two: s.p2,
+        score_part_three: s.p3,
+        total_score: s.total,
+        // Spec §3/§6: the three axes, stored separately.
+        tier: s.tier,
+        zone: s.band,
+        zone_title: r.title,
+        objective: state.objective,
+        capacity: state.capacity,
+        // Routing wire-points (sent once Kit/Kajabi is connected).
+        tags: tags,
+        sequence: zone && zone.sequence,
+        result_page: resultPage,
+        anchor: anchorKey,
+        reflection: state.reflection,
+        submitted_at: new Date().toISOString(),
+        source: 'narrative-edge-quick-check',
+        lead_source: window.__ns_source || 'organic',
+        campaign: window.__ns_campaign || '',
+        event: 'assessment_complete'
+      };
+
+      // Wire the Field Guide opt-in (no-op for bands that don't show it)
+      wireFieldGuideOptin(payload);
+
+      // Pre-populate the Trust(ed) Sessions form with what we already know
+      populateTrustedSessionsForm();
+      updateTrustedSessionsSubmitState();
+
+      const statusEl = document.getElementById('submit-status');
+      const { ok, error } = await postToWebhook(payload);
+      if (error === 'no-webhook') {
+        // Standalone mode (no list wired yet): the on-page result is the result.
+        statusEl.textContent = '';
+        statusEl.className = 'submit-status';
+      } else if (ok) {
+        statusEl.textContent = 'Results sent to ' + state.lead.email;
+        statusEl.className = 'submit-status ok';
+      } else if (error === 'network') {
+        statusEl.textContent = 'Network error &middot; results saved locally';
+        statusEl.className = 'submit-status error';
+      } else {
+        statusEl.textContent = 'Delivery failed &middot; results saved locally';
+        statusEl.className = 'submit-status error';
+      }
+    });
+
+    /* ============================================================
+       TRUST(ED) SESSIONS APPLICATION FORM
+       Pre-populates from assessment state. Submits as a separate
+       event ('trusted_sessions_application') so downstream automation
+       can branch independently.
+       ============================================================ */
+    function populateTrustedSessionsForm() {
+      const nameEl = document.getElementById('ts-name');
+      const emailEl = document.getElementById('ts-email');
+      const roleEl = document.getElementById('ts-role-org');
+      const bandEl = document.getElementById('ts-band');
+      if (nameEl && !nameEl.value) nameEl.value = state.lead.name || '';
+      if (emailEl && !emailEl.value) emailEl.value = state.lead.email || '';
+      if (roleEl && !roleEl.value && state.lead.role) roleEl.value = state.lead.role;
+      if (bandEl) bandEl.value = state.score.band || '';
+    }
+
+    function validateTrustedSessionsForm() {
+      const name = (document.getElementById('ts-name').value || '').trim();
+      const email = (document.getElementById('ts-email').value || '').trim();
+      const roleOrg = (document.getElementById('ts-role-org').value || '').trim();
+      const story = (document.getElementById('ts-story').value || '').trim();
+      const consent = document.getElementById('ts-consent').checked;
+      return (
+        name.length >= 2 &&
+        validateEmail(email) &&
+        roleOrg.length >= 5 &&
+        story.length >= 50 &&
+        consent
+      );
+    }
+
+    function updateTrustedSessionsSubmitState() {
+      const btn = document.getElementById('ts-submit');
+      if (!btn) return;
+      btn.disabled = !validateTrustedSessionsForm();
+    }
+
+    // Wire character counter + submit-state listener on every field
+    (function wireTrustedSessionsForm() {
+      const story = document.getElementById('ts-story');
+      const cc = document.getElementById('ts-charcount');
+      if (story && cc) {
+        const updateCharCount = () => {
+          const len = story.value.length;
+          cc.textContent = `${len} / 1500`;
+          cc.classList.toggle('under', len > 0 && len < 50);
+        };
+        story.addEventListener('input', updateCharCount);
+        updateCharCount();
+      }
+      ['ts-name', 'ts-email', 'ts-role-org', 'ts-story'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateTrustedSessionsSubmitState);
+      });
+      const consent = document.getElementById('ts-consent');
+      if (consent) consent.addEventListener('change', updateTrustedSessionsSubmitState);
+
+      const form = document.getElementById('ts-form');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const errEl = document.getElementById('ts-error');
+        errEl.textContent = '';
+        if (!validateTrustedSessionsForm()) {
+          const story = document.getElementById('ts-story').value.trim();
+          if (story.length < 50) {
+            errEl.textContent = 'The story or trust issue field needs at least 50 characters.';
+          } else if (!document.getElementById('ts-consent').checked) {
+            errEl.textContent = 'Please check the consent box to submit.';
+          } else {
+            errEl.textContent = 'Please complete all required fields.';
+          }
+          return;
+        }
+
+        const submitBtn = document.getElementById('ts-submit');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const payload = {
+          name: document.getElementById('ts-name').value.trim(),
+          email: document.getElementById('ts-email').value.trim(),
+          role_organization: document.getElementById('ts-role-org').value.trim(),
+          story_or_trust_issue: document.getElementById('ts-story').value.trim(),
+          assessment_band: document.getElementById('ts-band').value || null,
+          assessment_band_title: state.score.band ? (RESULTS[state.score.band] && RESULTS[state.score.band].title) : null,
+          assessment_total_score: state.score.total || null,
+          consent: true,
+          submitted_at: new Date().toISOString(),
+          source: 'narrative-edge-quick-check',
+          event: 'trusted_sessions_application',
+          subject_line: `New Trust(ed) Sessions application: ${document.getElementById('ts-name').value.trim()}`
+        };
+
+        const result = await postToWebhook(payload);
+
+        // Gate the thank-you on Formspree's response.
+        // - ok: Formspree accepted → show thank-you
+        // - network / no-webhook: transient failure, lead cached locally → still show thank-you (safety net)
+        // - any other error (Formspree 4xx etc.): show error, keep form visible so the user can retry
+        const isTransientFailure = result.error === 'network' || result.error === 'no-webhook';
+        if (!result.ok && !isTransientFailure) {
+          errEl.textContent = `Submission failed: ${result.error}. Please try again.`;
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit my application';
+          return;
+        }
+
+        // Replace the form with the thank-you message.
+        const formEl = document.getElementById('ts-form');
+        const thanksEl = document.getElementById('ts-thanks');
+        if (formEl) formEl.style.display = 'none';
+        if (thanksEl) {
+          thanksEl.style.display = 'block';
+          thanksEl.removeAttribute('aria-hidden');
+          // Also hide the framing copy since the thank-you replaces it
+          const framing = document.querySelector('.ts-framing');
+          if (framing) framing.style.display = 'none';
+          const headline = document.querySelector('.ts-headline');
+          if (headline) headline.style.display = 'none';
+          // Scroll to the thank-you so the user sees it
+          thanksEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    })();
+
+    /* ============================================================
+       FOOTER FIELD GUIDE PUBLICATION NOTIFY
+       Lighter promise than the Developing-band opt-in: just notification,
+       no discount. Distinct event so downstream automation can branch.
+       Available to any visitor, regardless of whether they took the assessment.
+       ============================================================ */
+    (function wireFieldGuideNotify() {
+      const form = document.getElementById('fg-notify-form');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailEl = document.getElementById('fg-notify-email');
+        const errEl = document.getElementById('fg-notify-error');
+        const submitBtn = document.getElementById('fg-notify-submit');
+        errEl.textContent = '';
+        const email = (emailEl.value || '').trim();
+        if (!validateEmail(email)) {
+          errEl.textContent = 'Please use a valid email address.';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        const originalLabel = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+
+        const payload = {
+          name: state.lead.name || null,
+          email: email,
+          submitted_at: new Date().toISOString(),
+          source: 'narrative-edge-quick-check',
+          event: 'field_guide_publication_notify',
+          assessment_band: state.score.band || null,
+          assessment_total_score: state.score.total || null,
+          subject_line: 'New Field Guide notify signup: ' + email
+        };
+
+        const result = await postToWebhook(payload);
+        const isTransientFailure = result.error === 'network' || result.error === 'no-webhook';
+        if (!result.ok && !isTransientFailure) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+          errEl.textContent = 'Submission failed: ' + result.error + '. Please try again.';
+          return;
+        }
+
+        // Replace the form with the confirmation card in place.
+        form.style.display = 'none';
+        const thanksEl = document.getElementById('fg-notify-thanks');
+        if (thanksEl) {
+          thanksEl.style.display = 'block';
+          thanksEl.removeAttribute('aria-hidden');
+        }
+      });
+    })();
+
+    document.getElementById('restart').addEventListener('click', () => {
+      Object.keys(state.p1).forEach(k => state.p1[k] = null);
+      Object.keys(state.p2).forEach(k => state.p2[k] = null);
+      Object.keys(state.p3).forEach(k => state.p3[k] = 0);
+      state.reflection = '';
+      state.objective = ''; state.orgSize = ''; state.timeframe = ''; state.capacity = '';
+      document.querySelectorAll('.scale label, .tf label, .choice-list label').forEach(l => l.classList.remove('checked'));
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.querySelectorAll('.stepper input').forEach(i => i.value = 0);
+      const osSel = document.getElementById('q-orgsize'); if (osSel) osSel.selectedIndex = 0;
+      const tfSel = document.getElementById('q-timeframe'); if (tfSel) tfSel.selectedIndex = 0;
+      document.getElementById('reflection').value = '';
+      // Reset Trust(ed) Sessions form back to its initial visible state
+      const tsForm = document.getElementById('ts-form');
+      const tsThanks = document.getElementById('ts-thanks');
+      if (tsForm) { tsForm.style.display = ''; tsForm.reset(); }
+      if (tsThanks) { tsThanks.style.display = 'none'; tsThanks.setAttribute('aria-hidden', 'true'); }
+      const tsFraming = document.querySelector('.ts-framing');
+      if (tsFraming) tsFraming.style.display = '';
+      const tsHeadline = document.querySelector('.ts-headline');
+      if (tsHeadline) tsHeadline.style.display = '';
+      const tsSubmit = document.getElementById('ts-submit');
+      if (tsSubmit) { tsSubmit.disabled = true; tsSubmit.textContent = 'Submit my application'; }
+      const tsCharcount = document.getElementById('ts-charcount');
+      if (tsCharcount) { tsCharcount.textContent = '0 / 1500'; tsCharcount.classList.remove('under'); }
+      showStep(1);
+    });
+  </script>
+</body>
+</html>
