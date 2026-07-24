@@ -127,6 +127,7 @@ export default async (req) => {
         proximity_link: String(payload.link || ''),
         proximity_date: today,
         proximity_reading_status: 'queued',
+        lead_source: String(payload.lead_source || ''),
       },
     });
     subscriberOk = true;

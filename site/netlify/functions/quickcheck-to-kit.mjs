@@ -173,6 +173,7 @@ export default async (req) => {
         role: String(payload.role || ''),
         org_size: String(payload.org_size || ''),
         timeframe: String(payload.timeframe || ''),
+        lead_source: String(payload.lead_source || ''),
       },
     });
     subscriberOk = true;

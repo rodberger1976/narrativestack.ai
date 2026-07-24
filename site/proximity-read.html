@@ -558,6 +558,7 @@
         care: document.getElementById('q-care').value.trim(),
         future: document.getElementById('q-future').value.trim(),
         link: document.getElementById('c-link').value.trim(),
+        lead_source: (function(){ try { var q = new URLSearchParams(window.location.search); return (q.get('src') || q.get('utm_source') || '').trim() || 'organic'; } catch(_) { return 'organic'; } })(),
       };
 
       submitBtn.disabled = true;

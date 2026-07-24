@@ -2083,8 +2083,8 @@
     (function captureSource() {
       try {
         const q = new URLSearchParams(window.location.search);
-        window.__ns_source = (q.get('utm_source') || '').trim() || 'organic';
-        window.__ns_campaign = (q.get('utm_campaign') || '').trim();
+        window.__ns_source = (q.get('src') || q.get('utm_source') || '').trim() || 'organic';
+        window.__ns_campaign = (q.get('utm_campaign') || q.get('camp') || '').trim();
       } catch (_) { window.__ns_source = 'organic'; window.__ns_campaign = ''; }
     })();
 
