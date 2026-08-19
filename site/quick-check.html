@@ -1365,6 +1365,50 @@
     .anchor-block .anchor-name{font-family:var(--ns-serif);font-size:1.25rem;color:var(--ns-paper);}
     .anchor-block a{color:var(--ns-azure);font-weight:700;text-decoration:none;}
   </style>
+<script>
+/* ANALYTICS-BLOCK v1 */
+/* ANALYTICS (Plausible cookieless + Microsoft Clarity + CTA events). Runs only on production hostnames. */
+(function(){
+  var host = location.hostname;
+  var MAP = {"drrodberger.com":"drrodberger.com","www.drrodberger.com":"drrodberger.com","reignlight.com":"reignlight.com","www.reignlight.com":"reignlight.com","narrativestack.ai":"narrativestack.ai","www.narrativestack.ai":"narrativestack.ai"};
+  var domain = MAP[host];
+  if(!domain) return; /* skip preview/localhost so stats stay clean until launch */
+  /* Plausible (no cookies, no consent banner needed) */
+  window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments); };
+  var ps = document.createElement('script');
+  ps.defer = true; ps.setAttribute('data-domain', domain);
+  ps.src = 'https://plausible.io/js/script.tagged-events.outbound-links.js';
+  document.head.appendChild(ps);
+  /* SPA route-change pageviews (harmless on multi-page sites) */
+  try { var _ps = history.pushState; history.pushState = function(){ _ps.apply(this, arguments); window.plausible('pageview'); }; window.addEventListener('popstate', function(){ window.plausible('pageview'); }); } catch(e){}
+  /* Microsoft Clarity (heatmaps + session replay) */
+  var CID = "xpzadchidz";
+  if (CID && CID.slice(0,2) !== "__") {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CID);
+  }
+  /* Named CTA events -> "buttons engaged" */
+  function track(name, props){ try{ window.plausible && window.plausible(name, props?{props:props}:undefined);}catch(e){} try{ window.clarity && window.clarity("event", name);}catch(e){} }
+  document.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest("a,button") : null; if(!a) return;
+    var href = (a.getAttribute && (a.getAttribute("href")||"")) || "";
+    var txt = (a.textContent||"").trim().toLowerCase(); var s = (href+" "+txt).toLowerCase();
+    var name = null;
+    if(/calendly\.com|book a conversation|book the conversation|check a date/.test(s)) name="Book Conversation";
+    else if(/quick-check|#assessment|take the assessment|quick leadership assessment/.test(s)) name="Take Assessment";
+    else if(/mailto:[^"]*(storystack|launch)|notify me|get notified/.test(s)) name="Notify StoryStack";
+    else if(/amazon\.|wiley\.|bookshop\.|order the book|buy the book/.test(s)) name="Order Book";
+    else if(/#apply|start the application|apply below|ghostwrit/.test(s)) name="Ghostwriting Apply";
+    else if(/field-guide/.test(s)) name="Field Guide";
+    else if(/reignlight/.test(s)) name="Go: ReignLight";
+    else if(/narrativestack/.test(s)) name="Go: NarrativeStack";
+    else if(/drrodberger/.test(s)) name="Go: DrRodBerger";
+    else if(/youtube\.com|youtu\.be|apple\.com\/.*podcast|spotify/.test(s)) name="Media Play";
+    if(name) track(name);
+  }, true);
+})();
+/* /ANALYTICS-BLOCK */
+</script>
+
 </head>
 <body class="on-hero">
 <!-- Netlify Forms: hidden static form so Netlify keeps provisioning "assessment-completions"
