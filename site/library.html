@@ -76,6 +76,24 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(18,38,56,.85);backdr
 .scrolllink:hover{color:var(--coral)}
 @media(max-width:780px){.nav-links a:not(.btn){display:none}}
 
+/* Shared button row, lifted with the rest of the chrome. */
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+/* Animated brand logomark in the header and footer, same as every other page. */
+.logomark{display:block;flex:0 0 auto}
+.logomark .ln{transform-box:view-box;transform-origin:20px 20px}
+.logomark .pt{transform-box:view-box;transform-origin:20px 20px}
+.logomark .l1{animation:lmL1 6s ease-in-out infinite}
+.logomark .l2{animation:lmL2 6s ease-in-out infinite}
+.logomark .l3{animation:lmL3 6s ease-in-out infinite}
+.logomark .l4{animation:lmL4 6s ease-in-out infinite}
+.logomark .pt{animation:lmBloom 6s ease-in-out infinite}
+@keyframes lmL1{0%{transform:translateY(-11px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(-11px);opacity:1}}
+@keyframes lmL2{0%{transform:translateY(-4px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(-4px);opacity:1}}
+@keyframes lmL3{0%{transform:translateY(4px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(4px);opacity:1}}
+@keyframes lmL4{0%{transform:translateY(11px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(11px);opacity:1}}
+@keyframes lmBloom{0%,14%{transform:scale(.3);opacity:0}30%{transform:scale(1.08);opacity:1}40%,84%{transform:scale(1);opacity:1}100%{transform:scale(.3);opacity:0}}100%{transform:scale(1);opacity:1}}
+
 /* footer */
 footer{background:var(--navy-deeper);color:var(--on-navy);padding:34px 0;border-top:1px solid var(--line);font-size:.86rem}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
