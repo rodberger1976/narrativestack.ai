@@ -80,29 +80,20 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(18,38,56,.85);backdr
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 
 /* ── Hero: copy left, illustrated portrait right ────────────────────────
-   Same framed treatment the homepage uses for its hero image. The sketch is
-   navy ink on transparent, so it sits on a warm paper field and reads as
-   itself — inverting it to white on the navy thinned it to scribble. */
+   Same framed treatment the homepage uses for its hero image. The art is the
+   painted currents already on the site (paths/assets/sprint-waves.jpg), whose
+   coral-and-blue is the house palette — and which is not the homepage hero, so
+   nothing repeats for someone arriving from there. */
 .libhero{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4vw,62px);align-items:center}
 .libhero__art{position:relative}
 .portrait{position:relative;margin:0;aspect-ratio:768/954;border-radius:16px;overflow:hidden;
-  border:1px solid var(--line);background:var(--cream-warm);
+  border:1px solid var(--line);background:var(--navy-deep);
   box-shadow:0 30px 60px -28px rgba(0,0,0,.55)}
 .portrait::after{content:"";position:absolute;inset:0;pointer-events:none;
-  /* the figure runs off the bottom edge; fade it into the paper so the crop
-     reads as a choice rather than a chop */
-  background:radial-gradient(130% 80% at 50% 4%,rgba(255,255,255,.38),transparent 58%),
-             linear-gradient(180deg,transparent 56%,rgba(246,239,224,.72) 86%,var(--cream-warm) 99%)}
-/* Two-colour offset. The source line art is a single hue, so each layer is a
-   solid colour masked by the drawing's own alpha — exact control, and the
-   coral sits a few pixels off register behind the navy, the way a two-plate
-   press lands. */
-.portrait__ink{position:absolute;inset:0;
-  -webkit-mask:url("assets/rod-sketch-line.png") center 62%/contain no-repeat;
-          mask:url("assets/rod-sketch-line.png") center 62%/contain no-repeat;
-  padding:4% 6% 0}
-.portrait__ink--coral{background:var(--coral);transform:translate(7px,6px);opacity:.8}
-.portrait__ink--navy{background:var(--navy)}
+  /* settle the painted panel into the navy section rather than letting it
+     sit on top as a bright rectangle */
+  background:linear-gradient(180deg,rgba(18,38,56,.12),transparent 34%,rgba(18,38,56,.28))}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 /* the five-bar mark, bottom left, the way it sits on the brand */
 .portrait__mark{position:absolute;left:26px;bottom:24px;width:34px;height:20px;z-index:2;
   background:
@@ -244,8 +235,7 @@ html.js .reveal.in{opacity:1;transform:none}
     </div>
     <div class="libhero__art">
       <figure class="portrait">
-          <span class="portrait__ink portrait__ink--coral" aria-hidden="true"></span>
-          <span class="portrait__ink portrait__ink--navy" role="img" aria-label="An illustrated line portrait of Dr. Rod Berger"></span>
+          <img src="assets/hero-currents.jpg" alt="" aria-hidden="true" width="900" height="1123" loading="eager" decoding="async">
           <span class="portrait__mark" aria-hidden="true"></span>
         </figure>
     </div>
