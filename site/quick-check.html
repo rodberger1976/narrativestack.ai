@@ -2224,12 +2224,17 @@
       const link = anchor.url
         ? `<a href="${anchor.url}" target="_blank" rel="noopener">Start with ${anchor.name} &rarr;</a>`
         : `<span class="muted">${anchor.name} &middot; coming soon</span>`;
+      /* The anchor names one rung. The library shows the whole ladder, so a
+         reader who was handed the wrong rung can still find their own. */
+      const libraryLink =
+        `<div style="margin-top:10px"><a href="/library">See the full library &rarr;</a></div>`;
       return `
         <div class="anchor-block">
           <div class="cta-label">Your anchor</div>
           <div class="anchor-name">${anchor.name}</div>
           <p class="muted">The right place to start the work for where your story stands now.</p>
           ${link}
+          ${libraryLink}
         </div>
       `;
     }

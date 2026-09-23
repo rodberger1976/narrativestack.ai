@@ -106,7 +106,7 @@ window.ASSESSMENT_CONFIG = {
     book:       { name: 'The Narrative Edge', kind: 'retail',
                   url: 'https://www.amazon.com/Narrative-Edge-Authentic-Storytelling-Moment/dp/1394331290' },
     condensed:  { name: 'The Edit', kind: 'retail',
-                  url: '' },               // title locked ("The Edit"); positioning + URL TBD
+                  url: 'https://www.amazon.com/dp/B0HK93NXZT' },  // paperback (live 2026-09)
     fieldGuide: { name: 'The Field Guide', kind: 'workbook',
                   url: '' }                // publishes this summer; waitlist for now
   },
