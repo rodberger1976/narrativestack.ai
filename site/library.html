@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Library &middot; The Narrative Stack</title>
-<meta name="description" content="The Narrative Edge and its companions, from Dr. Rod Berger. Eight books arranged by the work they do: the argument, the pocket editions, the field guides, and the interview pair.">
+<meta name="description" content="The Narrative Edge and its companions, from Dr. Rod Berger, arranged by the work they do: the argument, the pocket editions, the field guides, the interview pair, and The Calloway Signal.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%231A3048'/%3E%3Cpath d='M20 20 Q12 12 20 2 Q28 12 20 20 Z' fill='%232FC3DD'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Library &middot; The Narrative Stack">
@@ -114,6 +114,9 @@ html.js .reveal.in{opacity:1;transform:none}
    <button> is invalid and unreachable by keyboard. */
 .band{border-top:1px solid var(--line)}
 .band:first-of-type{border-top:0}
+/* The navy-to-cream change already separates this band; the cyan hairline
+   would just read as a stray blue line across the top of the cream. */
+.bg-cream.band{border-top:0}
 .band-head{max-width:54ch}
 .band-head .h-band{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.5rem);margin:12px 0 14px;line-height:1.08}
 .band-head p{color:var(--on-navy);font-size:1.02rem;line-height:1.62}
@@ -124,8 +127,10 @@ html.js .reveal.in{opacity:1;transform:none}
    width:100% button with no intrinsic width to size the column from. */
 .shelf-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:620px}
 .shelf-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media(max-width:760px){.shelf-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:460px){.shelf-2,.shelf-3{grid-template-columns:1fr;max-width:300px}}
+.shelf-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:760px){.shelf-3,.shelf-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.shelf-2,.shelf-3{grid-template-columns:1fr;max-width:300px}
+  .shelf-4{gap:18px}}
 
 .bookcard{display:flex;flex-direction:column}
 .bk{position:relative;width:100%;aspect-ratio:var(--ratio);padding:0;border:0;background:none;cursor:pointer;perspective:1400px;display:block;border-radius:4px}
@@ -143,6 +148,7 @@ html.js .reveal.in{opacity:1;transform:none}
   font-family:var(--sans);font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   color:#fff;background:rgba(18,38,56,.78);padding:4px 8px;border-radius:3px;transition:opacity .2s}
 .bk[aria-pressed="true"] .bk-hint{opacity:0}
+.bk--art .bk-hint{top:9px;bottom:auto}
 @media(hover:hover) and (pointer:fine){.bk:hover .bk-hint{opacity:0}}
 
 .bk-cap{margin-top:14px}
@@ -160,10 +166,6 @@ html.js .reveal.in{opacity:1;transform:none}
 .bk-buy:hover,.bk-buy:focus-visible{border-bottom-color:currentColor}
 .bk-soon{font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-light)}
 
-.closer{border:1px solid var(--line);border-radius:16px;padding:clamp(26px,4vw,40px);margin-top:10px}
-.closer .cta-row{gap:26px}
-.closer p{margin-top:12px}
-.closer .h-band{margin-top:0}
 
 @media(prefers-reduced-motion:reduce){
   .bk-inner{transition:opacity .3s}
@@ -197,7 +199,7 @@ html.js .reveal.in{opacity:1;transform:none}
   <div class="wrap over">
     <div class="kicker">The Library</div>
     <h1 class="h-sec" style="max-width:19ch">The method, in a form you can hold.</h1>
-    <p class="lead on-navy" style="max-width:56ch">Eight books, arranged by the work they do rather than by the order they were published. Start with the argument, carry the pocket editions, open a field guide when it is time to write. Tap any cover to read the back.</p>
+    <p class="lead on-navy" style="max-width:56ch">The Narrative Edge and its companions, arranged by the work they do rather than the order they were published. Start with the argument, carry the pocket editions, open a field guide when it is time to write. Tap any cover to read the back.</p>
     <div class="cta-row" style="margin-top:30px">
       <a class="btn btn-coral" href="index.html#assessment">Not sure where to start? Take the Quick Check</a>
     </div>
@@ -361,17 +363,75 @@ html.js .reveal.in{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- CLOSER -->
-<section class="bg-cream sec">
+<!-- FICTION -->
+<section class="bg-cream sec band" id="fiction">
   <div class="wrap">
-    <div class="closer reveal" style="border-color:var(--line-warm)">
+    <div class="band-head reveal">
       <div class="kicker">One more shelf</div>
       <h2 class="h-band">There is fiction, too.</h2>
-      <p style="color:var(--slate);max-width:56ch;line-height:1.62">The Calloway Signal is a four-book series written by Whitley Berger with Rod Berger &mdash; the same conviction about story, pointed somewhere else entirely. It lives with the rest of the house at ReignLight, alongside everything above.</p>
-      <div class="cta-row" style="margin-top:26px">
-        <a class="btn btn-coral" href="https://reignlight.com" target="_blank" rel="noopener">Visit ReignLight</a>
-        <a class="scrolllink" href="index.html" style="color:var(--coral-deep)">Back to narrativestack.ai &rarr;</a>
-      </div>
+      <p>The Calloway Signal is a four-book series written by Whitley Berger with Rod Berger &mdash; the same conviction about story, pointed somewhere else entirely. Read in order. It starts with <em>Unit Seven</em>.</p>
+    </div>
+    <div class="shelf shelf-4 reveal">
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for Unit Seven" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal1-f.jpg" alt="Unit Seven, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal1-b.jpg" alt="Unit Seven, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Unit Seven</div>
+            <div class="bk-sub">Book One</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG49QJYD" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for The Mars Frequency" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal2-f.jpg" alt="The Mars Frequency, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal2-b.jpg" alt="The Mars Frequency, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">The Mars Frequency</div>
+            <div class="bk-sub">Book Two</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG6K78R8" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for Colony" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal3-f.jpg" alt="Colony, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal3-b.jpg" alt="Colony, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Colony</div>
+            <div class="bk-sub">Book Three</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG6F51CR" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for The Return Signal" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal4-f.jpg" alt="The Return Signal, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal4-b.jpg" alt="The Return Signal, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">The Return Signal</div>
+            <div class="bk-sub">Book Four</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG6JJ4LW" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+    </div>
+    <div class="cta-row reveal" style="margin-top:clamp(34px,4vw,48px)">
+      <a class="btn btn-coral" href="https://reignlight.com/the-calloway-signal" target="_blank" rel="noopener">Enter the world of The Calloway Signal</a>
+      <a class="scrolllink" href="index.html" style="color:var(--coral-deep)">Back to narrativestack.ai &rarr;</a>
     </div>
   </div>
 </section>
