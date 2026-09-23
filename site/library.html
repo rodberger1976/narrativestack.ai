@@ -93,8 +93,16 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(18,38,56,.85);backdr
      reads as a choice rather than a chop */
   background:radial-gradient(130% 80% at 50% 4%,rgba(255,255,255,.38),transparent 58%),
              linear-gradient(180deg,transparent 56%,rgba(246,239,224,.72) 86%,var(--cream-warm) 99%)}
-.portrait img{position:absolute;inset:0;width:100%;height:100%;
-  object-fit:contain;object-position:center 64%;padding:7% 9% 0;display:block}
+/* Two-colour offset. The source line art is a single hue, so each layer is a
+   solid colour masked by the drawing's own alpha — exact control, and the
+   coral sits a few pixels off register behind the navy, the way a two-plate
+   press lands. */
+.portrait__ink{position:absolute;inset:0;
+  -webkit-mask:url("assets/rod-sketch-line.png") center 62%/contain no-repeat;
+          mask:url("assets/rod-sketch-line.png") center 62%/contain no-repeat;
+  padding:4% 6% 0}
+.portrait__ink--coral{background:var(--coral);transform:translate(7px,6px);opacity:.8}
+.portrait__ink--navy{background:var(--navy)}
 /* the five-bar mark, bottom left, the way it sits on the brand */
 .portrait__mark{position:absolute;left:26px;bottom:24px;width:34px;height:20px;z-index:2;
   background:
@@ -236,9 +244,10 @@ html.js .reveal.in{opacity:1;transform:none}
     </div>
     <div class="libhero__art">
       <figure class="portrait">
-        <img src="assets/rod-sketch.png" alt="An illustrated line portrait of Dr. Rod Berger" width="476" height="672" loading="eager" decoding="async">
-        <span class="portrait__mark" aria-hidden="true"></span>
-      </figure>
+          <span class="portrait__ink portrait__ink--coral" aria-hidden="true"></span>
+          <span class="portrait__ink portrait__ink--navy" role="img" aria-label="An illustrated line portrait of Dr. Rod Berger"></span>
+          <span class="portrait__mark" aria-hidden="true"></span>
+        </figure>
     </div>
   </div>
 </section>
