@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Library &middot; The Narrative Stack</title>
+<meta name="description" content="The Narrative Edge and its companions, from Dr. Rod Berger, arranged by the work they do: the argument, the pocket editions, the field guides, the interview pair, and The Calloway Signal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%231A3048'/%3E%3Cpath d='M20 20 Q12 12 20 2 Q28 12 20 20 Z' fill='%232FC3DD'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Library &middot; The Narrative Stack">
+<meta property="og:description" content="The Narrative Edge and its companions, arranged by the work they do.">
+<meta property="og:url" content="https://narrativestack.ai/library">
+<link rel="canonical" href="https://narrativestack.ai/library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --navy:#1A3048; --navy-deep:#122638; --navy-deeper:#0D2338;
+  --slate:#46566A; --slate-light:#5B6B7B;
+  --cyan:#2FC3DD; --coral:#FF774F; --coral-deep:#E0654A;
+  --cream:#FAFBF6; --cream-warm:#F6EFE0;
+  --ink:#16273a; --muted:#5B6B7B; --on-navy:#AEBDC9;
+  --line:rgba(127,217,233,.20); --line-warm:#e7e3d6;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Hanken Grotesk",sans-serif;
+  --maxw:1180px; --pad:clamp(20px,5vw,72px);
+  --clifftree:none;
+  --currents:none;
+  --constellation:none;
+  --stilllife:none;
+  --portrait:none;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--navy);color:#fff;-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+section{position:relative;overflow:hidden}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.sec{padding-top:clamp(74px,9vw,130px);padding-bottom:clamp(74px,9vw,130px)}
+.bg-navy{background:var(--navy)} .bg-deep{background:var(--navy-deep)} .bg-cream{background:var(--cream);color:var(--ink)}
+
+/* type */
+.serif{font-family:var(--serif)}
+h1,h2,.disp{font-family:var(--serif);font-weight:600;line-height:1.03;letter-spacing:-.005em}
+.eyebrow,.kicker{font-family:var(--sans);font-weight:700;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase}
+.kicker{color:var(--coral)} .bg-cream .kicker{color:var(--coral-deep)}
+.h-sec{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,5vw,3.5rem);margin:14px 0 22px}
+.lead{font-size:clamp(1.06rem,1.6vw,1.26rem);line-height:1.6}
+.on-navy{color:var(--on-navy)} .muted{color:var(--muted)}
+.coral{color:var(--coral)} .cyan{color:var(--cyan)}
+
+/* motifs */
+.pin{display:inline-block;vertical-align:-.12em}
+.qcircle{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.qcircle.cy{background:rgba(47,195,221,.10)} .qcircle.co{background:rgba(255,119,79,.10)}
+.uline{position:relative;white-space:nowrap;color:var(--coral)}
+.over{position:relative;z-index:2}
+
+/* image layer */
+.imgbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:.5}
+.imgbg.dim{opacity:.34}
+.veil{position:absolute;inset:0;z-index:1}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:60;background:rgba(18,38,56,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:13px var(--pad)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:1.22rem;color:#fff}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{color:var(--on-navy);text-decoration:none;font-weight:600;font-size:.92rem}
+.nav-links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:.5em;border:0;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:.98rem;padding:.8em 1.4em;border-radius:999px;text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s,color .18s}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:0 12px 28px -12px rgba(255,119,79,.75)}
+.btn-coral:hover{transform:translateY(-2px);box-shadow:0 18px 36px -12px rgba(255,119,79,.9)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.nav .btn{padding:.58em 1.05em;font-size:.88rem}
+.scrolllink{color:var(--on-navy);font-weight:600;text-decoration:none;font-size:.95rem}
+.scrolllink:hover{color:var(--coral)}
+@media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+/* Shared button row, lifted with the rest of the chrome. */
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+/* ── Hero: copy left, illustrated portrait right ────────────────────────
+   Same framed treatment the homepage uses for its hero image. The art is the
+   painted currents already on the site (paths/assets/sprint-waves.jpg), whose
+   coral-and-blue is the house palette — and which is not the homepage hero, so
+   nothing repeats for someone arriving from there. */
+.libhero{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4vw,62px);align-items:center}
+.libhero__art{position:relative}
+.portrait{position:relative;margin:0;aspect-ratio:768/954;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);background:var(--navy-deep);
+  box-shadow:0 30px 60px -28px rgba(0,0,0,.55)}
+.portrait::after{content:"";position:absolute;inset:0;pointer-events:none;
+  /* settle the painted panel into the navy section rather than letting it
+     sit on top as a bright rectangle */
+  background:linear-gradient(180deg,rgba(18,38,56,.12),transparent 34%,rgba(18,38,56,.28))}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* the five-bar mark, bottom left, the way it sits on the brand */
+.portrait__mark{position:absolute;left:26px;bottom:24px;width:34px;height:20px;z-index:2;
+  background:
+    linear-gradient(var(--cyan),var(--cyan)) 0 0/34px 3px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 0 6px/34px 3px no-repeat,
+    linear-gradient(var(--coral),var(--coral)) 0 12px/34px 3px no-repeat,
+    linear-gradient(var(--cyan),var(--cyan)) 0 18px/34px 3px no-repeat;
+  opacity:.9}
+@media(max-width:900px){
+  .libhero{grid-template-columns:1fr;gap:clamp(30px,6vw,44px)}
+  .libhero__art{max-width:400px;margin-inline:auto;width:100%}
+}
+
+/* Animated brand logomark in the header and footer, same as every other page. */
+.logomark{display:block;flex:0 0 auto}
+.logomark .ln{transform-box:view-box;transform-origin:20px 20px}
+.logomark .pt{transform-box:view-box;transform-origin:20px 20px}
+.logomark .l1{animation:lmL1 6s ease-in-out infinite}
+.logomark .l2{animation:lmL2 6s ease-in-out infinite}
+.logomark .l3{animation:lmL3 6s ease-in-out infinite}
+.logomark .l4{animation:lmL4 6s ease-in-out infinite}
+.logomark .pt{animation:lmBloom 6s ease-in-out infinite}
+@keyframes lmL1{0%{transform:translateY(-11px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(-11px);opacity:1}}
+@keyframes lmL2{0%{transform:translateY(-4px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(-4px);opacity:1}}
+@keyframes lmL3{0%{transform:translateY(4px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(4px);opacity:1}}
+@keyframes lmL4{0%{transform:translateY(11px);opacity:1}24%{transform:translateY(0);opacity:1}30%,86%{transform:translateY(0);opacity:0}100%{transform:translateY(11px);opacity:1}}
+@keyframes lmBloom{0%,14%{transform:scale(.3);opacity:0}30%{transform:scale(1.08);opacity:1}40%,84%{transform:scale(1);opacity:1}100%{transform:scale(.3);opacity:0}}100%{transform:scale(1);opacity:1}}
+
+/* footer */
+footer{background:var(--navy-deeper);color:var(--on-navy);padding:34px 0;border-top:1px solid var(--line);font-size:.86rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer a{color:var(--coral);text-decoration:none}
+
+/* The hidden state is gated on html.js, which the inline head script sets.
+   No JS, a thrown script, or a dead IntersectionObserver all leave the
+   shelves visible — this page has to stay buyable, not just animated. */
+html.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+html.js .reveal.in{opacity:1;transform:none}
+
+
+/* ── The Library ─────────────────────────────────────────────────────────
+   Flip cards, ported from the ReignLight shelf (ProductCard.jsx). The card
+   is a real <button>: click, tap, Enter and Space all flip it. Hover is a
+   bonus on fine pointers only, so a touch device never sticks mid-flip.
+   The buy link is a SIBLING of the button, never a child — an <a> inside a
+   <button> is invalid and unreachable by keyboard. */
+.band{border-top:1px solid var(--line)}
+.band:first-of-type{border-top:0}
+/* The navy-to-cream change already separates this band; the cyan hairline
+   would just read as a stray blue line across the top of the cream. */
+.bg-cream.band{border-top:0}
+.band-head{max-width:54ch}
+.band-head .h-band{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.5rem);margin:12px 0 14px;line-height:1.08}
+.band-head p{color:var(--on-navy);font-size:1.02rem;line-height:1.62}
+.bg-cream .band-head p{color:var(--slate)}
+
+.shelf{display:grid;gap:clamp(22px,3vw,38px);margin-top:clamp(30px,4vw,46px)}
+.shelf-1{grid-template-columns:min(260px,100%)}  /* a definite track: minmax(0,260px) collapses to 0, because the card is a
+   width:100% button with no intrinsic width to size the column from. */
+.shelf-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:620px}
+.shelf-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.shelf-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:760px){.shelf-3,.shelf-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.shelf-2,.shelf-3{grid-template-columns:1fr;max-width:300px}
+  .shelf-4{gap:18px}}
+
+.bookcard{display:flex;flex-direction:column}
+.bk{position:relative;width:100%;aspect-ratio:var(--ratio);padding:0;border:0;background:none;cursor:pointer;perspective:1400px;display:block;border-radius:4px}
+.bk:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+.bk-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.2,.7,.2,1)}
+.bk[aria-pressed="true"] .bk-inner{transform:rotateY(180deg)}
+@media(hover:hover) and (pointer:fine){.bk:hover .bk-inner{transform:rotateY(180deg)}
+  .bk:hover[aria-pressed="true"] .bk-inner{transform:rotateY(360deg)}}
+.bk-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:4px;overflow:hidden;background:var(--field);
+  box-shadow:0 18px 38px -20px rgba(0,0,0,.55)}
+.bk-face img{width:100%;height:100%;object-fit:contain;display:block}
+.bk-back{transform:rotateY(180deg)}
+.bk-hint{position:absolute;bottom:9px;right:9px;z-index:3;pointer-events:none;
+  font-family:var(--sans);font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(18,38,56,.78);padding:4px 8px;border-radius:3px;transition:opacity .2s}
+.bk[aria-pressed="true"] .bk-hint{opacity:0}
+.bk--art .bk-hint{top:9px;bottom:auto}
+@media(hover:hover) and (pointer:fine){.bk:hover .bk-hint{opacity:0}}
+
+.bk-cap{margin-top:14px}
+.bk-title{font-family:var(--serif);font-weight:600;font-size:1.16rem;line-height:1.2;color:#fff}
+.bg-cream .bk-title{color:var(--ink)}
+.bk-sub{margin-top:4px;font-size:.84rem;line-height:1.45;color:var(--on-navy)}
+.bg-cream .bk-sub{color:var(--slate)}
+.bk-meta{margin-top:11px;min-height:20px}
+.bk-buy{display:inline-block;font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--coral);text-decoration:none;border-bottom:1px solid transparent;padding:4px 0 3px;transition:border-color .18s}
+/* On touch the label alone is an 18px target. Grow the hit area without
+   moving the text, so the row still reads as a caption. */
+@media(pointer:coarse){.bk-buy{padding:13px 0 12px;margin:-13px 0 -12px}.bk-meta{min-height:44px;display:flex;align-items:center}}
+.bg-cream .bk-buy{color:var(--coral-deep)}
+.bk-buy:hover,.bk-buy:focus-visible{border-bottom-color:currentColor}
+.bk-soon{font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-light)}
+
+
+@media(prefers-reduced-motion:reduce){
+  .bk-inner{transition:opacity .3s}
+  .bk[aria-pressed="true"] .bk-inner{transform:none}
+  @media(hover:hover){.bk:hover .bk-inner{transform:none}}
+  .bk-back{transform:none;opacity:0;transition:opacity .3s}
+  .bk[aria-pressed="true"] .bk-back{opacity:1}
+  .bk[aria-pressed="true"] .bk-front{opacity:0}
+  .reveal{transition:none}
+}
+
+
+/* Safety net: this page is a storefront, so if JS never runs the shelves must
+   still be visible and buyable. The observer only ever needs to animate them. */
+</style>
+<script>document.documentElement.className+=" js";</script>
+</head>
+<body class="bg-navy">
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="index.html" style="text-decoration:none"><svg class="logomark" viewBox="0 0 40 40" width="26" height="26" aria-hidden="true"><g class="lines"><rect class="ln l1" x="7" y="6" width="26" height="3.1" rx="1.55" fill="#2FC3DD"/><rect class="ln l2" x="7" y="13" width="26" height="3.1" rx="1.55" fill="#2FC3DD"/><rect class="ln l3" x="7" y="20" width="26" height="3.1" rx="1.55" fill="#FF774F"/><rect class="ln l4" x="7" y="27" width="26" height="3.1" rx="1.55" fill="#2FC3DD"/></g><g class="petals"><path class="pt up" d="M20 20 Q12 12 20 2 Q28 12 20 20 Z" fill="#2FC3DD"/><path class="pt right" d="M20 20 Q28 12 38 20 Q28 28 20 20 Z" fill="#2FC3DD"/><path class="pt down" d="M20 20 Q28 28 20 38 Q12 28 20 20 Z" fill="#FF774F"/><path class="pt left" d="M20 20 Q12 28 2 20 Q12 12 20 20 Z" fill="#2FC3DD"/></g></svg> The Narrative Stack</a>
+  <nav class="nav-links">
+    <a href="index.html">narrativestack.ai</a>
+    <a class="btn btn-coral" href="index.html#assessment">Take the Assessment</a>
+  </nav>
+</div></header>
+
+<!-- HERO -->
+<section class="bg-navy sec" id="top">
+  <div class="qcircle" style="width:520px;height:520px;right:-250px;top:-150px;background:radial-gradient(circle,rgba(47,195,221,.13),transparent 70%)"></div>
+  <div class="wrap over libhero">
+    <div class="libhero__copy">
+      <div class="kicker">The Library</div>
+      <h1 class="h-sec" style="max-width:17ch">The method, in a form you can hold.</h1>
+      <p class="lead on-navy" style="max-width:50ch">The Narrative Edge and its companions, arranged by the work they do rather than the order they were published. Start with the argument, carry the pocket editions, open a field guide when it is time to write. Tap any cover to read the back.</p>
+      <div class="cta-row" style="margin-top:30px">
+        <a class="btn btn-coral" href="index.html#assessment">Not sure where to start? Take the Quick Check</a>
+        <a class="scrolllink" href="https://drrodberger.com/news/the-narrative-edge-library" target="_blank" rel="noopener">Publication news &rarr;</a>
+      </div>
+    </div>
+    <div class="libhero__art">
+      <figure class="portrait">
+          <img src="assets/hero-currents.jpg" alt="" aria-hidden="true" width="900" height="1123" loading="eager" decoding="async">
+          <span class="portrait__mark" aria-hidden="true"></span>
+        </figure>
+    </div>
+  </div>
+</section>
+
+<section class="bg-navy sec band" id="argument">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <div class="kicker">Start here</div>
+      <h2 class="h-band">The argument the rest of the shelf is built on.</h2>
+      <p>If you have read nothing else, read this one. It makes the case that how a story is built decides whether anyone believes it — and it is the book every title below extends from.</p>
+    </div>
+    <div class="shelf shelf-1 reveal">
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for The Narrative Edge" style="--ratio:0.689;--field:#FFFFFF">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/edge-f.png" alt="The Narrative Edge, front cover"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/edge-b.png" alt="The Narrative Edge, three-dimensional cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">The Narrative Edge</div>
+            <div class="bk-sub">Authentic Storytelling That Meets the Moment &middot; Wiley, 2025</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/1394331290" target="_blank" rel="noopener noreferrer">Amazon &middot; Hardcover</a></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+<section class="bg-deep sec band" id="carry">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <div class="kicker">Carry it with you</div>
+      <h2 class="h-band">Small enough to keep in a bag. Sharp enough to change a meeting.</h2>
+      <p>The pocket editions are for the week you are actually having — a train, a green room, ten minutes before the room fills. Short, and built to be reread.</p>
+    </div>
+    <div class="shelf shelf-2 reveal">
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for The Edit" style="--ratio:0.714;--field:#2FC4DD">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/edit-f.png" alt="The Edit, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/edit-b.png" alt="The Edit, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">The Edit</div>
+            <div class="bk-sub">Your Narrative Edge &middot; The Pocket Edition</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HK93NXZT" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for Unasked" style="--ratio:0.714;--field:#2FC4DD">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/unasked-f.png" alt="Unasked, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/unasked-b.png" alt="Unasked, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Unasked</div>
+            <div class="bk-sub">Questions to carry until you are ready to answer them.</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HK4YXVW6" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+<section class="bg-navy sec band" id="work">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <div class="kicker">Do the work on the page</div>
+      <h2 class="h-band">Working books, not books about working.</h2>
+      <p>Full-size field guides with room to write. Every session closes with a Six-Word Story, because a constraint that tight forces you to find what actually matters. Pick the one that matches the room you stand in.</p>
+    </div>
+    <div class="shelf shelf-3 reveal">
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for Your Narrative Edge: The Field Guide" style="--ratio:0.772;--field:#183048">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/fieldguide-f.png" alt="Your Narrative Edge: The Field Guide, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/fieldguide-b.png" alt="Your Narrative Edge: The Field Guide, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Your Narrative Edge: The Field Guide</div>
+            <div class="bk-sub">A Field Guide to Finding, Refining &amp; Sharing Your Story</div>
+            <div class="bk-meta"><span class="bk-soon">Coming Soon</span></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for Leaders and Business: The Boardroom Sessions" style="--ratio:0.772;--field:#183048">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/leaders-f.png" alt="Leaders and Business: The Boardroom Sessions, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/leaders-b.png" alt="Leaders and Business: The Boardroom Sessions, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Leaders &amp; Business: The Boardroom Sessions</div>
+            <div class="bk-sub">For the pitch, the team meeting, the transformation, and the day everything is on the line</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HKPTW6HZ" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for My Narrative Edge: A Field Guide for the Fork" style="--ratio:0.772;--field:#F3F2ED">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/edgefork-f.png" alt="My Narrative Edge: A Field Guide for the Fork, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/edgefork-b.png" alt="My Narrative Edge: A Field Guide for the Fork, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">My Narrative Edge: A Field Guide for the Fork</div>
+            <div class="bk-sub">For the next generation, at the moment the road splits</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HJYTYK7B" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+<section class="bg-deep sec band" id="interview">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <div class="kicker">For the interview</div>
+      <h2 class="h-band">Two sides of the same conversation.</h2>
+      <p>A matched pair on asking and being asked. <em>Ask.</em> is for the person holding the microphone. <em>Tell.</em> is for the person across from them. Most of us are both, in the same week.</p>
+    </div>
+    <div class="shelf shelf-2 reveal">
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for Ask." style="--ratio:0.714;--field:#FAFAF7">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/ask-f.png" alt="Ask., front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/ask-b.png" alt="Ask., back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Ask.</div>
+            <div class="bk-sub">The Working Craft of Questions That Open People Up.</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HK74QHVW" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk" type="button" aria-pressed="false" aria-label="Flip cover for Tell." style="--ratio:0.714;--field:#FF7559">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/tell-f.png" alt="Tell., front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/tell-b.png" alt="Tell., back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Tell.</div>
+            <div class="bk-sub">How to Be Ready When the Real Question Finds You.</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HK751NRY" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- FICTION -->
+<section class="bg-cream sec band" id="fiction">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <div class="kicker">One more shelf</div>
+      <h2 class="h-band">There is fiction, too.</h2>
+      <p>The Calloway Signal is a four-book series written by Whitley Berger with Rod Berger &mdash; the same conviction about story, pointed somewhere else entirely. Read in order. It starts with <em>Unit Seven</em>.</p>
+    </div>
+    <div class="shelf shelf-4 reveal">
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for Unit Seven" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal1-f.jpg" alt="Unit Seven, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal1-b.jpg" alt="Unit Seven, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Unit Seven</div>
+            <div class="bk-sub">Book One</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG49QJYD" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for The Mars Frequency" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal2-f.jpg" alt="The Mars Frequency, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal2-b.jpg" alt="The Mars Frequency, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">The Mars Frequency</div>
+            <div class="bk-sub">Book Two</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG6K78R8" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for Colony" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal3-f.jpg" alt="Colony, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal3-b.jpg" alt="Colony, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">Colony</div>
+            <div class="bk-sub">Book Three</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG6F51CR" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+        <div class="bookcard">
+          <button class="bk bk--art" type="button" aria-pressed="false" aria-label="Flip cover for The Return Signal" style="--ratio:0.627;--field:#141417">
+            <span class="bk-inner">
+              <span class="bk-face bk-front"><img src="assets/covers/cal4-f.jpg" alt="The Return Signal, front cover" loading="lazy"></span>
+              <span class="bk-face bk-back"><img src="assets/covers/cal4-b.jpg" alt="The Return Signal, back cover" loading="lazy"></span>
+            </span>
+            <span class="bk-hint">Flip</span>
+          </button>
+          <div class="bk-cap">
+            <div class="bk-title">The Return Signal</div>
+            <div class="bk-sub">Book Four</div>
+            <div class="bk-meta"><a class="bk-buy" href="https://www.amazon.com/dp/B0HG6JJ4LW" target="_blank" rel="noopener noreferrer">Amazon &middot; Paperback</a></div>
+          </div>
+        </div>
+    </div>
+    <div class="cta-row reveal" style="margin-top:clamp(34px,4vw,48px)">
+      <a class="btn btn-coral" href="https://reignlight.com/the-calloway-signal" target="_blank" rel="noopener">Enter the world of The Calloway Signal</a>
+      <a class="scrolllink" href="index.html" style="color:var(--coral-deep)">Back to narrativestack.ai &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div style="display:flex;align-items:center;gap:10px"><svg class="logomark" viewBox="0 0 40 40" width="20" height="20" aria-hidden="true"><g class="lines"><rect class="ln l1" x="7" y="6" width="26" height="3.1" rx="1.55" fill="#2FC3DD"/><rect class="ln l2" x="7" y="13" width="26" height="3.1" rx="1.55" fill="#2FC3DD"/><rect class="ln l3" x="7" y="20" width="26" height="3.1" rx="1.55" fill="#FF774F"/><rect class="ln l4" x="7" y="27" width="26" height="3.1" rx="1.55" fill="#2FC3DD"/></g><g class="petals"><path class="pt up" d="M20 20 Q12 12 20 2 Q28 12 20 20 Z" fill="#2FC3DD"/><path class="pt right" d="M20 20 Q28 12 38 20 Q28 28 20 20 Z" fill="#2FC3DD"/><path class="pt down" d="M20 20 Q28 28 20 38 Q12 28 20 20 Z" fill="#FF774F"/><path class="pt left" d="M20 20 Q12 28 2 20 Q12 12 20 20 Z" fill="#2FC3DD"/></g></svg> The Narrative Stack &middot; narrativestack.ai</div>
+  <div style="color:var(--on-navy);font-size:.85rem;margin-top:10px">The Narrative Edge and its companions &middot; published by ReignLight</div>
+</div></footer>
+
+<script>
+/* Flip on click, Enter and Space (a <button> gives us the last two free).
+   aria-pressed carries the state for both CSS and assistive tech. */
+document.querySelectorAll('.bk').forEach(function(b){
+  b.addEventListener('click',function(){
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true' ? 'false' : 'true');
+  });
+});
+/* Same reveal-on-scroll as the rest of the site. */
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -10% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  /* Belt and braces: if the observer never fires (some embedded and headless
+     contexts never run it), reveal everything rather than hide the shelves. */
+  setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},2500);
+})();
+</script>
+</body></html>
