@@ -1800,28 +1800,17 @@
   <footer>
     <div class="container">
 
-      <!-- Field Guide publication notify — open to any visitor regardless of band -->
-      <section class="fg-notify" id="fg-notify" aria-label="Field Guide publication notification">
+      <!-- Field Guide — published; buy block replaced the pre-launch notify 2026-09-27 -->
+      <section class="fg-notify" id="fg-notify" aria-label="Field Guide">
         <div class="fg-notify-text">
-          <div class="fg-notify-eyebrow">The Field Guide &middot; Coming This Summer</div>
+          <div class="fg-notify-eyebrow">The Field Guide &middot; Available Now</div>
           <div class="fg-notify-underscore"></div>
-          <h3 class="fg-notify-headline">Be the first to know.</h3>
-          <p class="fg-notify-body">The Field Guide publishes later this summer. Leave your email and you&rsquo;ll hear from me the day it ships.</p>
+          <h3 class="fg-notify-headline">The book gave you the idea. This gives you the pen.</h3>
+          <p class="fg-notify-body">Twelve chapters of guided story work, with room to write. The companion field guide to <em>The Narrative Edge</em>.</p>
         </div>
-        <form class="fg-notify-form" id="fg-notify-form" novalidate>
+        <div class="fg-notify-form">
           <div class="fg-notify-row">
-            <input id="fg-notify-email" name="email" type="email" autocomplete="email" required aria-required="true" placeholder="you@example.com" />
-            <button type="submit" class="btn btn-coral" id="fg-notify-submit">Notify me</button>
-          </div>
-          <div class="fg-notify-error" id="fg-notify-error" aria-live="polite"></div>
-        </form>
-        <div class="fg-notify-thanks" id="fg-notify-thanks" style="display: none;" aria-hidden="true">
-          <div class="fg-notify-confirm">
-            <div class="check">&check;</div>
-            <div>
-              <strong>You&rsquo;re on the list</strong>
-              <p>I&rsquo;ll write when it ships.</p>
-            </div>
+            <a class="btn btn-coral" href="https://www.amazon.com/dp/B0HL6GB8VH" target="_blank" rel="noopener noreferrer">Get the Field Guide on Amazon</a>
           </div>
         </div>
       </section>
@@ -1863,7 +1852,8 @@
     const BOOK_TRAILER_TITLE = 'The Narrative Edge &middot; Official Book Trailer';
 
     /* CTA type drives rendering:
-         'optin'  — Field Guide 20% discount sign-up (no external link)
+         'optin'  — Field Guide 20% discount sign-up (retired 2026-09-27, book published)
+         'fieldguide' — external Field Guide buy link
          'amazon' — opens Amazon Narrative Edge with UTM
          'inquire'— cohort/advisory inquiry (placeholder href)
     */
@@ -1877,11 +1867,12 @@
         cta: 'Apply for a Trust(ed) Session'
       },
       developing: {
-        type: 'optin',
-        label: 'Reserve Your Field Guide Discount',
+        type: 'fieldguide',
+        label: 'The Field Guide',
         title: 'The Field Guide is built for exactly this gap.',
-        body: 'The Field Guide and its companion exercises are designed to give you the range you&rsquo;re missing, the stories beyond your three or four go-tos. It publishes later this summer. Reserve your 20% discount below and you&rsquo;ll get the code the day it ships.',
-        cta: 'Reserve my 20% discount'
+        body: 'The Field Guide and its companion exercises are designed to give you the range you&rsquo;re missing, the stories beyond your three or four go-tos. It is available now.',
+        href: 'https://www.amazon.com/dp/B0HL6GB8VH',
+        cta: 'Get the Field Guide on Amazon'
       },
       drift: {
         // type 'none' — band narrative leads directly into the universal book
@@ -2192,7 +2183,8 @@
        ============================================================ */
     /* Renders the band-specific CTA. Four flavors:
        - 'none'    → no band CTA rendered; the universal book block below stands alone
-       - 'optin'   → Field Guide discount sign-up button (no external nav)
+       - 'optin'   → Field Guide discount sign-up button (retired; book published)
+       - 'fieldguide' → external Field Guide buy link
        - 'amazon'  → external link to Amazon w/ UTMs
        - 'inquire' → placeholder external link (also used for anchor-scroll CTAs)
     */
@@ -2205,6 +2197,8 @@
       } else if (c.type === 'optin') {
         actionHtml = `<button id="fg-optin-btn" class="btn" type="button">${c.cta}</button>
           <div id="fg-optin-status" class="submit-status" aria-live="polite"></div>`;
+      } else if (c.type === 'fieldguide') {
+        actionHtml = `<a href="${c.href}" class="btn" style="border-bottom: 0;" target="_blank" rel="noopener noreferrer">${c.cta}</a>`;
       } else {
         actionHtml = `<a href="${c.href}" class="btn" style="border-bottom: 0;">${c.cta}</a>`;
       }
