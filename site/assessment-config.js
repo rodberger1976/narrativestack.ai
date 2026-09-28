@@ -108,7 +108,7 @@ window.ASSESSMENT_CONFIG = {
     condensed:  { name: 'The Edit', kind: 'retail',
                   url: 'https://www.amazon.com/dp/B0HK93NXZT' },  // paperback (live 2026-09)
     fieldGuide: { name: 'The Field Guide', kind: 'workbook',
-                  url: '' }                // publishes this summer; waitlist for now
+                  url: 'https://www.amazon.com/dp/B0HL6GB8VH' }  // paperback (live 2026-09)
   },
 
   /* Capacity decides which rung the reader meets (Spec §3):
