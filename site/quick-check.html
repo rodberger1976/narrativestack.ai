@@ -504,6 +504,9 @@
       margin-top: var(--ns-space-3);
     }
     .ts-thanks .sig strong { font-style: normal; font-weight: 600; }
+    #next-step .sig { margin-top: var(--ns-space-3); font-family: var(--ns-serif); font-style: italic; color: var(--ns-paper-80); }
+    #next-step .sig strong { font-style: normal; font-weight: 600; }
+    #next-step [hidden] { display: none; }
     @media (max-width: 640px) {
       .trusted-sessions { padding-top: var(--ns-space-5); }
       .ts-thanks {
@@ -1729,8 +1732,26 @@
         </div>
         <p class="submit-status" id="submit-status" aria-live="polite"></p>
 
-        <!-- Trust(ed) Sessions Application — discrete human-voice (Coral) surface -->
-        <section class="trusted-sessions" id="trusted-sessions-application">
+        <!-- What Happens Next — replaces the webinar-era Trust(ed) Sessions block (2026-09-30).
+             The door paragraph shown follows state.intent ('self' | 'org'). -->
+        <section class="trusted-sessions" id="next-step" aria-label="What happens next">
+          <div class="ts-eyebrow">What Happens Next</div>
+          <div class="ts-eyebrow-underscore"></div>
+          <h2 class="ts-headline">Your result is on its way to your inbox.</h2>
+          <div class="ts-framing">
+            <p>Over the next week I&rsquo;ll send four short notes built on your answers. The last question you answered, the one about every title stripped away, I read myself.</p>
+            <p data-door="self">When you&rsquo;re ready to go further, the next step is a Narrative Debrief: ninety minutes, you and me, your actual material on the table. We name the one story doing the most work for you or against you, and you leave with language you can use that afternoon.</p>
+            <p data-door="org" hidden>When you&rsquo;re ready to take this to your team, the next step is a team Narrative Debrief: ninety minutes on your organization&rsquo;s material, where we decide what is worth building across the group.</p>
+            <p>The details are in the last of those notes. Nothing to decide today.</p>
+          </div>
+          <div class="sig">
+            Yours in narrative,<br/>
+            <strong><a href="https://www.linkedin.com/in/rodbergerpsyd/" target="_blank" rel="noopener">Rod</a></strong>
+          </div>
+        </section>
+
+        <!-- Trust(ed) Sessions Application — retired 2026-09-30 (webinar-only offer). Kept hidden so its script keeps working. -->
+        <section class="trusted-sessions" id="trusted-sessions-application" hidden style="display:none">
           <div class="ts-eyebrow">Apply &middot; Trust(ed) Sessions</div>
           <div class="ts-eyebrow-underscore"></div>
           <h2 class="ts-headline">Apply for a Trust(ed) Co-Author Session</h2>
@@ -1862,9 +1883,9 @@
         type: 'inquire',
         label: 'Next Chapter',
         title: 'Develop this in others.',
-        body: 'If you&rsquo;re ready to author the story-culture of the people around you, a Trust(ed) Co-Author Session is built for exactly that work. Apply below.',
-        href: '#trusted-sessions-application',
-        cta: 'Apply for a Trust(ed) Session'
+        body: 'If you&rsquo;re ready to author the story-culture of the people around you, the next step is a Narrative Debrief. Here is how it unfolds.',
+        href: '#next-step',
+        cta: 'What happens next'
       },
       developing: {
         type: 'fieldguide',
@@ -2472,6 +2493,9 @@
       const leadHtml = (zone && zone.leadsWith) ? '<p class="result-lead">' + zone.leadsWith + '</p>' : '';
       document.getElementById('r-body').innerHTML = leadHtml + r.body + renderTrailer() + renderAnchor(anchor);
       document.getElementById('r-cta').innerHTML = renderCTA(c, s.band);
+      // Show the next-step paragraph that matches the intent fork.
+      const door = state.intent === 'self' ? 'self' : 'org';
+      document.querySelectorAll('#next-step [data-door]').forEach(el => { el.hidden = el.dataset.door !== door; });
       showStep(7);
 
       // Tags: one shared completed tag + one zone tag (Spec §6).
