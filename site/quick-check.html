@@ -1426,7 +1426,7 @@
   <input name="zone_title"><input name="objective"><input name="capacity"><input name="tags">
   <input name="sequence"><input name="result_page"><input name="anchor">
   <textarea name="reflection"></textarea><textarea name="verbatim"></textarea>
-  <input name="source"><input name="lead_source"><input name="campaign"><input name="submitted_at"><input name="event">
+  <input name="source"><input name="lead_source"><input name="campaign"><input name="lead_channel"><input name="lead_post"><input name="submitted_at"><input name="event">
 </form>
 
   <div class="geometry" aria-hidden="true"></div>
@@ -2140,8 +2140,11 @@
       try {
         const q = new URLSearchParams(window.location.search);
         window.__ns_source = (q.get('src') || q.get('utm_source') || '').trim() || 'organic';
-        window.__ns_campaign = (q.get('utm_campaign') || q.get('camp') || '').trim();
-      } catch (_) { window.__ns_source = 'organic'; window.__ns_campaign = ''; }
+        window.__ns_campaign = (q.get('utm_campaign') || q.get('camp') || q.get('c') || '').trim();
+        /* Social posts: which platform (ch, else utm_source when src is set) and which post (utm_content). */
+        window.__ns_channel = (q.get('ch') || (q.get('src') ? q.get('utm_source') : '') || '').trim().toLowerCase();
+        window.__ns_post = (q.get('utm_content') || '').trim().slice(0, 120);
+      } catch (_) { window.__ns_source = 'organic'; window.__ns_campaign = ''; window.__ns_channel = ''; window.__ns_post = ''; }
     })();
 
     document.getElementById('gate-form').addEventListener('submit', (e) => {
@@ -2535,6 +2538,8 @@
         source: 'narrative-edge-quick-check',
         lead_source: window.__ns_source || 'organic',
         campaign: window.__ns_campaign || '',
+        lead_channel: window.__ns_channel || '',
+        lead_post: window.__ns_post || '',
         event: 'assessment_complete'
       };
 

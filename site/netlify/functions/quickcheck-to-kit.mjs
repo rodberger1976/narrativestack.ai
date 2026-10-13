@@ -40,6 +40,10 @@ const KIT = {
       'aligned': 21373144,
     },
     intent: { self: 21373145, org: 21373146 },  // for:self / for:team
+    /* Social attribution (headline series): src:social, ch:instagram|linkedin, campaign:headlines */
+    source: { social: 21352179 },
+    channel: { instagram: 24586290, linkedin: 24586291 },
+    campaign: { headlines: 24586292 },
     path: {
       debrief: 21373147,
       sprint: 21373148,
@@ -174,6 +178,8 @@ export default async (req) => {
         org_size: String(payload.org_size || ''),
         timeframe: String(payload.timeframe || ''),
         lead_source: String(payload.lead_source || ''),
+        lead_platform: String(payload.lead_channel || ''),
+        lead_post: String(payload.lead_post || ''),
       },
     });
     subscriberOk = true;
@@ -187,6 +193,9 @@ export default async (req) => {
     zone ? KIT.tags.zone[zone] : null,
     intent ? KIT.tags.intent[intent] : null,
     routing ? routing.pathTag : null,
+    KIT.tags.source[String(payload.lead_source || '').toLowerCase()] || null,
+    KIT.tags.channel[String(payload.lead_channel || '').toLowerCase()] || null,
+    KIT.tags.campaign[String(payload.campaign || '').toLowerCase()] || null,
   ].filter(Boolean);
   for (const tagId of tagIds) {
     try {
