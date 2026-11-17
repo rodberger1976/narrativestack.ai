@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Turn · Free Preview · Dr. Rod Berger</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The free preview of The Turn with Dr. Rod Berger: Start Here, the Quick Check and Lessons 1 to 3.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a course player. A course progress meter rides in the header on every page. Outline of lessons on the left (a drawer on phones) with per-item checks and per-lesson status; the main column shows Start Here, the course dashboard, a lesson's pieces in viewing order, or a lesson-complete screen. Tokens are The Turn kit's own. */
+:root{
+  --bg:#F4F2EC; --surface:#FBFAF6; --ink:#183048; --muted:#5d6b78; --line:#dcd7cb;
+  --coral:#FF7559; --coral-ink:#c4472d; --ok:#2e7d5b; --ok-soft:rgba(46,125,91,.12); --veil:rgba(24,48,72,.06);
+  --display:"Cormorant Garamond", Georgia, serif;
+  --body:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1d2b; --surface:#16283a; --ink:#F4F2EC; --muted:#a9b4bf; --line:#2a4157;
+  --coral:#FF7559; --coral-ink:#ff9a83; --ok:#6fcf9f; --ok-soft:rgba(111,207,159,.14); --veil:rgba(244,242,236,.06); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1d2b; --surface:#16283a; --ink:#F4F2EC; --muted:#a9b4bf; --line:#2a4157;
+  --coral:#FF7559; --coral-ink:#ff9a83; --ok:#6fcf9f; --ok-soft:rgba(111,207,159,.14); --veil:rgba(244,242,236,.06); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--coral-ink)}
+:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.top-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.brand{font-family:var(--display);font-weight:600;font-size:1.7rem;line-height:1;background:none;border:0;padding:0}
+.brand small{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--coral-ink);text-transform:uppercase;margin-left:8px;vertical-align:middle}
+.spacer{flex:1}
+.menu-btn{display:none;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 12px;font-size:.9rem}
+.toggle{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+.toggle input{accent-color:var(--coral)}
+.flag{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 10px;white-space:nowrap}
+
+/* course progress meter, always in the header */
+.prog{display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);border-radius:99px;padding:5px 12px 5px 10px;min-width:0}
+.prog .pl{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bar{display:block;height:6px;border-radius:99px;background:var(--line);overflow:hidden;flex:0 0 auto}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:99px;transition:width .4s}
+.prog .bar{width:90px}
+.prog b{font-size:.85rem;font-variant-numeric:tabular-nums}
+
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 64px}
+nav.outline{position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px);align-self:start;max-height:calc(100vh - 90px);overflow:auto;padding-right:4px}
+.les{border-bottom:1px solid var(--line)}
+.les>button{width:100%;text-align:left;background:none;border:0;padding:11px 4px;display:grid;grid-template-columns:2.2rem 1fr auto;gap:6px;align-items:center}
+.les .no{font-family:var(--mono);font-size:.72rem;color:var(--muted);width:1.7rem;height:1.7rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1.5px solid transparent}
+.les.complete .no{background:var(--ok);color:var(--bg);border-color:var(--ok);font-size:.8rem}
+.les .nm{font-weight:600;font-size:.95rem;line-height:1.3}
+.les .ct{font-family:var(--mono);font-size:.68rem;color:var(--muted);white-space:nowrap}
+.les.complete .ct{color:var(--ok)}
+.les.open>button .nm{color:var(--coral-ink)}
+.les.locked>button{opacity:.55}
+.les.bonus>button .nm{color:var(--coral-ink)}
+.bonus-pill{display:inline-block;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;background:var(--coral-ink);color:#F4F2EC;border-radius:99px;padding:2px 8px;margin-right:6px;vertical-align:2px;box-shadow:0 0 14px 2px rgba(255,117,89,.45)}
+.items{list-style:none;margin:0 0 10px;padding:0 0 0 2.2rem;display:none}
+.les.open .items{display:block}
+.items li button{width:100%;text-align:left;background:none;border:0;padding:6px 6px;border-radius:6px;display:flex;gap:8px;align-items:center;font-size:.9rem}
+.items li button:hover{background:var(--veil)}
+.items li button[aria-current="true"]{background:var(--veil);font-weight:600}
+.items li.soon{font-size:.85rem;color:var(--muted);padding:5px 6px}
+.dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line);flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+.dot.done{background:var(--ok);border-color:var(--ok);color:var(--bg)}
+
+main{min-width:0}
+.crumb{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-ink)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4.6vw,3rem);line-height:1.05;margin:6px 0 6px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:1.65rem;line-height:1.15;margin:34px 0 8px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 18px;max-width:65ch}
+.donebadge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);background:var(--ok-soft);border-radius:99px;padding:3px 10px;margin-left:8px;vertical-align:4px}
+.player{background:#000;border-radius:8px;overflow:hidden;aspect-ratio:16/9;max-width:100%;position:relative}
+.player video{width:100%;height:100%;display:block;background:#000}
+.pending{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--surface);color:var(--muted);text-align:center;padding:20px;border:1px dashed var(--line);border-radius:8px}
+.pending b{font-family:var(--display);font-size:1.5rem;color:var(--ink)}
+.navrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin:14px 0 26px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:9px 16px;font-weight:600;font-size:.92rem}
+.btn.primary{background:var(--coral-ink);border-color:var(--coral-ink);color:#F4F2EC}
+.btn.okb{background:var(--ok);border-color:var(--ok);color:var(--bg)}
+.btn:disabled{opacity:.4;cursor:default}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;font-size:.82rem}
+
+.rs{border-top:2px solid var(--ink);margin-top:6px}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}
+.tabs button{border:0;background:none;padding:7px 12px;border-radius:99px;font-weight:600;font-size:.9rem;color:var(--muted);display:inline-flex;gap:5px;align-items:center}
+.tabs button .tk{color:var(--ok);font-size:.8rem}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tabs button[aria-selected="true"] .tk{color:var(--bg)}
+.tabs .rsct{margin-left:auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-right:4px}
+.pane{padding:18px 0;max-width:68ch}
+.k{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-ink);margin:0 0 6px}
+blockquote{font-family:var(--display);font-size:1.6rem;line-height:1.25;margin:4px 0 6px;font-weight:500}
+.src{font-size:.82rem;color:var(--muted);margin:0 0 16px}
+.ref{display:inline-flex;align-items:center;gap:6px;background:var(--veil);border:1px solid var(--line);border-radius:99px;padding:2px 10px 2px 4px;font-size:.8rem;color:var(--ink);text-align:left;line-height:1.35}
+.ref img{width:16px;height:22px;object-fit:cover;border-radius:2px;flex:0 0 auto}
+.ref:hover{border-color:var(--coral)}
+.ref .i{font-family:var(--mono);font-size:.62rem;color:var(--coral-ink);border:1px solid currentColor;border-radius:50%;width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.q{font-family:var(--display);font-size:1.4rem;line-height:1.3;margin:2px 0 4px;font-weight:600}
+ol.steps{padding-left:1.3em;margin:6px 0 14px} ol.steps li{margin:4px 0}
+textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);padding:10px 12px;font:inherit;resize:vertical}
+.saved{font-size:.78rem;color:var(--muted);margin-top:4px;min-height:1em}
+.six{font-family:var(--display);font-style:italic;font-size:1.35rem}
+.note{background:var(--veil);border-left:3px solid var(--coral);padding:12px 14px;border-radius:0 6px 6px 0;margin:16px 0;font-size:.92rem}
+.wb{display:inline-flex;gap:8px;align-items:center;margin-top:8px}
+.seq{list-style:none;padding:0;margin:0 0 6px;display:flex;flex-wrap:wrap;gap:6px}
+.seq li{font-size:.8rem;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--muted);display:inline-flex;gap:5px;align-items:center}
+.seq li.on{border-color:var(--coral);color:var(--ink);font-weight:600}
+.seq li.dn{border-color:var(--ok);color:var(--ok)}
+
+/* dashboard */
+.dash{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 22px;align-items:center;margin:14px 0 8px}
+.ring{--p:0;width:96px;height:96px;border-radius:50%;background:conic-gradient(var(--ok) calc(var(--p)*1%),var(--line) 0);display:flex;align-items:center;justify-content:center;grid-row:span 2}
+.ring span{width:76px;height:76px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.7rem;font-weight:600}
+.dash .big{font-family:var(--display);font-size:1.45rem;font-weight:600;line-height:1.2}
+.dash .meta{color:var(--muted);font-size:.9rem}
+.dash .navrow{grid-column:1/-1;margin:8px 0 0}
+.home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;text-align:left;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card .no{font-family:var(--mono);font-size:.7rem;color:var(--coral-ink);letter-spacing:.12em}
+.card .nm{font-family:var(--display);font-size:1.45rem;font-weight:600;line-height:1.15}
+.card .meta{font-size:.82rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.card .bar{width:100%}
+.card.locked{opacity:.55}
+.card.bonus{box-shadow:0 0 0 1px var(--coral), 0 0 22px rgba(255,117,89,.28)}
+.card.complete{border-color:var(--ok)}
+.st{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;border-radius:99px;padding:2px 8px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.st.ip{border-color:var(--coral);color:var(--coral-ink)}
+.st.ok{border-color:var(--ok);color:var(--ok);background:var(--ok-soft)}
+
+/* lesson complete */
+.celebrate{text-align:center;max-width:620px;margin:10px auto 0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.bigcheck{width:84px;height:84px;border-radius:50%;background:var(--ok);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:2.4rem;animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.bigcheck{animation:none}}
+.celebrate .bar{width:min(360px,100%);height:8px}
+.donelist{list-style:none;padding:0;margin:6px 0;display:flex;flex-direction:column;gap:4px;text-align:left}
+.donelist li{display:flex;gap:8px;align-items:center;font-size:.92rem}
+
+/* start here */
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:10px 0}
+.how .card{gap:4px}
+.how .card .no{color:var(--muted)}
+.how .card b{font-family:var(--display);font-size:1.3rem;line-height:1.15}
+.how .card span{font-size:.9rem;color:var(--muted)}
+.rs6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.rs6 div{border-top:2px solid var(--ink);padding-top:6px}
+.rs6 b{display:block;font-weight:700}
+.rs6 span{font-size:.86rem;color:var(--muted)}
+dl.gloss{display:grid;grid-template-columns:minmax(9rem,auto) minmax(0,1fr);gap:10px 18px;margin:10px 0;max-width:75ch}
+dl.gloss dt{font-weight:700}
+dl.gloss dd{margin:0;color:var(--muted)}
+.promise{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:0 8px 8px 0;padding:16px 18px;margin:12px 0 16px;max-width:70ch}
+.promise p{margin:0;font-family:var(--display);font-size:1.35rem;line-height:1.3;font-weight:600}
+.promise small{display:block;margin-top:6px;color:var(--muted);font-size:.88rem}
+.shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:10px 0}
+.book{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:left}
+.book img{width:64px;height:90px;object-fit:cover;border-radius:3px;box-shadow:0 1px 0 var(--line)}
+.book b{display:block;font-family:var(--display);font-size:1.15rem;line-height:1.15}
+.book span{font-size:.8rem;color:var(--muted);display:block}
+.book:hover{border-color:var(--coral)}
+
+/* overlays */
+.wbv{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column}
+.wbv[hidden]{display:none}
+.wbv-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);background:var(--bg);
+  padding:calc(env(safe-area-inset-top,0px) + 10px) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+.wbv-bar b{font-family:var(--display);font-size:1.25rem;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wbv-bar span{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.wbv-pages{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:16px max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 24px) max(16px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;align-items:center;gap:16px}
+.wbv-pages img{display:block;width:100%;max-width:820px;height:auto;aspect-ratio:8.5/11;background:#fff;border:1px solid var(--line);border-radius:4px}
+.wbv-note{max-width:820px;font-size:.85rem;color:var(--muted);text-align:center}
+.sheetwrap{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheetwrap[hidden]{display:none}
+.sheet{background:var(--bg);border:1px solid var(--line);border-radius:12px;max-width:520px;width:100%;max-height:100%;overflow:auto;padding:20px;display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px}
+.sheet img{width:110px;height:auto;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.sheet .k{margin:0}
+.sheet h3{font-family:var(--display);font-size:1.5rem;line-height:1.1;margin:2px 0 2px}
+.sheet .tag{font-style:italic;color:var(--muted);margin:0 0 10px;font-size:.92rem}
+.sheet p{margin:0 0 10px;font-size:.93rem}
+.sheet .here{background:var(--veil);border-radius:6px;padding:8px 10px;font-size:.86rem}
+.sheet .ft{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:12px;font-size:.84rem;color:var(--muted)}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .menu-btn{display:inline-block}
+  nav.outline{position:fixed;inset:0 auto 0 0;width:min(86vw,340px);max-height:none;height:100%;background:var(--bg);z-index:40;
+    padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 24px max(16px,env(safe-area-inset-left,0px));border-right:1px solid var(--line);transform:translateX(-105%);transition:transform .2s}
+  nav.outline.show{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:35}
+  .home-grid,.how,.shelf{grid-template-columns:1fr}
+  .rs6{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toggle span{display:none}
+  .brand small{display:none}
+  .flag{display:none}
+}
+@media (max-width:560px){
+  .brand{font-size:1.4rem}
+  .prog .pl{display:none}
+  .prog .bar{width:54px}
+  dl.gloss{grid-template-columns:1fr;gap:2px 0}
+  dl.gloss dd{margin-bottom:10px}
+  .sheet{grid-template-columns:1fr}
+  .sheet img{width:90px}
+  .dash{grid-template-columns:1fr;justify-items:start}
+  .ring{grid-row:auto}
+}
+@media (prefers-reduced-motion:reduce){nav.outline{transition:none}.bar i{transition:none}}
+
+/* v4: guided Turn sequence, watch-to-unlock, glows */
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(255,117,89,0)}50%{box-shadow:0 0 0 3px rgba(255,117,89,.28),0 0 18px 2px rgba(255,117,89,.42)}}
+.prog{border-color:var(--coral);animation:glow 2.6s ease-in-out infinite}
+.prog:hover{background:var(--surface)}
+.card.next{border-color:var(--coral);animation:glow 2.6s ease-in-out infinite}
+.upnext{align-self:flex-start;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;background:var(--coral-ink);color:#F4F2EC;border-radius:99px;padding:2px 9px}
+.les.next .no{box-shadow:0 0 0 2px var(--coral),0 0 12px rgba(255,117,89,.55);color:var(--coral-ink)}
+.btn.glow{animation:glow 2.6s ease-in-out infinite}
+.stepper{list-style:none;margin:18px 0 0;padding:0 0 12px;display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.stepper li{flex:0 0 auto}
+.stepper button{background:none;border:0;display:flex;align-items:center;gap:7px;padding:6px 10px 6px 6px;border-radius:99px;font-weight:600;font-size:.88rem;color:var(--muted);white-space:nowrap}
+.stepper .n{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.7rem;flex:0 0 auto}
+.stepper .dn .n{background:var(--ok);border-color:var(--ok);color:var(--bg)}
+.stepper .dn{color:var(--ok)}
+.stepper .cur{background:var(--ink);color:var(--bg)}
+.stepper .cur .n{border-color:var(--bg);color:var(--bg)}
+.stepper button:disabled{opacity:.45;cursor:not-allowed}
+.stepwrap{padding:20px 0 4px;max-width:70ch}
+.stepwrap.wide{max-width:none}
+.stephead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.stephead .sn{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--muted)}
+.stephead h2{margin:0;font-size:1.8rem}
+.stepnav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 6px;padding-top:14px;border-top:1px solid var(--line)}
+.lock{display:flex;align-items:center;gap:10px;font-size:.86rem;color:var(--muted);flex-wrap:wrap}
+.lock .bar{width:120px}
+.lock b{color:var(--ink);font-variant-numeric:tabular-nums}
+.wbstep{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;margin:16px 0 4px}
+.wbstep .wbic{width:30px;height:38px;border:1.5px solid var(--ink);border-radius:3px;position:relative;flex:0 0 auto;background:var(--bg)}
+.wbstep .wbic::after{content:"";position:absolute;left:5px;right:5px;top:9px;height:14px;background:repeating-linear-gradient(to bottom,var(--line) 0 2px,transparent 2px 6px)}
+.wbstep div{flex:1;min-width:12rem;font-size:.88rem;color:var(--muted)}
+.wbstep div b{display:block;color:var(--ink);font-size:.92rem}
+.checklist{list-style:none;margin:10px 0 16px;padding:0;display:flex;flex-direction:column;gap:10px}
+.checklist li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.checklist li.ok{border-color:var(--ok)}
+.checklist .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:12px;margin-top:1px}
+.checklist li.ok .ck{background:var(--ok);border-color:var(--ok);color:var(--bg)}
+.checklist label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;width:100%}
+.checklist input{width:22px;height:22px;accent-color:var(--ok);flex:0 0 auto;margin:1px 0 0}
+.checklist small{display:block;color:var(--muted);font-size:.84rem;margin-top:2px}
+.btn.big{padding:12px 22px;font-size:1rem}
+.btn.flash,.btn.flash:disabled{opacity:1;background:var(--ok)!important;border-color:var(--ok)!important;color:var(--bg)!important;transform:scale(1.04);transition:transform .2s}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);z-index:80;background:var(--ok);color:var(--bg);font-weight:600;border-radius:99px;padding:10px 18px;box-shadow:0 6px 24px rgba(0,0,0,.18);max-width:calc(100vw - 32px);text-align:center}
+.toast[hidden]{display:none}
+.review{display:flex;gap:8px;align-items:center;font-size:.82rem;color:var(--muted);margin:4px 0 0}
+.review input{accent-color:var(--coral)}
+@media (max-width:560px){.stepper .lbl{display:none}.stepper .cur .lbl{display:inline}.stephead h2{font-size:1.5rem}}
+@media (prefers-reduced-motion:reduce){.prog,.card.next,.btn.glow{animation:none;box-shadow:0 0 0 2px rgba(255,117,89,.45)}.btn.flash{transform:none}}
+.flag.free{color:var(--coral-ink);border-color:var(--coral)}
+@media (max-width:760px){.flag.free{display:inline-block}}
+@media (max-width:440px){.flag.free{display:none}}
+.freenote{border:1.5px solid var(--coral);background:var(--surface);border-radius:14px;padding:14px 16px;margin:0 0 16px}
+.freenote b{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-ink);margin-bottom:4px}
+.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0 6px;text-align:left}
+.ways .w{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:16px}
+.ways .w h3{font-family:var(--display);font-size:1.45rem;margin:4px 0 6px}
+.ways .w p{margin:0 0 12px;color:var(--muted)}
+.welcome{margin:6px 0 22px}
+.meet{display:flex;gap:14px;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 16px;margin:14px 0 0;text-decoration:none;color:var(--ink)}
+.meet:hover{border-color:var(--coral)}
+.meet img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--coral);flex:0 0 64px}
+.meet span{flex:1 1 auto;min-width:0}.meet b{display:block}.meet small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4;margin-top:2px}
+.meet .arr{flex:0 0 auto;color:var(--coral-ink);font-size:1.3rem}
+.qc{display:flex;gap:14px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 16px;margin:14px 0}
+.qc div{flex:1 1 240px}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
+</style>
+
+</head><body>
+<header class="top"><div class="top-in">
+  <button class="menu-btn" id="menuBtn" aria-controls="outline" aria-expanded="false">Lessons</button>
+  <button class="brand" data-home="1">The Turn<small>with Dr. Rod Berger</small></button>
+  <div class="spacer"></div>
+  <span class="flag free">Free preview</span>
+  <button class="prog" id="prog" data-home="1" aria-label="Course progress"></button>
+  <input type="checkbox" id="teacher" hidden>
+</div></header>
+<div class="scrim" id="scrim" hidden></div>
+<div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+<div class="wbv" id="wbv" hidden role="dialog" aria-modal="true" aria-labelledby="wbvTitle">
+  <div class="wbv-bar"><div style="min-width:0"><span>Workbook</span><br><b id="wbvTitle"></b></div><button class="btn" id="wbvClose">Close</button></div>
+  <div class="wbv-pages" id="wbvPages"></div>
+</div>
+<div class="sheetwrap" id="sheetwrap" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></div></div>
+<div class="shell">
+  <nav class="outline" id="outline" aria-label="Course lessons"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const COURSE = {"lessons": [{"key": "PERM", "lesson": 1, "bonus": false, "name": "Permission Structures", "pillar": "Conviction", "pillar2": "Resonance", "principle": "You do not need anyone else’s approval to share your story. You only need your own.", "principle_where": "The Edit · Edit 17: Permission Structures", "turns": [{"id": "taryn-smith", "turn": 1, "guest": "Taryn Smith", "built": true, "code": "l01-t01", "free": true}, {"id": "max-partain", "turn": 2, "guest": "Max Partain", "built": false, "code": "l01-t02"}, {"id": "priten-shah", "turn": 3, "guest": "Priten Shah", "built": false, "code": null}, {"id": "dr-lee-berger", "turn": 4, "guest": "Dr. Lee Berger", "built": false, "code": null}, {"id": "dr-emad-rahim", "turn": 5, "guest": "Dr. Emad Rahim", "built": false, "code": null}]}, {"key": "PEN", "lesson": 2, "bonus": false, "name": "The Pen Still Needs a Hand", "pillar": "Conviction", "pillar2": "Resonance", "principle": "AI can clean the windshield. You still decide where the car is going.", "principle_where": "The Edit · Edit 1: The Pen Still Needs a Hand", "turns": [{"id": "rich-tu", "turn": 1, "guest": "Rich Tu", "built": true, "code": "l02-t01", "free": true}, {"id": "prof-john-friedman", "turn": 2, "guest": "John Friedman", "built": false, "code": "l02-t02"}, {"id": "jarrod-hoffman", "turn": 3, "guest": "Jarrod Hoffman", "built": false, "code": null}, {"id": "cj-casciotta", "turn": 4, "guest": "CJ Casciotta", "built": false, "code": null}, {"id": "sarah-nagy", "turn": 5, "guest": "Sarah Nagy", "built": false, "code": null}, {"id": "dr-jason-jay", "turn": 6, "guest": "Dr. Jason Jay", "built": false, "code": null}, {"id": "alex-swartsel", "turn": 7, "guest": "Alex Swartsel", "built": false, "code": null}]}, {"key": "MEMORY", "lesson": 3, "bonus": false, "name": "Memories Are Your Toolbox", "pillar": "Resonance", "pillar2": "Coherence", "principle": "Your memories are not nostalgia. They are tools. Curate them like a craftsman.", "principle_where": "The Edit · Edit 19: Memories Are Your Toolbox", "turns": [{"id": "opal-lee", "turn": 1, "guest": "Opal Lee", "built": true, "code": "l03-t01", "free": true}, {"id": "richard-browning", "turn": 2, "guest": "Richard Browning", "built": false, "code": "l03-t02"}, {"id": "hopkins-PH1", "turn": 3, "guest": "Patrick Hopkins", "built": false, "code": null}, {"id": "alex-albon", "turn": 4, "guest": "Alex Albon", "built": false, "code": null}, {"id": "yousef-hamidaddin", "turn": 5, "guest": "Yousef Hamidaddin", "built": false, "code": null}, {"id": "jost-capito", "turn": 6, "guest": "Jost Capito", "built": false, "code": null}, {"id": "john-shoffner", "turn": 7, "guest": "John Shoffner", "built": false, "code": null}, {"id": "gerry-sigal", "turn": 8, "guest": "Gerry Sigal", "built": false, "code": null}, {"id": "jean-daniel-ruch", "turn": 9, "guest": "Jean-Daniel Ruch", "built": false, "code": null}, {"id": "bob-stiller", "turn": 10, "guest": "Bob Stiller", "built": false, "code": null}]}, {"key": "OPEN", "lesson": 4, "bonus": false, "name": "The Easy Open", "pillar": "Coherence", "pillar2": "Resonance", "principle": "The fastest way to meet someone is to ask about the part of them their job never sees.", "principle_where": "Ask. · Band 1: The Easy Open", "turns": [{"id": "dave-finocchio", "turn": 1, "guest": "Dave Finocchio", "built": false, "code": "l04-t01"}, {"id": "dr-marcus-conyers", "turn": 2, "guest": "Dr. Marcus Conyers", "built": false, "code": null}, {"id": "ryan-detert", "turn": 3, "guest": "Ryan Detert", "built": false, "code": null}, {"id": "stephen-zunes", "turn": 4, "guest": "Stephen Zunes", "built": false, "code": null}, {"id": "nils-pihl", "turn": 5, "guest": "Nils Pihl", "built": false, "code": null}, {"id": "dr-steve-babson", "turn": 6, "guest": "Dr. Steve Babson", "built": false, "code": null}, {"id": "rg-dan-backes", "turn": 7, "guest": "Dan Backes (host)", "built": false, "code": null}]}, {"key": "ROOM", "lesson": 5, "bonus": false, "name": "Reading the Room", "pillar": "Legibility", "pillar2": "Resonance", "principle": "You have the door open. Now stop talking.", "principle_where": "Ask. · Band 2: Reading the Room", "turns": [{"id": "dr-terence-tao", "turn": 1, "guest": "Terence Tao", "built": false, "code": "l05-t01"}, {"id": "barbra-banner", "turn": 2, "guest": "Barbra Banner", "built": false, "code": null}, {"id": "callie-christensen-kelly-oriard", "turn": 3, "guest": "Callie Christensen & Kelly Oriard", "built": false, "code": null}, {"id": "henrik-von-scheel", "turn": 4, "guest": "Henrik von Scheel", "built": false, "code": null}, {"id": "greta-jackson", "turn": 5, "guest": "Greta Jackson", "built": false, "code": null}, {"id": "moussa-sene", "turn": 6, "guest": "Moussa Sene", "built": false, "code": null}, {"id": "rg-dr-kim", "turn": 7, "guest": "Dr. Jeannie Kim", "built": false, "code": null}]}, {"key": "CARD", "lesson": 6, "bonus": false, "name": "Take Away the Business Card", "pillar": "Conviction", "pillar2": "Coherence", "principle": "If someone stripped away your title tomorrow, what story would you tell about your value?", "principle_where": "The Edit · Edit 2: Take Away the Business Card", "turns": [{"id": "hadi-partovi", "turn": 1, "guest": "Hadi Partovi", "built": false, "code": "l06-t01"}, {"id": "trygve-mongstad", "turn": 2, "guest": "Trygve Mongstad", "built": false, "code": "l06-t02"}, {"id": "steven-preston", "turn": 3, "guest": "Steven Preston", "built": false, "code": null}, {"id": "michelle-beadle", "turn": 4, "guest": "Michelle Beadle", "built": false, "code": null}, {"id": "ken-janssens", "turn": 5, "guest": "Ken Janssens", "built": false, "code": null}, {"id": "dr-matthias-bernow", "turn": 6, "guest": "Dr. Matthias Bernow", "built": false, "code": null}, {"id": "kendra-davenport", "turn": 7, "guest": "Kendra Davenport", "built": false, "code": null}, {"id": "rg-writer-unblocked", "turn": 8, "guest": "Nicole (host), Writer Unblocked", "built": false, "code": null}]}, {"key": "KITCH", "lesson": 7, "bonus": false, "name": "Police Report or Kitchen Table?", "pillar": "Resonance", "pillar2": "Legibility", "principle": "We report stories out of requirement. We share stories with the people we believe in.", "principle_where": "The Edit · Edit 3: Police Report or Kitchen Table?", "turns": [{"id": "sam-daley-harris", "turn": 1, "guest": "Sam Daley-Harris", "built": false, "code": "l07-t01"}, {"id": "shaun-neff", "turn": 2, "guest": "Shaun Neff", "built": false, "code": null}, {"id": "amra-AM1", "turn": 3, "guest": "Amra Sabic-El-Rayess", "built": false, "code": null}, {"id": "jonas-helmikst-l", "turn": 4, "guest": "Jonas Helmikstøl", "built": false, "code": null}, {"id": "david-holdridge", "turn": 5, "guest": "David Holdridge", "built": false, "code": null}]}, {"key": "TIDY", "lesson": 8, "bonus": false, "name": "The True One vs the Tidy One", "pillar": "Coherence", "pillar2": "Conviction", "principle": "Which version of my story serves this moment best?", "principle_where": "The Edit · Edit 13: Version Control", "turns": [{"id": "richard-gerver", "turn": 1, "guest": "Richard Gerver", "built": false, "code": null}, {"id": "jhamal-robinson", "turn": 2, "guest": "Jhamal Robinson", "built": false, "code": null}, {"id": "bobby-bones", "turn": 3, "guest": "Bobby Bones", "built": false, "code": "l08-t03"}, {"id": "pete-hall", "turn": 4, "guest": "Pete Hall", "built": false, "code": null}, {"id": "jermaine-dupri", "turn": 5, "guest": "Jermaine Dupri", "built": false, "code": null}, {"id": "charles-barkley", "turn": 6, "guest": "Charles Barkley", "built": false, "code": "l08-t06"}, {"id": "rich-tu-2023", "turn": 7, "guest": "Rich Tu (2023)", "built": false, "code": null}, {"id": "graham-bensinger", "turn": 8, "guest": "Graham Bensinger", "built": false, "code": null}, {"id": "terry-bradshaw", "turn": 9, "guest": "Terry Bradshaw", "built": false, "code": null}, {"id": "mario-lopez", "turn": 10, "guest": "Mario Lopez", "built": false, "code": null}, {"id": "daymond-john", "turn": 11, "guest": "Daymond John", "built": false, "code": null}, {"id": "dj-cassidy", "turn": 12, "guest": "DJ Cassidy", "built": false, "code": null}, {"id": "todd-wuestenberg", "turn": 13, "guest": "Todd Wuestenberg", "built": false, "code": null}, {"id": "jenson-button", "turn": 14, "guest": "Jenson Button", "built": false, "code": null}, {"id": "dov-seidman", "turn": 15, "guest": "Dov Seidman", "built": false, "code": null}, {"id": "josef-olmert", "turn": 16, "guest": "Josef Olmert", "built": false, "code": null}, {"id": "rg-michael-hernandez", "turn": 17, "guest": "Michael Hernandez (host)", "built": false, "code": null}]}, {"key": "AUTH", "lesson": 9, "bonus": false, "name": "Who’s Been Writing Your Story?", "pillar": "Conviction", "pillar2": "Coherence", "principle": "You cannot author your future while you’re still serving a sentence for a crime you didn’t commit.", "principle_where": "The Edit · Edit 5: Who’s Been Writing Your Story?", "turns": [{"id": "linda-ambrus-broenniman", "turn": 1, "guest": "Linda Ambrus Broenniman", "built": false, "code": null}, {"id": "claude-silver", "turn": 2, "guest": "Claude Silver", "built": false, "code": null}, {"id": "metta-world-peace-alex-bayer", "turn": 3, "guest": "Metta World Peace & Alex Bayer", "built": false, "code": null}, {"id": "glenn-bostock", "turn": 4, "guest": "Glenn Bostock", "built": false, "code": null}, {"id": "cindy-watson", "turn": 5, "guest": "Cindy Watson", "built": false, "code": null}, {"id": "aaron-rasmussen", "turn": 6, "guest": "Aaron Rasmussen", "built": false, "code": null}, {"id": "matthew-caldwell", "turn": 7, "guest": "Matthew Caldwell", "built": false, "code": null}, {"id": "naveen-jain", "turn": 8, "guest": "Naveen Jain", "built": false, "code": null}, {"id": "chelsea-nassib", "turn": 9, "guest": "Chelsea Nassib", "built": false, "code": null}, {"id": "nick-swinmurn", "turn": 10, "guest": "Nick Swinmurn", "built": false, "code": null}, {"id": "irshad-manji", "turn": 11, "guest": "Irshad Manji", "built": false, "code": null}]}, {"key": "ORIGIN", "lesson": 10, "bonus": false, "name": "Your Origin Story Is Not a Status Report", "pillar": "Coherence", "pillar2": "Conviction", "principle": "Stop listing your past and start authoring your role inside it.", "principle_where": "The Edit · Edit 4: Your Origin Story Is Not a Status Report", "turns": [{"id": "jc-curleigh", "turn": 1, "guest": "JC Curleigh", "built": false, "code": null}, {"id": "dr-darin-eich", "turn": 2, "guest": "Dr. Darin Eich", "built": false, "code": null}, {"id": "zaid-tahabsem", "turn": 3, "guest": "Zaid Tahabsem", "built": false, "code": null}, {"id": "guy-fieri", "turn": 4, "guest": "Guy Fieri", "built": false, "code": null}, {"id": "peter-samuelson", "turn": 5, "guest": "Peter Samuelson", "built": false, "code": null}, {"id": "karl-liapunov", "turn": 6, "guest": "Karl Liapunov", "built": false, "code": null}, {"id": "sharon-rechter", "turn": 7, "guest": "Sharon Rechter", "built": false, "code": null}, {"id": "tariq-TQ1", "turn": 8, "guest": "Tariq Qureishy", "built": false, "code": null}, {"id": "halle-stanford", "turn": 9, "guest": "Halle Stanford", "built": false, "code": null}, {"id": "del-reid", "turn": 10, "guest": "Del Reid", "built": false, "code": null}]}, {"key": "CONFLICT", "lesson": 11, "bonus": false, "name": "Conflict Is Narrative Fuel", "pillar": "Conviction", "pillar2": "Resonance", "principle": "Without conflict, there is no arc. Just a flat line of forgettable moments.", "principle_where": "The Edit · Edit 22: Conflict Is Narrative Fuel", "turns": [{"id": "candace-nelson", "turn": 1, "guest": "Candace Nelson", "built": false, "code": null}, {"id": "grappo-GR1", "turn": 2, "guest": "Gary Grappo", "built": false, "code": null}]}, {"key": "SPIN", "lesson": 12, "bonus": false, "name": "Selling Without the Spin", "pillar": "Legibility", "pillar2": "Resonance", "principle": "When people hear your honest story, they do not just buy. They believe.", "principle_where": "The Edit · Edit 14: Selling Without the Spin", "turns": [{"id": "conrad-wolfram", "turn": 1, "guest": "Conrad Wolfram", "built": false, "code": null}, {"id": "anna-von-zeppelin-turvoll-leroy-nyangani", "turn": 2, "guest": "Anna von Zeppelin Turvoll & Leroy Nyangani", "built": false, "code": null}]}, {"key": "ALMOST", "lesson": 13, "bonus": false, "name": "The Question You Never Thought to Ask", "pillar": "Resonance", "pillar2": "Coherence", "principle": "You don’t always get a second conversation.", "principle_where": "", "turns": [{"id": "joshua-sam-miller", "turn": 1, "guest": "Joshua Sam Miller", "built": false, "code": null}, {"id": "rg-joe-dimino", "turn": 2, "guest": "Joe Dimino (host)", "built": false, "code": null}]}, {"key": "START", "lesson": 14, "bonus": false, "name": "Your Story, Their Starting Line", "pillar": "Coherence", "pillar2": "Conviction", "principle": "Offer your story as context, not as a cage.", "principle_where": "The Edit · Edit 32: Your Story, Their Starting Line", "turns": [{"id": "angie-murimirwa", "turn": 1, "guest": "Angie Murimirwa", "built": false, "code": null}, {"id": "alvy-ray-smith", "turn": 2, "guest": "Alvy Ray Smith", "built": false, "code": null}]}, {"key": "WALL", "lesson": 15, "bonus": false, "name": "Break the Fourth Wall", "pillar": "Conviction", "pillar2": "Resonance", "principle": "Vulnerability does not diminish leadership. It authenticates it.", "principle_where": "The Edit · Edit 11: Break the Fourth Wall", "turns": [{"id": "barbara-feigin-peter-feigin", "turn": 1, "guest": "Barbara Feigin & Peter Feigin", "built": false, "code": null}, {"id": "sebastian-sch-ffer", "turn": 2, "guest": "Sebastian Schäffer", "built": false, "code": null}, {"id": "esther-choy", "turn": 3, "guest": "Esther Choy", "built": false, "code": null}, {"id": "martin-plaut", "turn": 4, "guest": "Martin Plaut", "built": false, "code": null}, {"id": "adkins-AD1", "turn": 5, "guest": "Rod Adkins", "built": false, "code": null}, {"id": "dorsey-DO1", "turn": 6, "guest": "James M. Dorsey", "built": false, "code": null}]}, {"key": "PLOT", "lesson": null, "bonus": true, "name": "This Is a Plot Twist, Not the Credits", "pillar": "Conviction", "pillar2": "Coherence", "principle": "Plot twists destroy the script you were holding. They make room for a story you could not yet imagine.", "principle_where": "The Edit · Edit 27: This Is a Plot Twist, Not the Credits", "turns": [{"id": "dr-ellen-sigal", "turn": 1, "guest": "Dr. Ellen Sigal", "built": false, "code": null}]}, {"key": "BENCH", "lesson": null, "bonus": true, "name": "The Dialogue Bench", "pillar": "Conviction", "pillar2": "Resonance", "principle": "The most powerful storytelling is not a monologue. It is a dialogue.", "principle_where": "The Edit · Edit 21: The Dialogue Bench", "turns": [{"id": "lt-gen-cherish-mathson", "turn": 1, "guest": "Lt. Gen. Cherish Mathson", "built": false, "code": null}]}, {"key": "FEATHER", "lesson": 16, "bonus": false, "name": "The Feather", "pillar": "Coherence", "pillar2": "Conviction", "principle": "We all carry symbols that capture who we are. Most of us just never share them.", "principle_where": "The Edit · Edit 24: The Feather", "turns": [{"id": "walid-tahabsem", "turn": 1, "guest": "Walid Tahabsem", "built": false, "code": null}, {"id": "chris-brickley", "turn": 2, "guest": "Chris Brickley", "built": false, "code": null}, {"id": "hardeep-gulati-rogers-sithole", "turn": 3, "guest": "Hardeep Gulati & Rogers Sithole", "built": false, "code": null}, {"id": "tom-junod", "turn": 4, "guest": "Tom Junod", "built": false, "code": null}]}, {"key": "ENVY", "lesson": null, "bonus": true, "name": "Converting Envy into Appreciation", "pillar": "Resonance", "pillar2": "Legibility", "principle": "Envy is admiration wearing the wrong shoes. Put on your own pair and walk.", "principle_where": "The Edit · Edit 12: Converting Envy into Appreciation", "turns": [{"id": "sam-vincent", "turn": 1, "guest": "Sam Vincent", "built": false, "code": null}]}], "turns": {"l01-t01": {"id": "taryn-smith", "guest": "Taryn Smith", "watch": {"title": "The Turn, Lesson 1 · Turn 1", "note": "Taryn Smith rowed the Atlantic alone in forty-six days, and the country already knew her Day 27 video. Watch it once straight through. Hold your answer at the fork."}, "recall": {"quote": "You do not need anyone else’s approval to share your story. You only need your own.", "source": "The Edit · Edit 17: Permission Structures", "note": "Taryn's Day 27 video was already public. Pointing back to it, and naming what it gave other people, brought out her family on land, being twenty-two, and how she talks to people now."}, "reflect": {"knockout": "What permission have you been waiting for that you could grant yourself right now?", "source": "The Edit · Edit 17 Knockout Question", "then": "Which door would you have opened: name her public answer right there, offer a piece of my own story, or let the answer stand and wait for a way back in? Write two sentences on why, and one on what it would have cost you.", "unasked": {"question": "If you knew no one would judge you, what would you try?", "source": "Unasked · Movement Three · Author, Question 22"}}, "relate": {"steps": ["Hold off on pushing, and hold off on giving up.", "Find something they made, a post, a photo, a decision, and bring it back to them.", "Ask what it gave other people."], "source": "Your rep, Lesson 1 · Turn 1", "task": "Run the rep once this week, in a real conversation. Write down what they made, and what they said it gave other people."}, "refine": {"model": "Stopped asking. Started telling. Everything changed.", "task": "Write a six-word story about something you made or said in public that gave someone else permission. Draft it twice, a day apart."}, "release": {"stack": "Identify one story you have been holding back. Give yourself written permission: “I am allowed to tell this.” Then tell it, to one person, today.", "source": "The Edit · Edit 17, Stack It", "pillar": "Which pillar did this Turn strengthen most? Coherence / Resonance / Conviction / Legibility"}, "teacher_note": null, "turn_label": "Lesson 1 · Turn 1", "turn_code": "L01-T01"}, "l02-t01": {"id": "rich-tu", "guest": "Rich Tu", "watch": {"title": "The Turn, Lesson 2 · Turn 1", "note": "Rich Tu on The Narrative Edge Podcast. In Tape 1 he tells the story of Human Response the way he has told it before. In Tape 2, a question about how he built the piece brings his father’s voice into the room. Watch it once straight through. Hold your answer at the fork."}, "recall": {"quote": "AI can clean the windshield. You still decide where the car is going.", "source": "The Edit · Edit 1: The Pen Still Needs a Hand", "note": "Rich let the machine build the bones of Human Response. The part that mattered arrived in his father’s own voice, on some of the last voicemails he ever left."}, "reflect": {"knockout": "If a machine can produce a polished version of anything, what is the one story only you can tell?", "source": "The Edit · Edit 1 Knockout Question", "then": "Which door would you have opened: hold Rich to my question about the machine, go straight to his father, or ask how he built the piece? Write two sentences on why, and one on what it would have cost you.", "unasked": {"question": "If no one is steering for you, what is one small thing you can choose this week?", "source": "Unasked · Movement Three · Author, Question 35"}}, "relate": {"steps": ["Ask how they built it.", "Listen for the part the tool didn't make.", "When it shows up, stop and name it."], "source": "Your rep, Lesson 2 · Turn 1", "task": "Run the rep once this week, the next time someone tells you how a tool helped them make something. Note the moment it worked or didn’t."}, "refine": {"model": "The pen still needs a hand.", "task": "The machine gave Rich pages and pages. It could not give him his father’s voice. Write a six-word story about a voice in your own life that no tool could reproduce. Put it away. Rewrite it tomorrow. Keep both versions."}, "release": {"stack": "Name one thing AI has taken off your plate this year and one thing it can never take from you. Write both down. Carry the second one into your next room.", "source": "The Edit · Edit 1, Stack It", "pillar": "Which pillar did this Turn strengthen most? Coherence / Resonance / Conviction / Legibility"}, "teacher_note": null, "turn_label": "Lesson 2 · Turn 1", "turn_code": "L02-T01"}, "l03-t01": {"id": "opal-lee", "guest": "Opal Lee", "watch": {"title": "The Turn, Lesson 3 · Turn 1", "note": "Opal Lee, ninety-eight, beside Dr. Rod Berger at a closing keynote in Dallas, with fifteen hundred people in the room and a four-minute film about her life just finished. Watch it once straight through. Hold your answer at the fork."}, "recall": {"quote": "The art was in finding the human inside the headline.", "source": "Your Narrative Edge: The Field Guide · Chapter 10: Finding the Forest and the Trees", "note": "Everyone in the room knew the honors. One question about her mother's kitchen brought out a girl who cleaned her plate, climbed trees and found her voice in her grandfather."}, "reflect": {"knockout": "What memory have you been sitting on that is the most important story you could tell?", "source": "The Edit · Edit 19 Knockout Question", "then": "Which door would you have opened: stay with the honors, go to Annie Street, or set the bio down and ask what her mother's kitchen smelled like? Write two sentences on why, and one on what it would have cost you.", "unasked": {"question": "Which of the stories you were given will you keep?", "source": "Unasked · Movement Three · Author, Question 39"}}, "relate": {"steps": ["Name the bio out loud and set it down.", "Ask for one smell from the house they grew up in.", "If they answer with a rule or a reputation, ask for the dish."], "source": "Your rep, Lesson 3 · Turn 1", "task": "Run the rep once this week with someone whose reputation walks in ahead of them. Write down the dish they name, in their words."}, "refine": {"model": "Old memory. New meaning. Stack higher.", "task": "Write a six-word story about one smell from the kitchen you grew up in. Name the dish, not the feeling. Put it away. Rewrite it tomorrow. Keep both versions."}, "release": {"stack": "Close your eyes for thirty seconds and remember a moment from childhood that still makes you feel something. Write it down in three sentences. That is a story worth stacking.", "source": "The Edit · Edit 19, Stack It", "pillar": "Which pillar did this Turn strengthen most? Coherence / Resonance / Conviction / Legibility"}, "teacher_note": null, "turn_label": "Lesson 3 · Turn 1", "turn_code": "L03-T01"}}};
+const MEDIA = {"l01-open": "media/l01-open.mp4", "l01-open:poster": "media/l01-open.jpg", "l01-close": "media/l01-close.mp4", "l01-close:poster": "media/l01-close.jpg", "l02-open": "media/l02-open.mp4", "l02-open:poster": "media/l02-open.jpg", "l02-close": "media/l02-close.mp4", "l02-close:poster": "media/l02-close.jpg", "l03-open": "media/l03-open.mp4", "l03-open:poster": "media/l03-open.jpg", "l03-close": "media/l03-close.mp4", "l03-close:poster": "media/l03-close.jpg", "l01-t01": "media/l01-t01.mp4", "l01-t01:poster": "media/l01-t01.jpg", "l02-t01": "media/l02-t01.mp4", "l02-t01:poster": "media/l02-t01.jpg", "l03-t01": "media/l03-t01.mp4", "l03-t01:poster": "media/l03-t01.jpg", "trailer": "media/trailer.mp4", "trailer:poster": "media/trailer.jpg"};
+const WB={"l03-t01": 7, "l02-t01": 7, "l01-t01": 7};
+const PDF={"l01-t01": "wb/The-Turn-Workbook-Taryn-Smith.pdf", "l02-t01": "wb/The-Turn-Workbook-Rich-Tu.pdf", "l03-t01": "wb/The-Turn-Workbook-Opal-Lee.pdf"};
+const QC="../quick-check/", LEADER="https://bit.ly/rb-turn-leadercheck", MEET="https://live.drrodberger.com/?utm_source=the-turn&utm_medium=free-preview&utm_campaign=meet-rod";
+const FREE_NOTE={"1": "This is Lesson 1, Permission Structures, as a preview: Dr. Rod Berger's section open, one full Turn with Taryn Smith and its workbook, and his close. When he talks about every guest in this section, he means the full lesson. Members get every Turn in it as the library opens.", "2": "This is Lesson 2, The Pen Still Needs a Hand, as a preview: Dr. Rod Berger's section open, one full Turn with Rich Tu and its workbook, and his close. When he talks about every guest in this section, he means the full lesson. Members get every Turn in it as the library opens.", "3": "This is Lesson 3, Memories Are Your Toolbox, as a preview: Dr. Rod Berger's section open, one full Turn with Opal Lee and its workbook, and his close. When he talks about every guest in this section, he means the full lesson. Members get every Turn in it as the library opens."};
+function waysHtml(end){
+  return `<div class="ways">
+    <div class="w"><div class="crumb">${end?"That's the free preview":"Way forward 1"}</div><h3>Keep going with the full course</h3><p>Every Turn, organized by lesson, and four paths built for the rooms you walk into. The full course opens soon.</p></div>
+    <div class="w"><div class="crumb">Way forward 2</div><h3>Work on your own story</h3><p>For leaders, founders and anyone stepping into a bigger room: take the Leadership Quick-Check and start there with Dr. Rod Berger.</p><a class="btn" href="${LEADER}" target="_blank" rel="noopener">Take the Leadership Quick-Check</a></div>
+  </div>`;
+}
+const RS = [["watch","Watch","The episode"],["recall","Recall","The lesson in one line"],["reflect","Reflect","Your Knockout Question"],["relate","Relate","Try it in your own life"],["refine","Refine","Your six-word story"],["release","Release","One action for your week"]];
+const STEPS = [...RS, ["finish","Finish","Mark the Turn complete"]];
+const BOOKS = {
+  edge:{t:"The Narrative Edge",tag:"Authentic Storytelling That Meets the Moment",d:"Dr. Rod Berger's book with Wiley (2025). The ideas this whole course grows from.",how:"References name the chapter."},
+  edit:{t:"The Edit",tag:"Your Narrative Edge · The Pocket Edition",d:"Short, numbered lessons. Each one ends with a Knockout Question, a six-word story and a Stack It, the same steps you work in every Turn.",how:"“Edit 17” means lesson 17 in The Edit."},
+  fieldguide:{t:"Your Narrative Edge: The Field Guide",tag:"A Field Guide to Finding, Refining & Sharing Your Story",d:"The hands-on companion to The Narrative Edge, with chapters, exercises and question banks.",how:"References name the chapter, section or appendix."},
+  ask:{t:"Ask.",tag:"The Working Craft of Questions That Open People Up.",d:"Questions grouped in bands, from the easy open to the deep cut. It reads as one conversation with Tell.",how:"References name the band."},
+  tell:{t:"Tell.",tag:"How to Be Ready When the Real Question Finds You.",d:"The other half of Ask.: for the moments when you are the one being asked.",how:"References name the band."},
+  unasked:{t:"Unasked",tag:"Questions to carry until you are ready to answer them.",d:"A book of questions in three movements: Source, Examine and Author. Every Turn hands you one to carry.",how:"References name the movement and the question number."}
+};
+const BOOK_ORDER=["edge","edit","fieldguide","ask","tell","unasked"];
+const PROMISE="You never need a book to finish a lesson. Everything you need is on the page.";
+const WATCH_DONE=0.9;
+const store = {
+  get(k){ try{ return localStorage.getItem("turnfree:"+k) }catch(e){ return null } },
+  set(k,v){ try{ localStorage.setItem("turnfree:"+k,v) }catch(e){} },
+  del(k){ try{ localStorage.removeItem("turnfree:"+k) }catch(e){} }
+};
+const $ = (s,el=document)=>el.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pad = n => String(n).padStart(2,"0");
+const lessonId = l => l.start ? "start" : l.bonus ? "b"+pad(l.bonusNo) : "l"+pad(l.lesson);
+let bn=0; COURSE.lessons.forEach(l=>{ if(l.bonus){ l.bonusNo=++bn } });
+const built = l => l.turns.filter(t=>t.built);
+const label = l => l.start ? "Start Here" : l.bonus ? "Bonus Lesson" : "Lesson "+l.lesson;
+const multi = l => !l.bonus && l.turns.length>1;
+const review = () => false;
+
+const START_L={start:true,name:"Start Here",turns:[]};
+function seqFor(l){
+  if(l.start) return [{route:"start",kind:"start",title:"How this course works"}];
+  const out=[]; const id=lessonId(l); const b=built(l);
+  if(multi(l) && (b.length || MEDIA[id+"-open"])) out.push({route:id+"-open", kind:"open", title:"Section open"});
+  b.forEach(t=>out.push({route:t.code, kind:"turn", title:"Turn "+t.turn+" · "+t.guest, t}));
+  if(multi(l) && (b.length || MEDIA[id+"-close"])) out.push({route:id+"-close", kind:"close", title:"Section close"});
+  return out;
+}
+const LESSONS=[START_L, ...COURSE.lessons];
+const ALL=[]; LESSONS.forEach(l=>seqFor(l).forEach(s=>ALL.push({...s,l})));
+const done = r => store.get("done:"+r)==="1";
+const lessonState = l => { const s=seqFor(l); const d=s.filter(x=>done(x.route)).length; return {n:s.length,d,complete:s.length>0&&d===s.length,started:d>0} };
+const courseLessons = () => COURSE.lessons.filter(l=>seqFor(l).length);
+function courseStats(){
+  const d=ALL.filter(s=>done(s.route)).length, n=ALL.length;
+  const ls=courseLessons(); const lc=ls.filter(l=>lessonState(l).complete).length;
+  return {d,n,pct:n?Math.round(d*100/n):0,lc,ln:ls.length};
+}
+const nextUp = () => ALL.find(s=>!done(s.route));
+const nextLesson = () => { const n=nextUp(); return n ? n.l : null };
+
+/* watching: a piece counts as watched once the viewer has played through 90% of it */
+const watchedFrac = r => Number(store.get("w:"+r)||0);
+const watched = r => review() || !MEDIA[r] || watchedFrac(r)>=WATCH_DONE || done(r);
+/* Turn steps */
+const reach = code => review()||done(code) ? STEPS.length-1 : Number(store.get("reach:"+code)||0);
+const curStep = code => Math.min(Number(store.get("step:"+code)||(done(code)?6:0)), reach(code));
+const ack = code => review() || store.get("ack:"+code)==="1" || done(code);
+
+function bookOf(lbl){ const s=String(lbl||""); return BOOK_ORDER.find(k=>s.startsWith(BOOKS[k].t+" ·")||s===BOOKS[k].t) || null }
+function srcLine(lbl){
+  if(!lbl) return "";
+  const k=bookOf(lbl);
+  if(!k) return `<p class="src">${esc(lbl)}</p>`;
+  return `<p class="src"><button class="ref" data-book="${k}" data-place="${esc(lbl)}" aria-label="About ${esc(BOOKS[k].t)}: ${esc(lbl)}"><img src="books/${k}.jpg" alt="">${esc(lbl)}<span class="i" aria-hidden="true">i</span></button></p>`;
+}
+
+function renderProg(){
+  const c=courseStats();
+  $("#prog").innerHTML=`<span class="pl">Your course</span><span class="bar" aria-hidden="true"><i style="width:${c.pct}%"></i></span><b>${c.pct}%</b>`;
+  $("#prog").setAttribute("aria-label",`Your course: ${c.pct} percent complete. Open your course page.`);
+  $("#prog").title="Your course page";
+}
+
+function renderOutline(cur){
+  const nav=$("#outline"); let h=""; const nl=nextLesson();
+  LESSONS.forEach(l=>{
+    const seq=seqFor(l), avail=seq.length>0, open=cur&&cur.l===l, st=lessonState(l);
+    const ct = !avail ? "Full course" : st.complete ? "✓ Done" : st.d+"/"+st.n;
+    h+=`<div class="les ${open?"open":""} ${avail?"":"locked"} ${l.bonus?"bonus":""} ${st.complete?"complete":""} ${l===nl&&!open?"next":""}">
+      <button data-les="${lessonId(l)}" ${avail?"":"aria-disabled=\"true\""}>
+        <span class="no">${st.complete?"✓":l.start?"0":l.bonus?"★":pad(l.lesson)}</span>
+        <span class="nm">${l.bonus?'<span class="bonus-pill">BONUS</span>':""}${esc(l.name)}</span>
+        <span class="ct">${l===nl&&!open&&!st.complete?"Up next":ct}</span>
+      </button><ul class="items">`;
+    if(!l.start) seq.forEach(s=>{ h+=`<li><button data-route="${s.route}" aria-current="${cur&&cur.route===s.route}"><span class="dot ${done(s.route)?"done":""}">${done(s.route)?"✓":""}</span>${esc(s.title)}</button></li>` });
+    const later=l.turns.length-built(l).length;
+    if(avail && later>0 && !l.start) h+=`<li class="soon">${later} more Turn${later>1?"s":""} in the full course</li>`;
+    h+=`</ul></div>`;
+  });
+  nav.innerHTML=h;
+}
+
+function statusPill(st,avail){
+  if(!avail) return `<span class="st">Full course</span>`;
+  if(st.complete) return `<span class="st ok">✓ Complete</span>`;
+  if(st.started) return `<span class="st ip">In progress</span>`;
+  return `<span class="st">Not started</span>`;
+}
+const where = s => s.l.start ? "How this course works" : label(s.l)+", "+(s.kind==="turn"?s.t.guest:s.title);
+
+function home(){
+  const c=courseStats(), nx=nextUp(), nl=nextLesson();
+  const cta = !nx ? `<button class="btn okb" data-route="start">Free preview complete ✓ · Review Start Here</button>`
+    : `<button class="btn primary glow" data-route="${nx.route}">${c.d===0?"Start here":"Continue"} · ${esc(where(nx))}</button>`;
+  let h=`<div class="crumb">Your course</div>
+  <h1>The Turn</h1>
+  <p class="sub">Real interviews, read one moment at a time. Each lesson opens with Dr. Rod Berger on camera, plays its Turns, and closes with what to carry forward.</p>
+  <div class="dash">
+    <div class="ring" style="--p:${c.pct}" role="img" aria-label="${c.pct} percent complete"><span>${c.pct}%</span></div>
+    <div class="big">${c.lc} of ${c.ln} lessons complete</div>
+    <div class="meta">${c.d} of ${c.n} pieces done. The glowing card below is where you pick up next.</div>
+    <div class="navrow">${cta}${c.d>0?`<button class="linkbtn" data-reset="1">Reset my progress</button>`:""}</div>
+  </div>
+  <p class="src">This is the free preview: Start Here and Lessons 1 to 3. Your progress is saved in this browser. The rest of the course is listed below so you can see where it goes.</p>${waysHtml(false)}
+  <div class="home-grid">`;
+  LESSONS.forEach(l=>{
+    const seq=seqFor(l), avail=seq.length>0, st=lessonState(l), isNext=l===nl;
+    const first = avail ? (seq.find(s=>!done(s.route))||seq[0]).route : "";
+    const pct = st.n? Math.round(st.d*100/st.n):0;
+    h+=`<button class="card ${avail?"":"locked"} ${l.bonus?"bonus":""} ${st.complete?"complete":""} ${isNext?"next":""}" ${avail?`data-route="${first}"`:"disabled"}>
+      ${isNext?`<span class="upnext">${st.started?"PICK UP HERE":"UP NEXT"}</span>`:""}
+      <div class="no">${l.start?"BEFORE YOU BEGIN":l.bonus?"BONUS LESSON":"LESSON "+l.lesson}${l.pillar?" · BUILDS "+esc(l.pillar.toUpperCase()):""}</div>
+      <div class="nm">${esc(l.name)}</div>
+      ${avail?`<span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span>`:""}
+      <div class="meta"><span>${avail?(l.start?"15 minutes":st.d+" of "+st.n+" done"):"In the full course"}</span>${statusPill(st,avail)}</div></button>`;
+  });
+  return h+`</div>`;
+}
+
+function startView(){
+  const shelf=BOOK_ORDER.map(k=>`<button class="book" data-book="${k}"><img src="books/${k}.jpg" alt="Cover of ${esc(BOOKS[k].t)}"><div><b>${esc(BOOKS[k].t)}</b><span>${esc(BOOKS[k].tag)}</span></div></button>`).join("");
+  return `<div class="crumb">Start Here · free preview</div>
+  <h1>Welcome to The Turn</h1>
+  <p class="sub">Start with the welcome from Dr. Rod Berger. Then a few minutes here and nothing later will feel like a mystery: how each lesson runs, the words you'll see, where the ideas come from, and how to track your progress.</p>
+  <div class="welcome">${player("trailer","Welcome")}</div>
+  <a class="meet" href="${MEET}" target="_blank" rel="noopener"><img src="media/rod-headshot.jpg" alt="Dr. Rod Berger" width="64" height="64"><span><b>New here? Meet Dr. Rod Berger</b><small>The interviewer behind The Turn: more than 4,000 conversations across five continents, three shows, and the books these lessons come from. Opens in a new tab.</small></span><span class="arr" aria-hidden="true">→</span></a>
+  <div class="qc"><div><b>Not sure which lesson to start with?</b><br><span class="src" style="margin:0">The Quick Check takes five minutes. Your lowest part points to a first Turn. Nothing is saved or sent.</span></div><a class="btn" href="${QC}">Take the Quick Check</a></div>
+  <h2>How each lesson runs</h2>
+  <div class="how">
+    <div class="card"><span class="no">1 · SECTION OPEN</span><b>Dr. Rod Berger, on camera</b><span>What the lesson is about and what to watch for.</span></div>
+    <div class="card"><span class="no">2 · THE TURNS</span><b>A real interview, one moment at a time</b><span>Each Turn stops at a fork. Pick your door before you see his.</span></div>
+    <div class="card"><span class="no">3 · SECTION CLOSE</span><b>What to carry forward</b><span>The lesson in a few lines, your Knockout Question, and what's next.</span></div>
+  </div>
+  <p class="src">Bonus Lessons hold a single Turn, so they skip the open and close.</p>
+  <h2>Every Turn is seven steps</h2>
+  <div class="rs6">${STEPS.map(([k,n,d],i)=>`<div><b>${i+1} · ${n}</b><span>${d}</span></div>`).join("")}</div>
+  <p class="sub">Watch the film first. That unlocks the Five Rs: Recall, Reflect, Relate, Refine and Release, one at a time. Each step matches one page of your printable workbook, so you can work on the screen or on paper. When you've done the work, the Finish step asks you to confirm it and marks the Turn complete.</p>
+  <h2>Words you'll see</h2>
+  <dl class="gloss">
+    <dt>Turn</dt><dd>A short film built on one real interview moment: the question, the answer, the fork, and the door Dr. Rod Berger opened.</dd>
+    <dt>The fork</dt><dd>The point where the conversation could go three ways. You choose a door first, then see the one he took.</dd>
+    <dt>Knockout Question</dt><dd>The one question each lesson asks you to answer honestly, in writing.</dd>
+    <dt>Six-word story</dt><dd>The lesson in your own six words. Draft it twice, a day apart.</dd>
+    <dt>Stack It</dt><dd>One small action to take into your week.</dd>
+    <dt>The Four Pillars</dt><dd>Coherence, Resonance, Conviction and Legibility. Every lesson builds one, and the Release step asks which one grew.</dd>
+  </dl>
+  <h2>Where the ideas live</h2>
+  <div class="promise"><p>${PROMISE}</p><small>When a page names a book, like “The Edit · Edit 17”, it's showing you where the idea comes from, so you can go deeper if you want to. Tap any reference to see what it means.</small></div>
+  <div class="shelf">${shelf}</div>
+  <h2>Your progress</h2>
+  <p class="sub" style="margin-bottom:6px">Each film unlocks once you've watched it through. Finish a piece and it turns green in the lesson list, on your course page, and in the <b>Your course</b> meter at the top of every page. Tap that meter any time to see where you are. The next lesson to take always glows.</p>`;
+}
+
+function player(route,label){
+  const src=MEDIA[route];
+  return `<div class="player">${src?`<video id="vid" data-route="${route}" controls playsinline preload="metadata" src="${src}" ${MEDIA[route+":poster"]?`poster="${MEDIA[route+":poster"]}"`:""}></video>`:
+    `<div class="pending"><b>${esc(label)}</b><span>This film is finished; its preview copy is still uploading.</span></div>`}</div>`;
+}
+function lockHtml(route,what){
+  const f=Math.min(1,watchedFrac(route)/WATCH_DONE);
+  return `<span class="lock" id="lockmsg">🔒 Watch the ${what} through to unlock this. <span class="bar" aria-hidden="true"><i style="width:${Math.round(f*100)}%"></i></span><b>${Math.round(f*100)}%</b></span>`;
+}
+
+function pieceView(s,i){
+  const l=s.l;
+  const later=l.turns.length-built(l).length;
+  const lines = s.kind==="open" ? `<p class="sub">${esc(l.principle)}</p>${srcLine(l.principle_where)}` : `<p class="sub">This lesson builds <b>${esc(l.pillar)}</b>.</p>`;
+  const soon = (s.kind==="open" && !built(l).length && later) ? `<div class="note">This lesson's ${later} Turn${later>1?"s are":" is"} still in production. In the finished course they play between this open and the close.</div>`:"";
+  const ok=watched(s.route), isDone=done(s.route), next=ALL[i+1], prev=ALL[i-1];
+  const nextLbl = next ? (next.l!==s.l ? "Next lesson" : "Next: "+(next.kind==="turn"?next.t.guest:next.title)) : "Finish";
+  const fn = (s.kind==="open" && FREE_NOTE[l.lesson]) ? `<div class="freenote"><b>Free preview</b>${esc(FREE_NOTE[l.lesson])}</div>` : "";
+  return `${fn}<div class="crumb">${label(l)} · ${s.kind==="open"?"Section open":"Section close"}</div>
+  <h1>${esc(l.name)}${isDone?'<span class="donebadge">✓ Complete</span>':""}</h1>${lines}
+  ${player(s.route,"Dr. Rod Berger, on camera")}${soon}
+  <div class="stepnav"><button class="btn" ${prev?`data-route="${prev.route}"`:"disabled"}>Previous</button>
+    <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      ${isDone?`<button class="linkbtn" data-undo="${s.route}">Mark as not complete</button>`:ok?"":lockHtml(s.route,"video")}
+      <button class="btn big ${isDone?"okb":"primary"} ${ok&&!isDone?"glow":""}" id="doneBtn" data-done="${s.route}" ${next?`data-next="${next.route}"`:""} ${ok?"":"disabled"}>${isDone?"Complete ✓ · "+nextLbl:"Mark complete · "+nextLbl}</button>
+    </span></div>`;
+}
+
+/* ---------- the Turn: one guided sequence of seven steps ---------- */
+function stepperHtml(code,k){
+  const r=reach(code);
+  return `<ol class="stepper" id="stepper">${STEPS.map(([key,n],i)=>{
+    const d = done(code) || i<r || (i===r && i<k);
+    const cls = i===k ? "cur" : d ? "dn" : "";
+    return `<li><button class="${cls}" data-step="${i}" ${i<=r?"":"disabled"} aria-current="${i===k?"step":"false"}"><span class="n">${d&&i!==k?"✓":i<=r?i+1:"🔒"}</span><span class="lbl">${n}</span></button></li>`;
+  }).join("")}</ol>`;
+}
+function wbStep(code,i){
+  if(!WB[code]) return "";
+  const n=RS[i][1];
+  return `<div class="wbstep"><span class="wbic" aria-hidden="true"></span><div><b>Workbook page ${i+1} of 6 · ${n}</b>${i===0?"Prefer paper? Print the workbook now. Each step here matches one page.":"Same step, on paper. Work it here or there."}</div><button class="btn" data-wb="${code}" data-page="${i+2}">Open page ${i+1}</button></div>`;
+}
+function box(key,ph){
+  const v=store.get("ans:"+key)||"";
+  return `<textarea data-ans="${key}" placeholder="${esc(ph)}">${esc(v)}</textarea><div class="saved" data-saved="${key}"></div>`;
+}
+function stepBody(code,k){
+  const c=COURSE.turns[code]; const teacher=$("#teacher").checked;
+  const tn = teacher && c.teacher_note ? `<div class="note"><b>Teacher note.</b> ${esc(c.teacher_note)}</div>`:"";
+  switch(STEPS[k][0]){
+    case "watch": return `${player(code,"Film loading")}<p style="margin-top:14px">${esc(c.watch?.note)}</p>${tn}`;
+    case "recall": return `<div class="k">The lesson in one line</div><blockquote>${esc(c.recall?.quote)}</blockquote>${srcLine(c.recall?.source)}<p>${esc(c.recall?.note)}</p>`;
+    case "reflect": return `<div class="k">Knockout Question</div><p class="q">${esc(c.reflect?.knockout)}</p>${srcLine(c.reflect?.source)}${box(code+":kq","Your answer")}
+      <div class="k" style="margin-top:18px">Then</div><p>${esc(c.reflect?.then)}</p>${box(code+":door","Which door, and why")}
+      ${c.reflect?.unasked?`<div class="k" style="margin-top:18px">A question to carry · from Unasked</div><p class="q">${esc(c.reflect.unasked.question)}</p>${srcLine(c.reflect.unasked.source)}`:""}`;
+    case "relate": return `<div class="k">Your rep</div><ol class="steps">${(c.relate?.steps||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ol>${srcLine(c.relate?.source)}<p>${esc(c.relate?.task)}</p>${box(code+":rep","What happened when you ran it")}`;
+    case "refine": return `<div class="k">Six-word story</div><p class="six">${esc(c.refine?.model)}</p>${srcLine(c.refine?.model_source)}<p>${esc(c.refine?.task)}</p>${box(code+":six1","Draft one")}${box(code+":six2","Draft two, a day later")}`;
+    case "release": return `<div class="k">Stack It</div><p>${esc(c.release?.stack)}</p>${srcLine(c.release?.source)}${box(code+":stack","Your three sentences")}<div class="k" style="margin-top:18px">Pillar check</div><p>${esc(c.release?.pillar)}</p>`;
+  }
+  return "";
+}
+function finishBody(s,i){
+  const code=s.t.code, isDone=done(code), w=watched(code), all=reach(code)>=6, a=ack(code);
+  const next=ALL[i+1];
+  const nextLbl = next ? (next.l!==s.l ? "Next lesson" : "Next: "+(next.kind==="turn"?next.t.guest:next.title)) : "Finish";
+  const item=(ok,t,sm)=>`<li class="${ok?"ok":""}"><span class="ck">${ok?"✓":""}</span><div>${t}${sm?`<small>${sm}</small>`:""}</div></li>`;
+  return `<p class="sub">Three things make a Turn complete. The first two check themselves.</p>
+  <ul class="checklist">
+    ${item(w,"You watched the film")}
+    ${item(all,"You worked through all five Rs")}
+    <li class="${a?"ok":""}"><label><input type="checkbox" id="ackBox" data-ack="${code}" ${a?"checked":""} ${isDone?"disabled":""}><div>I finished my Five Rs work${WB[code]?", here on the page or in my printed workbook":""}.<small>Your answers stay saved here. ${WB[code]?`<button class="linkbtn" data-wb="${code}" data-page="1">Open the whole workbook</button>`:""}</small></div></label></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <button class="btn big ${isDone?"okb":"primary"} ${a&&!isDone?"glow":""}" id="doneBtn" data-done="${code}" ${next?`data-next="${next.route}"`:""} ${(w&&all&&a)||isDone?"":"disabled"}>${isDone?"Turn complete ✓ · "+nextLbl:"Mark Turn complete"}</button>
+    ${!isDone&&!a?'<span class="src" style="margin:0">Tick the box above to unlock.</span>':""}
+    ${isDone?`<button class="linkbtn" data-undo="${code}">Mark as not complete</button>`:""}
+  </div>`;
+}
+function turnStep(s,i){
+  const code=s.t.code, k=curStep(code), r=reach(code);
+  const [key,name,sub]=STEPS[k];
+  const body = key==="finish" ? finishBody(s,i) : stepBody(code,k)+wbStep(code,k);
+  let nav="";
+  if(key!=="finish"){
+    const nxt=STEPS[k+1][1], locked = key==="watch" && !watched(code);
+    nav=`<div class="stepnav"><button class="btn" ${k>0?`data-step="${k-1}"`:(ALL[i-1]?`data-route="${ALL[i-1].route}"`:"disabled")}>${k>0?"Back: "+STEPS[k-1][1]:"Previous piece"}</button>
+      <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">${locked?lockHtml(code,"film"):""}
+      <button class="btn big primary ${locked?"":"glow"}" id="stepNext" data-step="${k+1}" data-adv="1" ${locked?"disabled":""}>Next: ${nxt} →</button></span></div>`;
+  } else nav=`<div class="stepnav"><button class="btn" data-step="${k-1}">Back: Release</button></div>`;
+  return `<div class="stepwrap ${key==="watch"?"wide":""}" id="stepwrap"><div class="stephead"><span class="sn">STEP ${k+1} OF 7</span><h2>${name}</h2></div>${body}${nav}</div>`;
+}
+function turnView(s,i){
+  const t=s.t, c=COURSE.turns[t.code];
+  return `<div class="crumb">${label(s.l)} · Turn ${t.turn} · ${esc(s.l.name)}</div>
+  <h1>${esc(t.guest)}${done(t.code)?'<span class="donebadge">✓ Complete</span>':""}</h1>
+  <p class="sub">${esc(c.recall?.note||"")}</p>
+  ${stepperHtml(t.code,curStep(t.code))}
+  <div id="turnbody">${turnStep(s,i)}</div>`;
+}
+function setStep(s,i,k,adv){
+  const code=s.t.code;
+  if(adv && k>reach(code)) store.set("reach:"+code,String(k));
+  if(k>reach(code)) return;
+  store.set("step:"+code,String(k));
+  $("#stepper").outerHTML=stepperHtml(code,k);
+  $("#turnbody").innerHTML=turnStep(s,i);
+  attachVideo();
+  const h=$(".stephead"); if(h) h.scrollIntoView({block:"start",behavior:"smooth"});
+}
+
+function lessonDoneView(l){
+  const c=courseStats(), seq=seqFor(l);
+  const idx=LESSONS.indexOf(l); const nl=LESSONS.slice(idx+1).find(x=>seqFor(x).length);
+  const nxt = nl ? (seqFor(nl).find(s=>!done(s.route))||seqFor(nl)[0]) : null;
+  const all = c.d===c.n;
+  const later=l.turns.length-built(l).length;
+  return `<div class="celebrate">
+    <div class="bigcheck" aria-hidden="true">✓</div>
+    <div class="crumb">${esc(all?"Free preview complete":label(l)+" complete")}</div>
+    <h1>${esc(l.name)}</h1>
+    ${l.pillar?`<p class="sub" style="margin:0">This lesson built <b>${esc(l.pillar)}</b>.</p>`:""}
+    <ul class="donelist">${seq.map(s=>`<li><span class="dot done">✓</span>${esc(s.title)}</li>`).join("")}</ul>
+    ${later?`<p class="src" style="margin:0">That was the free preview of this lesson. The full lesson has ${later} more Turn${later>1?"s":""}.</p>`:""}
+    <span class="bar" aria-hidden="true"><i style="width:${c.pct}%"></i></span>
+    <div class="meta" style="color:var(--muted)">Your course: <b style="color:var(--ink)">${c.pct}%</b> · ${c.lc} of ${c.ln} lessons complete</div>
+    <div class="navrow" style="justify-content:center">
+      ${nxt?`<button class="btn primary big glow" data-route="${nxt.route}">Next · ${esc(label(nl))}: ${esc(nl.name)}</button>`:""}
+      <button class="btn" data-home="1">See your course</button>
+    </div>${nxt?"":waysHtml(true)}
+  </div>`;
+}
+
+let CUR=null, CURI=-1;
+function go(route){ if(location.hash.slice(1)!==route){ location.hash=route } else render() }
+function render(){
+  renderProg();
+  const r=location.hash.slice(1); const m=$("#main");
+  const dm=r.match(/^([lb]\d\d)-done$/);
+  if(dm){ const l=LESSONS.find(x=>lessonId(x)===dm[1]); renderOutline(null); if(l&&lessonState(l).complete){ CUR=null; m.innerHTML=lessonDoneView(l); window.scrollTo({top:0}); return } }
+  const i=ALL.findIndex(s=>s.route===r); const s=ALL[i]; CUR=s; CURI=i;
+  renderOutline(s);
+  if(!s){ m.innerHTML=home(); window.scrollTo({top:0}); return }
+  let h="";
+  if(s.kind==="start"){
+    const next=ALL[i+1];
+    h+=startView()+`<div class="stepnav"><span></span><button class="btn big primary glow" id="doneBtn" data-done="start" data-next="${next.route}">Got it · Start Lesson 1 →</button></div>`;
+  } else {
+    const seq=seqFor(s.l);
+    h+=`<ul class="seq">${seq.map(x=>`<li class="${x.route===s.route?"on":""} ${done(x.route)?"dn":""}">${done(x.route)?"✓ ":""}${esc(x.kind==="turn"?"Turn "+x.t.turn:x.title)}</li>`).join("")}</ul>`;
+    h+= s.kind==="turn" ? turnView(s,i) : pieceView(s,i);
+  }
+  m.innerHTML=h; window.scrollTo({top:0}); attachVideo();
+}
+
+/* track real viewing: only continuous playback counts, so skipping ahead doesn't unlock */
+function attachVideo(){
+  const v=$("#vid"); if(!v) return; const r=v.dataset.route; let last=0;
+  const upd=()=>{
+    const d=v.duration; if(!d||!isFinite(d)) return;
+    const t=v.currentTime;
+    if(t>=last && t-last<2.5){ const f=Math.max(watchedFrac(r), t/d); store.set("w:"+r,String(f)) }
+    last=t; refreshLock(r);
+  };
+  v.addEventListener("timeupdate",upd);
+  v.addEventListener("seeked",()=>{ last=v.currentTime });
+  v.addEventListener("ended",()=>{ store.set("w:"+r,"1"); refreshLock(r) });
+}
+let unlockedShown={};
+function refreshLock(r){
+  const f=Math.min(1,watchedFrac(r)/WATCH_DONE), lm=$("#lockmsg");
+  if(lm && f<1){ lm.querySelector(".bar i").style.width=Math.round(f*100)+"%"; lm.querySelector("b").textContent=Math.round(f*100)+"%"; return }
+  if(watched(r) && !unlockedShown[r] && lm){
+    unlockedShown[r]=1; lm.remove();
+    const b=$("#stepNext")||$("#doneBtn"); if(b){ b.disabled=false; b.classList.add("glow") }
+    toast("Unlocked. "+(CUR&&CUR.kind==="turn"?"On to Recall when you're ready.":"Mark it complete when you're ready."));
+  }
+}
+let toastT; function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,2600) }
+
+function complete(b){
+  const r=b.dataset.done; const s=ALL.find(x=>x.route===r); if(!s) return;
+  const was=lessonState(s.l).complete;
+  store.set("done:"+r,"1");
+  b.classList.add("flash"); b.disabled=true;
+  b.textContent = s.kind==="turn" ? "✓ Turn complete" : s.kind==="start" ? "✓ Ready" : "✓ Complete";
+  renderProg(); renderOutline(s);
+  const nowDone=lessonState(s.l).complete;
+  if(!s.l.start) toast(s.kind==="turn" ? `${s.t.guest} complete · your course is now ${courseStats().pct}%` : `${s.title} complete · your course is now ${courseStats().pct}%`);
+  setTimeout(()=>{
+    if(!s.l.start && !was && nowDone){ go(lessonId(s.l)+"-done"); return }
+    if(b.dataset.next) go(b.dataset.next); else { location.hash=""; render() }
+  },1100);
+}
+
+let wbFrom=null;
+function openWB(code,page){
+  const c=COURSE.turns[code]; const n=WB[code]; if(!n) return;
+  $("#wbvTitle").textContent=(c&&c.guest?c.guest+" · ":"")+"Five Rs workbook";
+  let h=""; for(let i=1;i<=n;i++) h+=`<img id="wbp${i}" src="wb/${code}-${i}.jpg" alt="Workbook page ${i} of ${n}" loading="${Math.abs(i-(page||1))<2?"eager":"lazy"}" width="1224" height="1584">`;
+  h+=`<p class="wbv-note">${PDF[code]?`<a class="btn" href="${PDF[code]}" download>Download the printable workbook (PDF)</a><br>`:""}When you've worked it, come back and tick it off on the Finish step.</p>`;
+  $("#wbvPages").innerHTML=h;
+  wbFrom=document.activeElement; $("#wbv").hidden=false; document.body.style.overflow="hidden"; $("#wbvClose").focus();
+  const tgt=$("#wbp"+(page||1)); $("#wbvPages").scrollTop = page>1 && tgt ? tgt.offsetTop-16 : 0;
+}
+function closeWB(){ $("#wbv").hidden=true; document.body.style.overflow=""; $("#wbvPages").innerHTML=""; if(wbFrom&&wbFrom.focus) wbFrom.focus() }
+let shFrom=null;
+function openBook(k,place){
+  const b=BOOKS[k]; if(!b) return;
+  $("#sheet").innerHTML=`<img src="books/${k}.jpg" alt="Cover of ${esc(b.t)}">
+    <div><div class="k">Where this idea comes from</div><h3 id="sheetTitle">${esc(b.t)}</h3><p class="tag">${esc(b.tag)}</p>
+    <p>${esc(b.d)}</p>${place?`<p class="here"><b>This reference:</b> ${esc(place)}<br>${esc(b.how)}</p>`:`<p class="here">${esc(b.how)}</p>`}</div>
+    <div class="ft"><span>${PROMISE}</span><button class="btn" id="sheetClose">Close</button></div>`;
+  shFrom=document.activeElement; $("#sheetwrap").hidden=false; $("#sheetClose").focus();
+}
+function closeBook(){ $("#sheetwrap").hidden=true; if(shFrom&&shFrom.focus) shFrom.focus() }
+document.addEventListener("keydown",e=>{ if(e.key!=="Escape") return; if(!$("#sheetwrap").hidden) closeBook(); else if(!$("#wbv").hidden) closeWB() });
+window.addEventListener("hashchange",()=>{ if(!$("#wbv").hidden) closeWB(); if(!$("#sheetwrap").hidden) closeBook() });
+$("#sheetwrap").addEventListener("click",e=>{ if(e.target.id==="sheetwrap") closeBook() });
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button,a"); if(!b||b.disabled) return;
+  if(b.dataset.home){ location.hash=""; render(); closeMenu(); return }
+  if(b.dataset.les){ const l=LESSONS.find(x=>lessonId(x)===b.dataset.les); const seq=l&&seqFor(l); if(seq&&seq.length){ go((seq.find(s=>!done(s.route))||seq[0]).route); closeMenu() } return }
+  if(b.dataset.route){ go(b.dataset.route); closeMenu(); return }
+  if(b.dataset.step && CUR && CUR.kind==="turn"){ setStep(CUR,CURI,Number(b.dataset.step),!!b.dataset.adv); return }
+  if(b.dataset.done){ complete(b); return }
+  if(b.dataset.undo){ store.del("done:"+b.dataset.undo); store.del("ack:"+b.dataset.undo); render(); return }
+  if(b.dataset.reset){ let ks=[]; try{ ks=Object.keys(localStorage) }catch(e){} ks.filter(k=>/^turnfree:(done|w|reach|step|ack):/.test(k)).forEach(k=>{ try{localStorage.removeItem(k)}catch(e){} }); render(); return }
+  if(b.dataset.wb){ openWB(b.dataset.wb, Number(b.dataset.page||1)); return }
+  if(b.id==="wbvClose"){ closeWB(); return }
+  if(b.dataset.book){ openBook(b.dataset.book,b.dataset.place); return }
+  if(b.id==="sheetClose"){ closeBook(); return }
+});
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.id==="reviewToggle"){ store.set("review",t.checked?"1":"0"); render(); return }
+  if(t.dataset.ack){ store.set("ack:"+t.dataset.ack,t.checked?"1":"0"); if(CUR&&CUR.kind==="turn") $("#turnbody").innerHTML=turnStep(CUR,CURI); return }
+});
+let saveT; document.addEventListener("input",e=>{ const t=e.target; if(!t.dataset.ans) return;
+  clearTimeout(saveT); saveT=setTimeout(()=>{ store.set("ans:"+t.dataset.ans,t.value); const s=document.querySelector(`[data-saved="${t.dataset.ans}"]`); if(s) s.textContent="Saved on this device" },400) });
+$("#teacher").addEventListener("change",()=>{ store.set("teacher",$("#teacher").checked?"1":"0"); if(CUR&&CUR.kind==="turn"){ $("#turnbody").innerHTML=turnStep(CUR,CURI); attachVideo() } });
+$("#teacher").checked=store.get("teacher")==="1";
+const menu=$("#outline"), scrim=$("#scrim"), mb=$("#menuBtn");
+function closeMenu(){ menu.classList.remove("show"); scrim.hidden=true; mb.setAttribute("aria-expanded","false") }
+mb.addEventListener("click",()=>{ const s=!menu.classList.contains("show"); menu.classList.toggle("show",s); scrim.hidden=!s; mb.setAttribute("aria-expanded",String(s)) });
+scrim.addEventListener("click",closeMenu);
+window.addEventListener("hashchange",render);
+if(!location.hash && !ALL.some(s=>done(s.route))) location.hash="start"; else render();
+</script>
+
+</body></html>

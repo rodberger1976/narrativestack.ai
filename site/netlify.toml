@@ -44,3 +44,9 @@
   for = "/paths/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# The Turn: free preview and Quick Check (unlisted)
+[[headers]]
+  for = "/the-turn/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
