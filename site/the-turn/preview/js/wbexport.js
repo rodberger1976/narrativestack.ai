@@ -1,10 +1,11 @@
 /* The Turn: fill a workbook PDF with a learner's answers. Runs in the browser (window.PDFLib) and in node for tests. */
 (function (root) {
   var MAP = { watch_fork: 'fork', recall_words: 'words', reflect_kq: 'kq', reflect_door: 'door', relate_rep: 'rep', refine_changed: 'changed', release_stack: 'stack', release_felt: 'felt' };
-  var KEEP = /[^\x09\x0A\x20-\x7E -ÿ‘’“”–—…•]/g;
+  var KEEP = /[^\x0A\x20-\x7E\xA0-\xFF‘’“”–—…•ŒœŠšŽžŸ€]/g;
   var dropped = 0, clipped = [];
   function clean(s) {
-    s = String(s || '').replace(/\r/g, '');
+    s = String(s || '').replace(/\r/g, '').replace(/\t/g, ' ').replace(/Ł/g, 'L').replace(/ł/g, 'l').replace(/Đ/g, 'D').replace(/đ/g, 'd');
+    s = s.replace(/[^\x00-\xFF‘’“”–—…•ŒœŠšŽžŸ€]/g, function (c) { var b = c.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); return /^[\x20-\x7E\xA0-\xFF]$/.test(b) ? b : c; });
     var m = s.match(KEEP); if (m) dropped += m.length;
     return s.replace(KEEP, '').replace(/[ \t]{2,}/g, ' ').replace(/ +\n/g, '\n').trim();
   }
@@ -27,10 +28,20 @@
     });
     return n;
   }
+  function hardBreak(font, txt, size, width) {
+    return txt.split('\n').map(function (para) {
+      return para.split(' ').map(function (w) {
+        if (font.widthOfTextAtSize(w, size) <= width) return w;
+        var out = [], cur = '';
+        for (var i = 0; i < w.length; i++) { var t = cur + w[i]; if (cur && font.widthOfTextAtSize(t, size) > width) { out.push(cur); cur = w[i]; } else cur = t; }
+        if (cur) out.push(cur); return out.join('\n');
+      }).join(' ');
+    }).join('\n');
+  }
   function fit(font, field, txt, name) {
     var r = field.acroField.getWidgets()[0].getRectangle();
-    for (var s = 11; s >= 6; s -= 0.5) { if (lines(font, txt, s, r.width - 14) * s * 1.25 <= r.height - 8) return s; }
-    clipped.push(name); return 6;
+    for (var s = 11; s >= 6; s -= 0.5) { if (lines(font, txt, s, r.width - 14) * s * 1.25 <= r.height - 8) return { size: s, text: hardBreak(font, txt, s, r.width - 14) }; }
+    clipped.push(name); return { size: 6, text: hardBreak(font, txt, 6, r.width - 14) };
   }
   function whiteBg(field) { try { field.acroField.getWidgets().forEach(function (w) { w.getOrCreateAppearanceCharacteristics().setBackgroundColor([1, 1, 1]); }); } catch (e) {} }
   async function fillWorkbook(PDFLib, bytes, ans) {
@@ -39,7 +50,7 @@
     var form = doc.getForm(), font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
     Object.keys(MAP).forEach(function (name) {
       var v = clean(ans[MAP[name]]); if (!v) return;
-      var f = form.getTextField(name); whiteBg(f); f.setFontSize(fit(font, f, v, name)); f.setText(v);
+      var f = form.getTextField(name), ft = fit(font, f, v, name); whiteBg(f); f.setFontSize(ft.size); f.setText(ft.text);
     });
     [1, 2].forEach(function (d) {
       var w = clean(ans['six' + d]).split(/\s+/).filter(function (x) { return /[A-Za-z0-9À-ÿ]/.test(x); });
