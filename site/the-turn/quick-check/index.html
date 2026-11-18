@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The Turn Quick Check · Dr. Rod Berger</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23183048%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%227.5%22 fill=%22none%22 stroke=%22%23FF7559%22 stroke-width=%223.2%22/%3E%3C/svg%3E">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="The Turn Quick Check: five minutes, three short parts, and the free Turn to start with. Nothing is saved or sent.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,11 +49,12 @@ a.btn{display:inline-block;text-decoration:none;margin-top:4px}
 .note{color:var(--mut);font-size:14px;margin-top:22px}
 .label{display:inline-block;margin-top:6px;padding:4px 12px;border-radius:99px;background:var(--soft);font-weight:700}
 footer{margin-top:36px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+.bar .row span:last-child{white-space:nowrap}
 </style>
 </head><body>
 
 <div class="wrap">
-  <a class="back" href="../preview/#start">← Back to the course</a>
+  <a class="back" href="../preview/">← Back to the course</a>
   <div class="eyebrow">The Turn · with Dr. Rod Berger</div>
   <h1>The Turn Quick Check: Whose story are you telling?</h1>
   <p class="lede">Five minutes. Three short parts and one last question. Rate each line from 1 (not yet) to 5 (that's me). Be honest. Nobody sees this but you.</p>
@@ -82,7 +84,7 @@ footer{margin-top:36px;color:var(--mut);font-size:13px;border-top:1px solid var(
     </div>
     <div class="eyebrow" style="margin:26px 0 10px">Your first Turn</div>
     <div class="turncard" id="turn"></div>
-    <p class="note">Keep your answer to the last question. You'll come back to it. Prefer to go in order? <a href="../preview/#l01-open" style="color:var(--ci);font-weight:600">Start with Lesson 1</a>.</p>
+    <p class="note" id="resnote"></p>
   </section>
 
   <footer>If any of this stirs up something heavy, talk with someone you trust: a friend, a mentor or a counselor. This page saves nothing and sends nothing.</footer>
@@ -103,20 +105,31 @@ const el=(t,a={},h='')=>{const e=document.createElement(t);Object.assign(e,a);if
 const partsEl=document.getElementById('parts');
 PARTS.forEach((p,pi)=>{const s=el('section',{className:'part'});s.append(el('div',{className:'eyebrow',textContent:'Part '+(pi+1)+' of 3'}),el('h2',{textContent:p.t.replace(/^Part \d: /,'')}));
  p.items.forEach((it,ii)=>{const row=el('div',{className:'item'});row.append(el('p',{textContent:it}));const sc=el('div',{className:'scale',role:'group'});sc.setAttribute('aria-label',it);
-  for(let v=1;v<=5;v++){const b=el('button',{type:'button',textContent:v});b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',v+(v===1?' (not yet)':v===5?" (that's me)":''));
-   b.onclick=()=>{score[pi][ii]=v;[...sc.querySelectorAll('button')].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));upd()};sc.append(b)}
+  for(let v=1;v<=5;v++){const b=el('button',{type:'button',textContent:v});b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',v+(v===1?' (not yet)':v===5?' (that’s me)':''));
+   b.onclick=()=>{score[pi][ii]=v;[...sc.querySelectorAll('button')].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));upd();changed()};sc.append(b)}
   sc.append(el('span',{className:'ends',textContent:'1 not yet · 5 that’s me'}));row.append(sc);s.append(row)});partsEl.append(s)});
 const authEl=document.getElementById('auth');
-AUTH.forEach(([k,v])=>{const b=el('button',{type:'button',className:'choice'},'<span><b>'+k+':</b> '+v+'</span>');b.setAttribute('aria-pressed','false');b.onclick=()=>{auth=k;[...authEl.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)))};authEl.append(b)});
+AUTH.forEach(([k,v])=>{const b=el('button',{type:'button',className:'choice'},'<span><b>'+k+':</b> '+v+'</span>');b.setAttribute('aria-pressed','false');b.onclick=()=>{auth=k;[...authEl.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));changed()};authEl.append(b)});
 const see=document.getElementById('see'),cnt=document.getElementById('count');
 function upd(){const n=score.flat().filter(Boolean).length;cnt.textContent=n+' of 12 rated';see.disabled=n<12}
+function keep(){try{history.replaceState({qc:{score,auth,last:document.getElementById('lastq').value,shown:!document.getElementById('result').hidden}},'')}catch(e){}}
+function changed(){const r=document.getElementById('result');if(!r.hidden){r.hidden=true;see.textContent='See my updated result'}keep()}
+document.getElementById('lastq').addEventListener('input',keep);
 see.onclick=()=>{const tot=score.map(a=>a.reduce((x,y)=>x+y,0));const low=tot.indexOf(Math.min(...tot));// a tie goes to the earlier part
  const bars=document.getElementById('bars');bars.innerHTML='';
  PARTS.forEach((p,i)=>{const b=el('div',{className:'bar'+(i===low?' low':'')});b.innerHTML='<div class="row"><span></span><span>'+tot[i]+' / 20</span></div><div class="track"><div class="fill" style="width:0"></div></div>';b.querySelector('.row span').textContent=p.t;bars.append(b);requestAnimationFrame(()=>requestAnimationFrame(()=>{b.querySelector('.fill').style.width=(tot[i]/20*100)+'%'}))});
  const ao=document.getElementById('authout');ao.innerHTML='';if(auth){ao.append(el('div',{className:'eyebrow',textContent:'Your authorship, right now'}),el('span',{className:'label',textContent:auth}))}
  const t=PARTS[low].turn,c=document.getElementById('turn');c.innerHTML='';const img=el('img',{src:t.img,alt:t.guest+', the opening of the Turn'});const d=el('div');
- d.append(el('div',{className:'eyebrow',textContent:t.lesson}),el('h3',{textContent:t.guest}),el('p',{textContent:PARTS[low].d+' '+t.line}));const a=el('a',{className:'btn',href:'../preview/#'+t.go,textContent:'Start Lesson '+t.n+' with '+t.guest+' →'});d.append(a);c.append(img,d);
- const r=document.getElementById('result');r.hidden=false;r.scrollIntoView({behavior:'smooth',block:'start'})};
+ const ties=tot.filter(x=>x===tot[low]).length;
+ const why='Part '+(low+1)+' was your lowest score: '+PARTS[low].d.charAt(0).toLowerCase()+PARTS[low].d.slice(1)+(ties===3?' All three parts tied, so you start at the beginning.':ties===2?' Two parts tied, so you start with the earlier one.':'');
+ d.append(el('div',{className:'eyebrow',textContent:t.lesson}),el('h3',{textContent:t.guest}),el('p',{textContent:why}));const a=el('a',{className:'btn',href:'../preview/#'+t.go,textContent:'Start Lesson '+t.n+' with '+t.guest+' →'});d.append(a);c.append(img,d);
+ document.getElementById('resnote').innerHTML='Keep your answer to the last question in mind as you watch.'+(low===0?'':' Prefer to go in order? <a href="../preview/#l01-open" style="color:var(--ci);font-weight:600">Start with Lesson 1</a>.');
+ see.textContent='See my result';
+ const r=document.getElementById('result');r.hidden=false;keep();r.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})};
+(function restore(){const st=history.state&&history.state.qc;if(!st)return;
+ st.score.forEach((row,pi)=>row.forEach((v,ii)=>{score[pi][ii]=v;if(!v)return;const sc=partsEl.querySelectorAll('.part')[pi].querySelectorAll('.scale')[ii];[...sc.querySelectorAll('button')].forEach(x=>x.setAttribute('aria-pressed',String(Number(x.textContent)===v)))}));
+ if(st.auth){auth=st.auth;[...authEl.children].forEach(x=>x.setAttribute('aria-pressed',String(x.textContent.startsWith(st.auth+':'))))}
+ document.getElementById('lastq').value=st.last||'';upd();if(st.shown&&!see.disabled)see.onclick();})();
 </script>
 
 </body></html>
